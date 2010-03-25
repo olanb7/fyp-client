@@ -29,7 +29,7 @@ CLICK_DECLS
 
 PrintWifi::PrintWifi()
     : _print_anno(false),
-      _print_checksum(false)
+      _print_checksum(true)
 {
     _label = "";
 }

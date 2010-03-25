@@ -5,7 +5,7 @@
 // It creates an interface using FromHost called "ap"
 // and uses open authentication to allow stations to associate to it.
 // This configuration assumes that you have a network interface named
-// ath1 and that it is located on channel 11.
+// eth1 and that it is located on channel 11.
 
 // Run it at user level with
 // 'click access_point.click'
@@ -15,7 +15,7 @@
 // Messages are printed to the system log (run 'dmesg' to see them, or look
 // in /var/log/messages), and to the file '/click/messages'.
 
-AddressInfo(ap_bssid 10.0.0.1/8 ath1);
+AddressInfo(ap_bssid 10.0.0.1/8 eth1);
 
 winfo :: WirelessInfo(SSID "g9", BSSID ap_bssid, CHANNEL 11);
 
@@ -29,9 +29,9 @@ FromHost(ap, ap_bssid, ETHER ap_bssid)
   -> set_rate :: SetTXRate(22)
   -> q :: Queue(10)
   -> ExtraEncap()
-  -> to_dev :: ToDevice (ath1);
+  -> to_dev :: ToDevice (eth1);
 
-from_dev :: FromDevice(ath1)
+from_dev :: FromDevice(eth1)
 -> prism2_decap :: Prism2Decap()
 -> extra_decap :: ExtraDecap()
 -> phyerr_filter :: FilterPhyErr()

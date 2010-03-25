@@ -1,0 +1,2765 @@
+radio/b8b10.cc:117:    int qbits = p->length() * 10;
+radio/b8b10.cc:123:    for(pi = 0; pi < (int)p->length(); pi++){
+radio/b8b10.cc:124:      int x10 = x8to10[p->data()[pi] & 0xff];
+radio/b8b10.cc:133:    p->kill();
+radio/b8b10.cc:138:    int pbits = p->length() * 8;
+radio/b8b10.cc:145:      int x10 = ((p->data()[pi] << pj) & 0xff) << 2;
+radio/b8b10.cc:146:      x10 |= (p->data()[pi+1] & 0xff) >> (6-pj);
+radio/b8b10.cc:155:    p->kill();
+radio/checkpattern.cc:46:  if(p->length() != _len)
+radio/checkpattern.cc:47:    click_chatter("CheckPattern: p->length() %d _len %d",
+radio/checkpattern.cc:48:                p->length(), _len);
+radio/checkpattern.cc:50:  for(i = 0; i < _len && i < p->length(); i++){
+radio/checkpattern.cc:51:    if((p->data()[i]&0xff) != (i&0xff)){
+radio/checkpattern.cc:53:                  i, p->data()[i] & 0xff, i & 0xff);
+radio/sendpattern.cc:48:    p->data()[i] = i & 0xff;
+radio/bim.cc:181:  send_packet(p->data(), p->length());
+radio/bim.cc:182:  p->kill();
+radio/scramble.cc:54:  len = p->length();
+radio/scramble.cc:57:    p->data()[i] ^= pattern[j];
+userlevel/fromdump.cc:170:    outp->magic = SWAPLONG(hp->magic);
+userlevel/fromdump.cc:171:    outp->version_major = SWAPSHORT(hp->version_major);
+userlevel/fromdump.cc:172:    outp->version_minor = SWAPSHORT(hp->version_minor);
+userlevel/fromdump.cc:173:    outp->thiszone = SWAPLONG(hp->thiszone);
+userlevel/fromdump.cc:174:    outp->sigfigs = SWAPLONG(hp->sigfigs);
+userlevel/fromdump.cc:175:    outp->snaplen = SWAPLONG(hp->snaplen);
+userlevel/fromdump.cc:176:    outp->linktype = SWAPLONG(hp->linktype);
+userlevel/fromdump.cc:182:    outp->ts.tv.tv_sec = SWAPLONG(hp->ts.tv.tv_sec);
+userlevel/fromdump.cc:183:    outp->ts.tv.tv_usec = SWAPLONG(hp->ts.tv.tv_usec);
+userlevel/fromdump.cc:184:    outp->caplen = SWAPLONG(hp->caplen);
+userlevel/fromdump.cc:185:    outp->len = SWAPLONG(hp->len);
+userlevel/fromdump.cc:403:    p->set_mac_header(p->data());
+userlevel/todump.cc:3: * todump.{cc,hh} -- element writes packets to tcpdump-like file
+userlevel/todump.cc:202:    const Timestamp& ts = p->timestamp_anno();
+userlevel/todump.cc:212:    unsigned to_write = p->length();
+userlevel/todump.cc:220:	|| fwrite(p->data(), 1, to_write, _fp) == 0) {
+userlevel/todump.cc:254:	p->kill();
+userlevel/fakepcap.cc:3: * fakepcap.{cc,hh} -- a faked-up pcap-like interface
+userlevel/fakepcap.cc:124:    const uint8_t *data = p->data();
+userlevel/fakepcap.cc:125:    const uint8_t *end_data = p->end_data();
+userlevel/fakepcap.cc:305:	int header_off = header_ptr - reinterpret_cast<uintptr_t>(p->data());
+userlevel/fakepcap.cc:306:	if (Packet *q = p->shift_data(-(header_ptr & 3), false)) {
+userlevel/fakepcap.cc:309:	    end_data = p->end_data();
+userlevel/fakepcap.cc:318:	    p->set_ip_header(iph, iph->ip_hl << 2);
+userlevel/fakepcap.cc:319:	    p->set_dst_ip_anno(iph->ip_dst);
+userlevel/fakepcap.cc:324:	    p->set_ip6_header(reinterpret_cast<const click_ip6*>(iph));
+userlevel/fromdump.hh:27:FromDump also transparently reads gzip- and bzip2-compressed tcpdump files, if
+userlevel/kerneltun.cc:463:    int cc = read(_fd, p->data(), _mtu_in);
+userlevel/kerneltun.cc:465:	p->take(_mtu_in - cc);
+userlevel/kerneltun.cc:471:		p->pull(4);
+userlevel/kerneltun.cc:474:		p->pull(2);
+userlevel/kerneltun.cc:478:	    uint16_t etype = *(uint16_t *)(p->data() + 2);
+userlevel/kerneltun.cc:479:	    p->pull(4);
+userlevel/kerneltun.cc:481:		checked_output_push(1, p->clone());
+userlevel/kerneltun.cc:486:	    int af = ntohl(*(unsigned *)p->data());
+userlevel/kerneltun.cc:487:	    p->pull(4);
+userlevel/kerneltun.cc:490:		checked_output_push(1, p->clone());
+userlevel/kerneltun.cc:497:	    uint16_t etype = *(uint16_t *)(p->data() + 14);
+userlevel/kerneltun.cc:498:	    p->pull(16);
+userlevel/kerneltun.cc:500:		checked_output_push(1, p->clone());
+userlevel/kerneltun.cc:506:	    p->timestamp_anno().set_now();
+userlevel/kerneltun.cc:539:	if (p->length() < sizeof(click_ether)) {
+userlevel/kerneltun.cc:544:	check_length = p->length() - sizeof(click_ether);
+userlevel/kerneltun.cc:547:	iph = p->ip_header();
+userlevel/kerneltun.cc:549:	if (!p->has_network_header()
+userlevel/kerneltun.cc:550:	    || p->network_length() < (int) sizeof(click_ip)) {
+userlevel/kerneltun.cc:553:	    p->kill();
+userlevel/kerneltun.cc:560:	p->change_headroom_and_length(p->headroom() + p->network_header_offset(), p->network_length());
+userlevel/kerneltun.cc:561:	check_length = p->length();
+userlevel/kerneltun.cc:574:	    uint16_t ethertype = ((const click_ether *) p->data())->ether_type;
+userlevel/kerneltun.cc:575:	    if ((q = p->push(4)))
+userlevel/kerneltun.cc:580:	    p = p->push(2);
+userlevel/kerneltun.cc:587:	if ((q = p->push(4)))
+userlevel/kerneltun.cc:592:	if ((q = p->push(4)))
+userlevel/kerneltun.cc:597:	if ((q = p->push(16))) {
+userlevel/kerneltun.cc:611:	int w = write(_fd, p->data(), p->length());
+userlevel/kerneltun.cc:612:	if (w != (int) p->length() && (errno != ENOBUFS || !_ignore_q_errs || !_printed_write_err)) {
+userlevel/kerneltun.cc:616:	p->kill();
+userlevel/todevice.cc:185:	retval = ((uint32_t) write(_fd, p->data(), p->length()) == p->length() ? 0 : -1);
+userlevel/todevice.cc:188:	retval = send(_fd, p->data(), p->length(), 0);
+userlevel/fromhost.cc:101:    /* we want an ethertap-like interface */
+userlevel/fromhost.cc:202:    int cc = read(_fd, p->data(), _mtu_in);
+userlevel/fromhost.cc:204:	p->take(_mtu_in - cc);
+userlevel/fromhost.cc:206:	p->pull(4);
+userlevel/fromhost.cc:207:	p->set_mac_header(p->data());
+userlevel/fromhost.cc:208:	const click_ip *ip = reinterpret_cast<const click_ip *>(p->data() + sizeof(click_ether));
+userlevel/fromhost.cc:209:	p->set_dst_ip_anno(IPAddress(ip->ip_dst));
+userlevel/fromhost.cc:210:	p->set_ip_header(ip, ip->ip_hl << 2);
+userlevel/fromhost.cc:211:	p->timestamp_anno().set_now();
+userlevel/fromhost.cc:214:	p->kill();
+userlevel/fromfile.cc:490:	    p->shrink_data(_buffer + _pos, size);
+userlevel/fromfile.cc:491:	    p->timestamp_anno().assign(sec, subsec);
+userlevel/fromfile.cc:497:	    if (read(p->data(), size, errh) < (int)size) {
+userlevel/fromfile.cc:498:		p->kill();
+userlevel/fromfile.cc:501:		p->timestamp_anno().assign(sec, subsec);
+userlevel/fromfile.cc:516:	    p->shrink_data(data, size);
+userlevel/fromfile.cc:517:	    p->timestamp_anno().assign(sec, subsec);
+userlevel/fromfile.cc:522:	    memcpy(p->data(), data, data_size);
+userlevel/fromfile.cc:524:		&& read(p->data() + data_size, size - data_size, errh) != (int)(size - data_size)) {
+userlevel/fromfile.cc:525:		p->kill();
+userlevel/fromfile.cc:528:	    p->timestamp_anno().assign(sec, subsec);
+userlevel/tohost.cc:80:    if (p->length() < sizeof(click_ether)) {
+userlevel/tohost.cc:82:	p->kill();
+userlevel/tohost.cc:87:    WritablePacket *q = p->push(4);
+userlevel/tohost.cc:89:	click_ether *e = (click_ether *) (p->data() + 4);
+userlevel/socket.cc:434:  while (p->length()) {
+userlevel/socket.cc:438:      _remote.in.sin_addr = p->dst_ip_anno();
+userlevel/socket.cc:443:      len = write(_active, p->data(), p->length());
+userlevel/socket.cc:445:      len = sendto(_active, p->data(), p->length(), 0,
+userlevel/socket.cc:467:      p->pull(len);
+userlevel/socket.cc:470:  p->kill();
+userlevel/socket.cc:498:      p->kill();
+userlevel/socket.cc:501:    p->kill();
+userlevel/khandlerproxy.cc:158:    if (khp->check_handler_name(str, errh) < 0)
+userlevel/khandlerproxy.cc:160:    khp->set_handler(str, Handler::OP_READ | Handler::OP_WRITE, handler_hook);
+userlevel/khandlerproxy.cc:193:    String fn = khp->handler_name_to_file_name(hname);
+userlevel/khandlerproxy.cc:200:	    if (khp->_verbose)
+userlevel/khandlerproxy.cc:201:		khp->complain_about_open(ErrorHandler::default_handler(), hname, err);
+userlevel/khandlerproxy.cc:203:	    khp->complain_about_open(0, hname, err);
+userlevel/khandlerproxy.cc:210:	    return khp->complain_about_open(errh, hname, errno);
+userlevel/khandlerproxy.cc:218:		return khp->complain(errh, hname, CSERR_UNSPECIFIED, fn + ": " + String(strerror(errno)));
+userlevel/khandlerproxy.cc:225:	    khp->complain(errh, hname, CSERR_HANDLER_ERROR, "Error executing kernel write handler '" + String(hname) + "'");
+userlevel/khandlerproxy.cc:226:	    if (!khp->_detailed_error_message) {
+userlevel/khandlerproxy.cc:227:		khp->complain(errh, hname, CSERR_HANDLER_ERROR, "(Check /click/errors for details.)");
+userlevel/khandlerproxy.cc:228:		khp->_detailed_error_message = true;
+userlevel/ipflowrawsockets.cc:49:      _flowid(p), _ip_p(p->ip_header()->ip_p),
+userlevel/ipflowrawsockets.cc:163:    while (p->length()) {
+userlevel/ipflowrawsockets.cc:164:	w = sendto(_wd, p->data(), p->length(), 0, (const struct sockaddr*)&sin, sizeof(sin));
+userlevel/ipflowrawsockets.cc:167:	p->pull(w);
+userlevel/ipflowrawsockets.cc:172:    p->kill();
+userlevel/ipflowrawsockets.cc:302:    memcpy(p->data(), data, length);
+userlevel/ipflowrawsockets.cc:303:    p = p->put(length);
+userlevel/ipflowrawsockets.cc:307:    p->timestamp_anno().assign(pkthdr->ts.tv_sec, pkthdr->ts.tv_usec);
+userlevel/ipflowrawsockets.cc:328:    p->take(p->length());
+userlevel/ipflowrawsockets.cc:332:	if (p->length() && fake_pcap_force_ip(p, f->datalink())) {
+userlevel/ipflowrawsockets.cc:334:	    p->pull((uintptr_t)p->ip_header() - (uintptr_t)p->data());
+userlevel/ipflowrawsockets.cc:337:	    p->kill();
+userlevel/ipflowrawsockets.cc:340:	len = read(fd, p->end_data(), p->tailroom());
+userlevel/ipflowrawsockets.cc:343:	    p = p->put(len);
+userlevel/ipflowrawsockets.cc:349:	    p->timestamp_anno().set_timeval_ioctl(fd, SIOCGSTAMP);
+userlevel/ipflowrawsockets.cc:353:		switch (p->ip_header()->ip_p) {
+userlevel/ipflowrawsockets.cc:356:		    //	      p->tcp_header()->th_dport);
+userlevel/ipflowrawsockets.cc:357:		    if (f->sport() != p->tcp_header()->th_dport)
+userlevel/ipflowrawsockets.cc:362:		    //      p->udp_header()->uh_dport);
+userlevel/ipflowrawsockets.cc:363:		    if (f->sport() != p->udp_header()->uh_dport)
+userlevel/ipflowrawsockets.cc:375:	p->kill();
+userlevel/fromdevice.cc:260:	// linux pcap-0.4-16) want to have a filter installed before they
+userlevel/fromdevice.cc:343:    if (p->data()[0] & 1) {
+userlevel/fromdevice.cc:344:	if (memcmp(bcast_addr, p->data(), 6) == 0)
+userlevel/fromdevice.cc:345:	    p->set_packet_type_anno(Packet::BROADCAST);
+userlevel/fromdevice.cc:347:	    p->set_packet_type_anno(Packet::MULTICAST);
+userlevel/fromdevice.cc:351:    p->set_timestamp_anno(Timestamp::make_usec(pkthdr->ts.tv_sec, pkthdr->ts.tv_usec));
+userlevel/fromdevice.cc:352:    p->set_mac_header(p->data());
+userlevel/fromdevice.cc:382:	int len = recvfrom(_linux_fd, p->data(), p->length(), MSG_TRUNC, (sockaddr *)&sa, &fromlen);
+userlevel/fromdevice.cc:385:		assert(p->length() == (uint32_t)_snaplen);
+userlevel/fromdevice.cc:388:		p->take(_snaplen - len);
+userlevel/fromdevice.cc:389:	    p->set_packet_type_anno((Packet::PacketType)sa.sll_pkttype);
+userlevel/fromdevice.cc:390:	    p->timestamp_anno().set_timeval_ioctl(_linux_fd, SIOCGSTAMP);
+userlevel/fromdevice.cc:391:	    p->set_mac_header(p->data());
+userlevel/fromdevice.cc:397:	    p->kill();
+userlevel/rawsocket.cc:218:      if ((int)p->length() < (int)sizeof(click_ip)) {
+userlevel/rawsocket.cc:219:	errh->error("runt IP packet (%d bytes)", p->length());
+userlevel/rawsocket.cc:220:	p->kill();
+userlevel/rawsocket.cc:222:	const click_ip *ip = (const click_ip *) p->data();
+userlevel/rawsocket.cc:228:	sin.sin_addr = ip->ip_dst;
+userlevel/rawsocket.cc:230:	while (p->length()) {
+userlevel/rawsocket.cc:232:	  len = sendto(_fd, p->data(), p->length(), 0,
+userlevel/rawsocket.cc:252:	    p->pull(len);
+userlevel/rawsocket.cc:256:	p->kill();
+userlevel/printold.cc:58:  if (p->timestamp_anno().sec() == 0) {
+userlevel/printold.cc:64:  if (bytes < 0 || (int) p->length() < bytes)
+userlevel/printold.cc:65:      bytes = p->length();
+userlevel/printold.cc:74:  long age_s = tv_now.sec() - p->timestamp_anno().sec();
+userlevel/printold.cc:75:  long age_u = tv_now.usec() - p->timestamp_anno().usec();
+userlevel/printold.cc:84:		  name().c_str(), age_ms, &p->timestamp_anno(), age_s, age_u);
+userlevel/printold.cc:90:  pcap_tv.tv_sec = (long) p->user_anno_i(0);
+userlevel/printold.cc:91:  pcap_tv.tv_usec = (long) p->user_anno_i(1);
+userlevel/printold.cc:96:    long age2_s = p->timestamp_anno().tv_sec - pcap_tv.tv_sec;
+userlevel/printold.cc:97:    long age2_u = p->timestamp_anno().tv_usec - pcap_tv.tv_usec;
+userlevel/printold.cc:116:  sprintf(sa.reserve(9), "(%5ld msecs) %4d | %n", age_ms, p->length(), &len);
+userlevel/printold.cc:122:    sprintf(buf + pos, "%02x", p->data()[i] & 0xff);
+bsdmodule/fastudpsrc.hh:121:    udp->uh_sum = 0;
+bsdmodule/fastudpsrc.hh:130:        udp->uh_sum = ~csum & 0xFFFF;
+bsdmodule/fastudpsrc.hh:132:        udp->uh_sum = 0;
+bsdmodule/todevice.cc:139:	struct mbuf *m = p->steal_m();
+bsdmodule/tohost.cc:95:    struct mbuf *m = p->steal_m();
+bsdmodule/tohost.cc:117:    (*ifp->if_input)(ifp, m);
+bsdmodule/fastudpsrc.cc:84:    udp->uh_sport = htons(_sport+_incr);
+bsdmodule/fastudpsrc.cc:85:    udp->uh_dport = htons(_dport+_incr);
+bsdmodule/fastudpsrc.cc:115:    ip->ip_v = 4;
+bsdmodule/fastudpsrc.cc:116:    ip->ip_hl = sizeof(click_ip) >> 2;
+bsdmodule/fastudpsrc.cc:117:    ip->ip_len = htons(_len-14);
+bsdmodule/fastudpsrc.cc:118:    ip->ip_id = 0;
+bsdmodule/fastudpsrc.cc:119:    ip->ip_p = IP_PROTO_UDP;
+bsdmodule/fastudpsrc.cc:120:    ip->ip_src = _sipaddr;
+bsdmodule/fastudpsrc.cc:121:    ip->ip_dst = _dipaddr;
+bsdmodule/fastudpsrc.cc:122:    ip->ip_tos = 0;
+bsdmodule/fastudpsrc.cc:123:    ip->ip_off = 0;
+bsdmodule/fastudpsrc.cc:124:    ip->ip_ttl = 250;
+bsdmodule/fastudpsrc.cc:125:    ip->ip_sum = 0;
+bsdmodule/fastudpsrc.cc:126:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+bsdmodule/fastudpsrc.cc:129:    udp->uh_sport = htons(_sport);
+bsdmodule/fastudpsrc.cc:130:    udp->uh_dport = htons(_dport);
+bsdmodule/fromdevice.cc:81:    if (ifp->if_spare2 == NULL)	// not for click.
+bsdmodule/fromdevice.cc:92:    FromDevice *me = (FromDevice *)(ifp->if_spare2);
+bsdmodule/fromdevice.cc:99:    if (!me->_polling && (ifp->if_ipending & IFF_POLLING) &&
+bsdmodule/fromdevice.cc:105:	    if (prp->ifp == ifp) {
+bsdmodule/fromdevice.cc:106:		me->_poll_handler = prp->handler;
+bsdmodule/fromdevice.cc:108:		prp->handler = NULL;
+bsdmodule/fromdevice.cc:109:		prp->ifp = NULL;
+bsdmodule/fromdevice.cc:110:		printf("Click FromDevice(%s) taking control over NIC driver polling\n", ifp->if_xname);
+bsdmodule/fromdevice.cc:116:			ifp->if_xname);
+bsdmodule/fromdevice.cc:155:    if (ifp->if_spare3 == NULL) { // not for click...
+bsdmodule/fromdevice.cc:162:    FromHost *me = (FromHost *)(ifp->if_spare3);
+bsdmodule/fromdevice.cc:330:	    if (prp->ifp == NULL)
+bsdmodule/fromdevice.cc:332:	prp->handler = _poll_handler;
+bsdmodule/fromdevice.cc:333:	prp->ifp = _dev;
+bsdmodule/fromdevice.cc:386:		    if (prp->ifp == NULL)
+bsdmodule/fromdevice.cc:388:		prp->handler = _poll_handler;
+bsdmodule/fromdevice.cc:389:		prp->ifp = _dev;
+app/ftpportmapper.cc:95:  const click_ip *iph = p->ip_header();
+app/ftpportmapper.cc:97:  const click_tcp *tcph = p->tcp_header();
+app/ftpportmapper.cc:98:  unsigned data_offset = p->transport_header_offset() + (tcph->th_off<<2);
+app/ftpportmapper.cc:99:  const unsigned char *data = p->data() + data_offset;
+app/ftpportmapper.cc:100:  unsigned len = p->length() - data_offset;
+app/ftpportmapper.cc:170:    wp = p->put(buflen - port_arg_len);
+app/ftpportmapper.cc:172:    wp = p->uniqueify();
+app/ftpportmapper.cc:173:    wp->take(port_arg_len - buflen);
+app/ftpportmapper.cc:175:  memmove(wp->data() + data_offset + port_arg_offset + buflen,
+app/ftpportmapper.cc:176:	  wp->data() + data_offset + port_arg_offset + port_arg_len,
+app/ftpportmapper.cc:178:  memcpy(wp->data() + data_offset + port_arg_offset,
+app/ftpportmapper.cc:184:  click_ip *wp_iph = wp->ip_header();
+app/ftpportmapper.cc:186:  wp_iph->ip_len = htons(wp->length() - wp->ip_header_offset());
+app/ftpportmapper.cc:196:  click_tcp *wp_tcph = wp->tcp_header();
+app/ftpportmapper.cc:207:  unsigned wp_tcp_len = wp->length() - wp->transport_header_offset();
+ipsec/des.cc:78:  unsigned char *idat = p->data();
+ipsec/des.cc:79:  struct esp_new *esp = (struct esp_new *)p->data();
+ipsec/des.cc:82:  unsigned char *ivp = esp->esp_iv;
+ipsec/des.cc:83:  int i, plen = p->length() - sizeof(esp_new) - _ignore;
+ipsec/des.cc:84:  idat = p->data() + sizeof(esp_new);
+ipsec/des.cc:90:     if(sa_data==NULL) {click_chatter("DES: No SADataTuple annotation. Check man page\n"); p->kill(); return 0;}
+ipsec/ipsecroutetable.cc:202:    const click_ip *ip = reinterpret_cast< const click_ip *>(p->data());
+ipsec/ipsecroutetable.cc:204:    int port = lookup_route(p->dst_ip_anno(), gw, spi, sa_data);
+ipsec/ipsecroutetable.cc:212:	       click_chatter("No Ipsec tunnel for %s. Wrong tunnel setup", p->dst_ip_anno().unparse().c_str());
+ipsec/ipsecroutetable.cc:222:	    if(ip->ip_p != 50) {
+ipsec/ipsecroutetable.cc:230:            struct esp_new * esp =(struct esp_new *)(p->data()+sizeof(click_ip));
+ipsec/ipsecroutetable.cc:231:            sa_data = _sa_table.lookup(SPI(ntohl(esp->esp_spi)));
+ipsec/ipsecroutetable.cc:233:		click_chatter("Invalid SPI %d, Dropping packet",ntohl(esp->esp_spi));
+ipsec/ipsecroutetable.cc:234:	p->kill();
+ipsec/ipsecroutetable.cc:243:	    p->set_dst_ip_anno(gw);
+ipsec/ipsecroutetable.cc:248:	    click_chatter("IPsecRouteTable: no route for %s", p->dst_ip_anno().unparse().c_str());
+ipsec/ipsecroutetable.cc:249:	p->kill();
+ipsec/sha1.cc:67:    SHA1_update (&ctx, (u_char*) p->data(), p->length());
+ipsec/sha1.cc:69:    WritablePacket *q = p->put(12);
+ipsec/sha1.cc:76:    const u_char *ah = p->data()+p->length()-12;
+ipsec/sha1.cc:80:    SHA1_update (&ctx, (u_char*) p->data(), p->length()-12);
+ipsec/sha1.cc:89:	p->kill();
+ipsec/sha1.cc:92:    p->take(12);
+ipsec/hmacsha1.cc:74:    HMAC(sa_data->Authentication_key,KEY_SIZE,(u_char*) p->data(),p->length(),digest,&len);
+ipsec/hmacsha1.cc:75:    WritablePacket *q = p->put(12);
+ipsec/hmacsha1.cc:81:    const u_char *ah = p->data()+p->length()-12;
+ipsec/hmacsha1.cc:84:    HMAC(sa_data->Authentication_key,KEY_SIZE,(u_char*) p->data(),p->length()-12,digest,&len);
+ipsec/hmacsha1.cc:92:	p->kill();
+ipsec/hmacsha1.cc:96:    p->take(12);
+ipsec/desp.cc:87:  struct esp_new *esp = (struct esp_new *) p->data();
+ipsec/desp.cc:93:  if(!checkreplaywindow(sa,(unsigned long)ntohl(esp->esp_rpl))) {
+ipsec/desp.cc:94:      p->kill(); //The packet failed replay check and it is therefore dropped
+ipsec/desp.cc:99:  p->pull(sizeof(esp_new));
+ipsec/desp.cc:101:  blks = p->length();
+ipsec/desp.cc:102:  blk = p->data();
+ipsec/desp.cc:106:    p->kill();
+ipsec/desp.cc:110:  blk = p->data() + p->length() - (blks + 2);
+ipsec/desp.cc:115:    p->kill();
+ipsec/desp.cc:119:  p->take(blks+2);
+ipsec/esp.cc:60:  if (p->has_network_header())
+ipsec/esp.cc:61:      ip_p = p->ip_header()->ip_p;
+ipsec/esp.cc:65:  int plen = p->length();
+ipsec/esp.cc:68:  WritablePacket *q = p->push(sizeof(esp_new));
+ipsec/esp.cc:76:  esp->esp_spi = htonl((uint32_t)IPSEC_SPI_ANNO(p));
+ipsec/esp.cc:77:  esp->esp_rpl = htonl(sa_data->cur_rpl);
+ipsec/esp.cc:84:  memmove(&esp->esp_iv[0], &i, 4);
+ipsec/esp.cc:86:  memmove(&esp->esp_iv[4], &i, 4);
+ipsec/aes.cc:77:  struct esp_new *esp = (struct esp_new *)p->data();
+ipsec/aes.cc:80:  unsigned char *ivp = esp->esp_iv;
+ipsec/aes.cc:81:  unsigned char * idat = p->data() + sizeof(esp_new);
+ipsec/aes.cc:82:  int plen = p->length() - sizeof(esp_new) - _ignore;
+ipsec/aes.cc:98:        p->kill();
+ipsec/aes.cc:106:        p->kill();
+ipsec/ipsecencap.cc:129:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+ipsec/ipsecencap.cc:134:  _iph.ip_dst = p->dst_ip_anno();
+ipsec/ipsecencap.cc:139: ip->ip_len = htons(p->length());
+ipsec/ipsecencap.cc:140: ip->ip_id = htons(_id.fetch_and_add(1));
+ipsec/ipsecencap.cc:144:    ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+ipsec/ipsecencap.cc:146:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+ipsec/ipsecencap.cc:148:  ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+ipsec/ipsecencap.cc:150:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+ipsec/ipsecencap.cc:153:  p->set_dst_ip_anno(IPAddress(ip->ip_dst));
+ipsec/ipsecencap.cc:154:  p->set_ip_header(ip, sizeof(click_ip));
+analysis/aggregatelen.cc:36:	p->kill();
+analysis/aggregatelen.cc:44:    if (_ip && !p->has_network_header())
+analysis/aggregatelen.cc:47:	offset = p->network_header_offset();
+analysis/aggregatelen.cc:51:    uint32_t len = p->length() - offset + EXTRA_LENGTH_ANNO(p);
+analysis/fromnlanrdump.cc:282:    if (p->network_header_length() != sizeof(click_ip)) { // there were ip options
+analysis/fromflandump.hh:25:FromFlanDump also transparently reads gzip- and bzip2-compressed files, if you
+analysis/aggregateipflows.cc:41:    const click_ip *iph = p->ip_header();
+analysis/aggregateipflows.cc:43:	return reinterpret_cast<const click_ip *>(p->icmp_header() + 1); // know it exists
+analysis/aggregateipflows.cc:216:	    hpinfo->_fragment_head = p->next();
+analysis/aggregateipflows.cc:217:	    p->kill();
+analysis/aggregateipflows.cc:231:    sinfo->_first_timestamp = p->timestamp_anno();
+analysis/aggregateipflows.cc:242:    finfo->_last_timestamp = p->timestamp_anno();
+analysis/aggregateipflows.cc:249:	&& p->transport_length() >= 14
+analysis/aggregateipflows.cc:251:	if (p->tcp_header()->th_flags & TH_RST)
+analysis/aggregateipflows.cc:253:	else if (p->tcp_header()->th_flags & TH_FIN)
+analysis/aggregateipflows.cc:255:	else if (p->tcp_header()->th_flags & TH_SYN)
+analysis/aggregateipflows.cc:319:    const click_icmp *icmph = p->icmp_header();
+analysis/aggregateipflows.cc:320:    if (p->has_transport_header()
+analysis/aggregateipflows.cc:328:	if ((unsigned)p->transport_length() >= sizeof(click_icmp) + embedded_hlen
+analysis/aggregateipflows.cc:356:	    int age = p->timestamp_anno().sec() - finfo->_last_timestamp.sec();
+analysis/aggregateipflows.cc:362:		    && p->ip_header()->ip_p == IP_PROTO_TCP
+analysis/aggregateipflows.cc:363:		    && (p->tcp_header()->th_flags & TH_SYN))) {
+analysis/aggregateipflows.cc:417:	for (Packet *p = hpinfo->_fragment_head; p; p = p->next())
+analysis/aggregateipflows.cc:423:	for (Packet *p = hpinfo->_fragment_head; p; p = p->next())
+analysis/aggregateipflows.cc:458:    p->set_next(0);
+analysis/aggregateipflows.cc:459:    _active_sec = p->timestamp_anno().sec();
+analysis/aggregateipflows.cc:475:    const click_ip *iph = p->ip_header();
+analysis/aggregateipflows.cc:479:    if (!p->timestamp_anno()) {
+analysis/aggregateipflows.cc:484:	p->timestamp_anno().set_now();
+analysis/aggregateipflows.cc:488:    if (p->has_network_header() && iph->ip_p == IP_PROTO_ICMP
+analysis/aggregateipflows.cc:495:    if (!p->has_network_header()
+analysis/aggregateipflows.cc:511:	if (udp_ptr + 4 > p->end_data())
+analysis/aggregateipflows.cc:547:    _active_sec = p->timestamp_anno().sec();
+analysis/aggregateipaddrpair.cc:121:    if (p->has_network_header()) {
+analysis/aggregateipaddrpair.cc:122:	const click_ip *iph = p->ip_header();
+analysis/aggregateipaddrpair.cc:128:	    if (!p->timestamp_anno()) {
+analysis/aggregateipaddrpair.cc:133:		p->timestamp_anno().set_now();
+analysis/aggregateipaddrpair.cc:136:	    if (finfo->aggregate && SEC_OLDER(finfo->last_timestamp.sec(), p->timestamp_anno().sec() - _timeout)) {
+analysis/aggregateipaddrpair.cc:151:	    finfo->last_timestamp = p->timestamp_anno();
+analysis/aggregateipaddrpair.cc:152:	    _active_sec = p->timestamp_anno().sec();
+analysis/fromtcpdump.cc:578:	    p->kill();
+analysis/fromtcpdump.cc:607:	    p->kill();
+analysis/timefilter.cc:128:    const Timestamp& tv = p->timestamp_anno();
+analysis/aggregatelast.cc:131:	    SET_FIRST_TIMESTAMP_ANNO(p, p->timestamp_anno());
+analysis/aggpktcounter.cc:191:	    f->add(p->anno_u32(_anno), port);
+analysis/ipsumdump_ip.cc:41:    int network_length = d.p->network_length();
+analysis/ipsumdump_ip.cc:99:	    d.v = d.p->length();
+analysis/ipsumdump_ip.cc:108:	  uint32_t allow_len = (d.iph ? network_length : d.p->length());
+analysis/ipsumdump_ip.cc:131:    click_ip *iph = d.p->ip_header();
+analysis/ipsumdump_ip.cc:164:	if (d.p->network_length() < ip_hl) {
+analysis/ipsumdump_ip.cc:165:	    if (!(d.p = d.p->put(ip_hl - d.p->network_length())))
+analysis/ipsumdump_ip.cc:167:	    iph = d.p->ip_header();
+analysis/ipsumdump_ip.cc:170:	    d.p->set_ip_header(iph, ip_hl);
+analysis/ipsumdump_ip.cc:173:	memcpy(d.p->network_header() + sizeof(click_ip), d.vptr[0], olen);
+analysis/ipsumdump_ip.cc:174:	memset(d.p->network_header() + sizeof(click_ip) + olen,
+analysis/ipsumdump_ip.cc:180:	uint32_t allow_len = (iph ? network_length : d.p->length());
+analysis/ipsumdump_ip.cc:190:	    if (!(d.p = d.p->put(more)))
+analysis/ipsumdump_ip.cc:192:	    iph = d.p->ip_header();
+analysis/ipsumdump_ip.cc:193:	    d.p->set_ip_header(iph, d.v);
+analysis/ipsumdump_ip.cc:194:	    memset(d.p->transport_header() - more, IPOPT_EOL, more);
+analysis/ipsumdump_ip.cc:199:	d.want_len = d.p->network_header_offset() + d.v;
+analysis/ipsumdump_ip.cc:337:	    && p->network_length() > (int)(d.iph->ip_hl << 2)
+analysis/ipsumdump_ip.cc:340:	    && p->transport_length() >= (dport ? 4 : 2)) {
+analysis/ipsumdump_ip.cc:341:	    const click_udp *udph = p->udp_header();
+analysis/ipsumdump_ip.cc:355:    click_ip *iph = d.p->ip_header();
+analysis/ipsumdump_ip.cc:362:	d.p->udp_header()->uh_sport = htons(d.v);
+analysis/ipsumdump_ip.cc:365:	d.p->udp_header()->uh_dport = htons(d.v);
+analysis/fromipsumdump.cc:507:	    d.p->kill();
+analysis/fromipsumdump.cc:516:    if (d.p && d.is_ip && d.p->ip_header())
+analysis/fromipsumdump.cc:519:    if (d.p && d.is_ip && d.p->ip_header()) {
+analysis/fromipsumdump.cc:522:	if (!d.p->ip_header()->ip_len) {
+analysis/fromipsumdump.cc:524:	    if (ip_len >= (uint32_t) d.p->network_header_offset())
+analysis/fromipsumdump.cc:525:		ip_len -= d.p->network_header_offset();
+analysis/fromipsumdump.cc:529:		ip_len = d.p->network_length();
+analysis/fromipsumdump.cc:530:	    d.p->ip_header()->ip_len = htons(ip_len);
+analysis/fromipsumdump.cc:532:	    ip_len = ntohs(d.p->ip_header()->ip_len);
+analysis/fromipsumdump.cc:535:	if (d.p->ip_header()->ip_p == IP_PROTO_UDP
+analysis/fromipsumdump.cc:536:	    && IP_FIRSTFRAG(d.p->ip_header())
+analysis/fromipsumdump.cc:537:	    && !d.p->udp_header()->uh_ulen) {
+analysis/fromipsumdump.cc:538:	    int len = ip_len - d.p->network_header_length();
+analysis/fromipsumdump.cc:539:	    d.p->udp_header()->uh_ulen = htons(len);
+analysis/fromipsumdump.cc:543:	d.p->set_dst_ip_anno(d.p->ip_header()->ip_dst);
+analysis/fromipsumdump.cc:548:	    if (ip_len > (uint32_t) d.p->network_length())
+analysis/fromipsumdump.cc:549:		xlen = ip_len - d.p->network_length();
+analysis/fromipsumdump.cc:550:	    if (!xlen || (d.p = d.p->put(xlen))) {
+analysis/fromipsumdump.cc:552:		    memset(d.p->end_data() - xlen, 0, xlen);
+analysis/fromipsumdump.cc:554:		set_checksums(d.p, d.p->ip_header());
+analysis/fromipsumdump.cc:560:    if (d.p && d.want_len > d.p->length())
+analysis/fromipsumdump.cc:561:	SET_EXTRA_LENGTH_ANNO(d.p, d.want_len - d.p->length());
+analysis/fromipsumdump.cc:569:    uint32_t length = p->length() + extra_length;
+analysis/fromipsumdump.cc:570:    if (htons(length) != p->ip_header()->ip_len) {
+analysis/fromipsumdump.cc:571:	if (WritablePacket *q = p->uniqueify()) {
+analysis/fromipsumdump.cc:573:	    ip->ip_len = htons(length);
+analysis/fromipsumdump.cc:574:	    if (ip->ip_p == IP_PROTO_UDP)
+analysis/fromipsumdump.cc:575:		q->udp_header()->uh_ulen = htons(length - (ip->ip_hl << 2));
+analysis/fromipsumdump.cc:599:	_multipacket_length = (p->length() + EXTRA_LENGTH_ANNO(p)) / count;
+analysis/fromipsumdump.cc:601:	if (_multipacket_length < p->length()) {
+analysis/fromipsumdump.cc:602:	    _multipacket_length = p->length();
+analysis/fromipsumdump.cc:606:	_multipacket_end_timestamp = p->timestamp_anno();
+analysis/fromipsumdump.cc:608:	    _multipacket_timestamp_delta = (p->timestamp_anno() - FIRST_TIMESTAMP_ANNO(p)) / (count - 1);
+analysis/fromipsumdump.cc:609:	    p->timestamp_anno() = FIRST_TIMESTAMP_ANNO(p);
+analysis/fromipsumdump.cc:613:	_work_packet = set_packet_lengths(p, _multipacket_length - p->length());
+analysis/fromipsumdump.cc:619:    if ((p = p->clone())) {
+analysis/fromipsumdump.cc:621:	SET_EXTRA_LENGTH_ANNO(p, _multipacket_length - p->length());
+analysis/fromipsumdump.cc:652:	_timing_offset = Timestamp::now() - p->timestamp_anno();
+analysis/fromipsumdump.cc:656:    Timestamp t = p->timestamp_anno() + _timing_offset;
+analysis/fromipsumdump.cc:698:	    p->kill();
+analysis/fromipsumdump.cc:731:	    p->kill();
+analysis/fromflandump.cc:346:	p->shrink_packet(_pos - sizeof(DAGCell) + DAGCell::PAYLOAD_OFFSET, sizeof(DAGCell) - DAGCell::PAYLOAD_OFFSET);
+analysis/fromflandump.cc:347:	p->set_timestamp_anno(tv);
+analysis/fromflandump.cc:355:	memcpy(wp->data(), &cell->payload, sizeof(cell->payload));
+analysis/fromflandump.cc:356:	wp->set_timestamp_anno(tv);
+analysis/toipflowdumps.cc:47:      _flowid(p), _ip_p(p->ip_header()->ip_p),
+analysis/toipflowdumps.cc:54:	const click_icmp *icmph = p->icmp_header();
+analysis/toipflowdumps.cc:70:	_first_timestamp = p->timestamp_anno() - Timestamp::epsilon();
+analysis/toipflowdumps.cc:432:	assert(p->ip_header()->ip_p == IP_PROTO_ICMP);
+analysis/toipflowdumps.cc:434:	sa << p->timestamp_anno() << ' ' << (PAINT_ANNO(p) & 1 ? '>' : '<') << " ICMP_error";
+analysis/toipflowdumps.cc:446:    const click_ip *iph = p->ip_header();
+analysis/toipflowdumps.cc:449:    _pkt[_npkt].timestamp = p->timestamp_anno() - _first_timestamp;
+analysis/toipflowdumps.cc:456:	const click_tcp *tcph = p->tcp_header();
+analysis/toipflowdumps.cc:832:	p->kill();
+analysis/fromdagdump.hh:25:FromDAGDump also transparently reads gzip- and bzip2-compressed files, if you
+analysis/storetimestamp.cc:52:    int offset = (_offset < 0 ? p->length() : _offset);
+analysis/storetimestamp.cc:53:    int delta = offset + 8 - p->length();
+analysis/storetimestamp.cc:54:    if (WritablePacket *q = p->put(delta < 0 ? 0 : delta)) {
+analysis/aggregateip.cc:82:	p->kill();
+analysis/aggregateip.cc:89:    if (!p->has_network_header())
+analysis/aggregateip.cc:92:    const click_ip *iph = p->ip_header();
+analysis/aggregateip.cc:93:    int offset = p->length();
+analysis/aggregateip.cc:96:	offset = p->network_header_offset();
+analysis/aggregateip.cc:100:	    offset = p->transport_header_offset();
+analysis/aggregateip.cc:104:	    offset = p->transport_header_offset();
+analysis/aggregateip.cc:109:	else if (iph->ip_p == IPPROTO_TCP && p->transport_header_offset() + sizeof(click_tcp) <= p->length()) {
+analysis/aggregateip.cc:110:	    const click_tcp *tcph = (const click_tcp *)p->transport_header();
+analysis/aggregateip.cc:111:	    offset = p->transport_header_offset() + (tcph->th_off << 2);
+analysis/aggregateip.cc:113:	    offset = p->transport_header_offset() + sizeof(click_udp);
+analysis/aggregateip.cc:117:	    offset = p->transport_header_offset();
+analysis/aggregateip.cc:122:    if (offset + 4 > (int)p->length())
+analysis/aggregateip.cc:125:    uint32_t udata = *((const uint32_t *)(p->data() + offset));
+analysis/aggregateip.cc:158:	return NameInfo::revquery_int(NameInfo::T_IP_PROTO, e, aip->_f.proto());
+analysis/aggregateip.cc:160:	return String(aip->_f.bit_offset());
+analysis/aggregateip.cc:162:	return String(aip->_f.bit_length());
+analysis/aggregateip.cc:164:	return aip->_f.unparse(e, false);
+analysis/toipsumdump.cc:220:	uint32_t total_len = p->length(), len = p->length();
+analysis/toipsumdump.cc:227:	Timestamp end_timestamp = p->timestamp_anno();
+analysis/toipsumdump.cc:231:	    p->set_timestamp_anno(FIRST_TIMESTAMP_ANNO(p));
+analysis/toipsumdump.cc:242:		p->timestamp_anno() = end_timestamp;
+analysis/toipsumdump.cc:244:		p->timestamp_anno() += timestamp_delta;
+analysis/toipsumdump.cc:266:    p->kill();
+analysis/toipsumdump.cc:276:	p->kill();
+analysis/ipsumdump_link.cc:36:    if (!d.p->has_mac_header()) {
+analysis/ipsumdump_link.cc:37:	if (!d.p->has_network_header() || d.p->data() < d.p->network_header())
+analysis/ipsumdump_link.cc:38:	    mac = d.p->data();
+analysis/ipsumdump_link.cc:42:	mac = d.p->mac_header();
+analysis/ipsumdump_link.cc:45:    if (!d.p->has_network_header())
+analysis/ipsumdump_link.cc:46:	network = d.p->end_data();
+analysis/ipsumdump_link.cc:48:	network = d.p->network_header();
+analysis/ipsumdump_link.cc:75:    if (!d.p->mac_header() && !(d.p = d.p->push_mac_header(14)))
+analysis/ipsumdump_link.cc:79:	memcpy(d.p->ether_header()->ether_shost, d.u8, 6);
+analysis/ipsumdump_link.cc:82:	memcpy(d.p->ether_header()->ether_dhost, d.u8, 6);
+analysis/ipsumdump_link.cc:85:	d.p->ether_header()->ether_type = htons(d.v);
+analysis/ipsumdumpinfo.cc:192:	else if (d.p->network_length() > (int) offsetof(click_ip, ip_p)
+analysis/ipsumdumpinfo.cc:202:	else if ((int) (d.p->transport_length() + EXTRA_LENGTH_ANNO(d.p)) >= l)
+analysis/ipsumdumpinfo.cc:350:    d.iph = (p->has_network_header() ? p->ip_header() : 0);
+analysis/ipsumdumpinfo.cc:351:    d.tcph = (p->has_transport_header() ? p->tcp_header() : 0);
+analysis/ipsumdumpinfo.cc:352:    d.udph = (p->has_transport_header() ? p->udp_header() : 0);
+analysis/ipsumdumpinfo.cc:353:    d.icmph = (p->has_transport_header() ? p->icmp_header() : 0);
+analysis/ipsumdumpinfo.cc:360:    else if (p->network_length() < (int) offsetof(click_ip, ip_id))
+analysis/ipsumdumpinfo.cc:371:	if (p->network_length() > ip_len) {
+analysis/ipsumdumpinfo.cc:372:	    SET_EXTRA_LENGTH_ANNO(p, EXTRA_LENGTH_ANNO(p) + p->network_length() - ip_len);
+analysis/ipsumdumpinfo.cc:373:	    p->take(p->network_length() - ip_len);
+analysis/ipsumdumpinfo.cc:374:	} else if (d.careful_trunc && p->network_length() + EXTRA_LENGTH_ANNO(p) < (uint32_t) ip_len) {
+analysis/ipsumdumpinfo.cc:377:	    BAD2("truncated IP missing ", (ntohs(d.iph->ip_len) - p->network_length() - EXTRA_LENGTH_ANNO(p)), scratch);
+analysis/ipsumdumpinfo.cc:383:	|| p->network_length() <= (int)(d.iph->ip_hl << 2)
+analysis/ipsumdumpinfo.cc:387:    else if (p->transport_length() > 12
+analysis/ipsumdumpinfo.cc:393:	|| p->network_length() <= (int)(d.iph->ip_hl << 2)
+analysis/ipsumdumpinfo.cc:400:	|| p->network_length() <= (int)(d.iph->ip_hl << 2)
+analysis/ipsumdumpinfo.cc:409:	uint32_t full_len = p->network_length() + EXTRA_LENGTH_ANNO(p);
+analysis/ipsumdumpinfo.cc:422:    if (!p->has_network_header())
+analysis/ipsumdumpinfo.cc:423:	p->set_network_header(p->data(), 0);
+analysis/ipsumdumpinfo.cc:424:    if (p->network_length() < (int) sizeof(click_ip)) {
+analysis/ipsumdumpinfo.cc:425:	if (!(p = p->put(sizeof(click_ip) - p->network_length())))
+analysis/ipsumdumpinfo.cc:427:	p->set_network_header(p->network_header(), sizeof(click_ip));
+analysis/ipsumdumpinfo.cc:428:	click_ip *iph = p->ip_header();
+analysis/ipsumdumpinfo.cc:445:    click_ip *iph = p->ip_header();
+analysis/ipsumdumpinfo.cc:466:	    && want_len < (uint32_t) p->transport_header_offset() + len)
+analysis/ipsumdumpinfo.cc:467:	    len = want_len - p->transport_header_offset();
+analysis/ipsumdumpinfo.cc:469:	if (p->transport_length() < len) {
+analysis/ipsumdumpinfo.cc:471:	    if (!(p = p->put(xlen - p->transport_length())))
+analysis/ipsumdumpinfo.cc:473:	    if (p->ip_header()->ip_p == IP_PROTO_TCP && len >= 13)
+analysis/ipsumdumpinfo.cc:474:		p->tcp_header()->th_off = sizeof(click_tcp) >> 2;
+analysis/ipsumdumpinfo.cc:476:		click_udp *udph = p->udp_header();
+analysis/ipsumdumpinfo.cc:481:		p->take(xlen - len);
+analysis/fromnetflowsumdump.cc:252:    uint32_t length = p->length() + extra_length;
+analysis/fromnetflowsumdump.cc:253:    if (htons(length) != p->ip_header()->ip_len) {
+analysis/fromnetflowsumdump.cc:254:	if (WritablePacket *q = p->uniqueify()) {
+analysis/fromnetflowsumdump.cc:256:	    ip->ip_len = htons(length);
+analysis/fromnetflowsumdump.cc:257:	    if (ip->ip_p == IP_PROTO_UDP)
+analysis/fromnetflowsumdump.cc:258:		q->udp_header()->uh_ulen = htons(length - (ip->ip_hl << 2));
+analysis/fromnetflowsumdump.cc:282:	_multipacket_length = (p->length() + EXTRA_LENGTH_ANNO(p)) / count;
+analysis/fromnetflowsumdump.cc:284:	if (_multipacket_length < p->length()) {
+analysis/fromnetflowsumdump.cc:285:	    _multipacket_length = p->length();
+analysis/fromnetflowsumdump.cc:289:	_multipacket_end_timestamp = p->timestamp_anno();
+analysis/fromnetflowsumdump.cc:291:	    _multipacket_timestamp_delta = (p->timestamp_anno() - FIRST_TIMESTAMP_ANNO(p)) / (count - 1);
+analysis/fromnetflowsumdump.cc:292:	    p->timestamp_anno() = FIRST_TIMESTAMP_ANNO(p);
+analysis/fromnetflowsumdump.cc:296:	_work_packet = set_packet_lengths(p, _multipacket_length - p->length());
+analysis/fromnetflowsumdump.cc:302:    if ((p = p->clone())) {
+analysis/fromnetflowsumdump.cc:304:	SET_EXTRA_LENGTH_ANNO(p, _multipacket_length - p->length());
+analysis/settimestampdelta.cc:57:    Timestamp& tv = p->timestamp_anno();
+analysis/ipsumdump_anno.cc:38:	d.u32[0] = p->timestamp_anno().sec();
+analysis/ipsumdump_anno.cc:39:	d.u32[1] = p->timestamp_anno().nsec();
+analysis/ipsumdump_anno.cc:42:	d.v = p->timestamp_anno().sec();
+analysis/ipsumdump_anno.cc:45:	d.v = p->timestamp_anno().usec();
+analysis/ipsumdump_anno.cc:49:	  uint64_t v3 = ((uint64_t)p->timestamp_anno().sec() * 1000000) + p->timestamp_anno().usec();
+analysis/ipsumdump_anno.cc:55:	  d.u32[1] = (p->timestamp_anno().sec() * 1000000) + p->timestamp_anno().usec();
+analysis/ipsumdump_anno.cc:84:	p->set_timestamp_anno(Timestamp::make_nsec(d.u32[0], d.u32[1]));
+analysis/ipsumdump_anno.cc:87:	p->timestamp_anno().set_sec(d.v);
+analysis/ipsumdump_anno.cc:90:	p->timestamp_anno().set_subsec(Timestamp::usec_to_subsec(d.v));
+analysis/ipsumdump_anno.cc:95:	p->set_timestamp_anno(Timestamp::make_usec(v3 / 1000000, v3 % 1000000));
+analysis/ipsumdump_anno.cc:99:	p->set_timestamp_anno(Timestamp::make_usec(d.u32[0] / 1000000, d.u32[0] % 1000000));
+analysis/ipsumdump_udp.cc:39:    int transport_length = d.p->transport_length();
+analysis/ipsumdump_udp.cc:60:    int ip_p = d.p->ip_header()->ip_p;
+analysis/ipsumdump_udp.cc:63:    if (d.p->transport_length() < (int) sizeof(click_udp)
+analysis/ipsumdump_udp.cc:64:	&& !(d.p = d.p->put(sizeof(click_udp) - d.p->transport_length())))
+analysis/ipsumdump_udp.cc:69:	d.p->udp_header()->uh_ulen = htons(d.v);
+analysis/fromnlanrdump.hh:26:FromNLANRDump also transparently reads gzip- and bzip2-compressed files, if
+analysis/aggcounter.cc:232:	amount = p->length() + (_use_extra_length ? EXTRA_LENGTH_ANNO(p) : 0);
+analysis/aggcounter.cc:233:	if (_ip_bytes && p->has_network_header())
+analysis/aggcounter.cc:234:	    amount -= p->network_header_offset();
+analysis/timestampaccum.cc:43:    _usec_accum += (Timestamp::now() - p->timestamp_anno()).doubleval();
+analysis/ipsumdump_icmp.cc:44:    int transport_length = d.p->transport_length();
+analysis/ipsumdump_icmp.cc:99:    if (d.p->transport_length() < (int) sizeof(click_icmp)
+analysis/ipsumdump_icmp.cc:100:	&& !(d.p = d.p->put(sizeof(click_icmp) - d.p->transport_length())))
+analysis/ipsumdump_icmp.cc:103:    click_icmp *icmph = d.p->icmp_header();
+analysis/ipsumdump_icmp.cc:110:	if (d.p->transport_length() < len
+analysis/ipsumdump_icmp.cc:111:	    && !(d.p = d.p->put(len - d.p->transport_length())))
+analysis/ipsumdump_icmp.cc:124:	    if (d.p->transport_length() < (int) sizeof(click_icmp_sequenced)) {
+analysis/ipsumdump_icmp.cc:125:		if (!(d.p = d.p->put(sizeof(click_icmp_sequenced) - d.p->transport_length())))
+analysis/ipsumdump_icmp.cc:127:		icmph = d.p->icmp_header();
+analysis/ipsumdump_icmp.cc:136:	    if (d.p->transport_length() < (int) sizeof(click_icmp_sequenced)) {
+analysis/ipsumdump_icmp.cc:137:		if (!(d.p = d.p->put(sizeof(click_icmp_sequenced) - d.p->transport_length())))
+analysis/ipsumdump_icmp.cc:139:		icmph = d.p->icmp_header();
+analysis/ipsumdump_icmp.cc:147:	    if (d.p->transport_length() < (int) sizeof(click_icmp_needfrag)) {
+analysis/ipsumdump_icmp.cc:148:		if (!(d.p = d.p->put(sizeof(click_icmp_needfrag) - d.p->transport_length())))
+analysis/ipsumdump_icmp.cc:150:		icmph = d.p->icmp_header();
+analysis/ipsumdump_icmp.cc:188:	    if (NameInfo::query_int(NameInfo::T_ICMP_CODE + d.p->icmp_header()->icmp_type, d.e, str, &d.v)
+analysis/ipsumdump_payload.cc:42:	off = p->transport_header_offset();
+analysis/ipsumdump_payload.cc:43:	uint32_t nlen = len + p->network_header_offset();
+analysis/ipsumdump_payload.cc:47:		if (p->transport_length() >= 13
+analysis/ipsumdump_payload.cc:48:		    && ((uint32_t) off + (p->tcp_header()->th_off << 2) <= nlen
+analysis/ipsumdump_payload.cc:50:		    off += (p->tcp_header()->th_off << 2);
+analysis/ipsumdump_payload.cc:58:	len -= off - p->network_header_offset();
+analysis/ipsumdump_payload.cc:61:	len = p->length();
+analysis/ipsumdump_payload.cc:86:    if (!d.is_ip || (d.p->ip_header()->ip_len == 0 && d.want_len == 0))
+analysis/ipsumdump_payload.cc:89:	click_ip *iph = d.p->ip_header();
+analysis/ipsumdump_payload.cc:91:	    + d.p->network_header_offset();
+analysis/ipsumdump_payload.cc:95:	    click_tcp *tcph = d.p->tcp_header();
+analysis/ipsumdump_payload.cc:102:		if (!(d.p = d.p->put(th_delta)))
+analysis/ipsumdump_payload.cc:104:		iph = d.p->ip_header(); // may have shifted
+analysis/ipsumdump_payload.cc:105:		unsigned char *tx = d.p->transport_header() + sizeof(click_tcp);
+analysis/ipsumdump_payload.cc:106:		memmove(tx + th_delta, tx, d.p->end_data() - (tx + th_delta));
+analysis/ipsumdump_payload.cc:108:		d.p->tcp_header()->th_off = (sizeof(click_tcp) + th_delta) >> 2;
+analysis/ipsumdump_payload.cc:116:		if (!(d.p = d.p->put(ip_delta)))
+analysis/ipsumdump_payload.cc:118:		iph = d.p->ip_header(); // may have shifted
+analysis/ipsumdump_payload.cc:119:		unsigned char *nx = d.p->network_header() + sizeof(click_ip);
+analysis/ipsumdump_payload.cc:120:		memmove(nx + ip_delta, nx, d.p->end_data() - (nx + ip_delta));
+analysis/ipsumdump_payload.cc:123:		d.p->set_ip_header(iph, sizeof(click_ip) + ip_delta);
+analysis/ipsumdump_payload.cc:138:    payload_info(d.p, d.is_ip ? d.p->ip_header() : 0, off, len);
+analysis/ipsumdump_payload.cc:145:	if (!d.p || (d.p->length() - off < plen
+analysis/ipsumdump_payload.cc:146:		     && !(d.p = d.p->put(plen - (d.p->length() - off)))))
+analysis/ipsumdump_payload.cc:148:	memcpy(d.p->data() + off, d.vptr[0], plen);
+analysis/ipsumdump_payload.cc:166:	if (off + len > (uint32_t) d.p->length())
+analysis/ipsumdump_payload.cc:167:	    len = d.p->length() - off;
+analysis/ipsumdump_payload.cc:169:	    String s = String::make_stable((const char *)(d.p->data() + off), len);
+analysis/ipsumdump_payload.cc:174:	    md5_append(&pms, (const md5_byte_t *) (d.p->data() + off), len);
+analysis/ipsumdump_payload.cc:224:	if (off + len > (uint32_t) d.p->length())
+analysis/ipsumdump_payload.cc:225:	    len = d.p->length() - off;
+analysis/ipsumdump_payload.cc:228:	md5_append(&pms, (const md5_byte_t *) (d.p->data() + off), len);
+analysis/anonipaddr.cc:275:    const click_ip *in_iph = p->ip_header();
+analysis/anonipaddr.cc:276:    if (!p->has_network_header() || in_iph->ip_v != 4) {
+analysis/anonipaddr.cc:279:    } else if (WritablePacket *q = p->uniqueify()) {
+analysis/eraseippayload.cc:40:    click_ip *ip = p->ip_header();
+analysis/eraseippayload.cc:41:    if (ip->ip_p == IP_PROTO_TCP) {
+analysis/eraseippayload.cc:42:	int off = p->transport_header_offset() + (p->tcp_header()->th_off << 2);
+analysis/eraseippayload.cc:43:	if (off < (int) p->length())
+analysis/eraseippayload.cc:44:	    memset(p->data() + off, 0, p->length() - off);
+analysis/eraseippayload.cc:45:	if (p->transport_header_offset() + 18 <= (int) p->length())
+analysis/eraseippayload.cc:46:	    p->tcp_header()->th_sum = 0;
+analysis/eraseippayload.cc:47:    } else if (ip->ip_p == IP_PROTO_UDP) {
+analysis/eraseippayload.cc:48:	int off = p->transport_header_offset() + sizeof(click_udp);
+analysis/eraseippayload.cc:49:	if (off < (int) p->length())
+analysis/eraseippayload.cc:50:	    memset(p->data() + off, 0, p->length() - off);
+analysis/eraseippayload.cc:51:	if (p->transport_header_offset() + 8 <= (int) p->length())
+analysis/eraseippayload.cc:52:	    p->udp_header()->uh_sum = 0;
+analysis/eraseippayload.cc:53:    } else if (ip->ip_p == IP_PROTO_ICMP) {
+analysis/eraseippayload.cc:56:	p->kill();
+analysis/ipsumdump_tcp.cc:40:    int transport_length = d.p->transport_length();
+analysis/ipsumdump_tcp.cc:111:    click_tcp *tcph = d.p->tcp_header();
+analysis/ipsumdump_tcp.cc:127:	    if (!(d.p = d.p->put(more)))
+analysis/ipsumdump_tcp.cc:129:	    tcph = d.p->tcp_header();
+analysis/ipsumdump_tcp.cc:130:	    memset(d.p->transport_header() + d.v - more, TCPOPT_EOL, more);
+analysis/ipsumdump_tcp.cc:147:	if (d.p->transport_length() < th_off) {
+analysis/ipsumdump_tcp.cc:148:	    if (!(d.p = d.p->put(th_off - d.p->transport_length())))
+analysis/ipsumdump_tcp.cc:150:	    tcph = d.p->tcp_header();
+analysis/ipsumdump_tcp.cc:154:	memcpy(d.p->transport_header() + sizeof(click_tcp), d.vptr[0], olen);
+analysis/ipsumdump_tcp.cc:155:	memset(d.p->transport_header() + sizeof(click_tcp) + olen,
+analysis/fromcapdump.cc:382:	    p->kill();
+analysis/fromcapdump.cc:411:	    p->kill();
+analysis/anonipaddr.hh:14:anonymizes top-level IP addresses in passing packets
+analysis/anonipaddr.hh:21:p-bit prefix, then the corresponding output addresses also share the same
+analysis/anonipaddr.hh:22:p-bit prefix. AnonymizeIPAddr was based on Greg Minshall's tcpdpriv(1); see
+analysis/fromdagdump.cc:348:	SET_EXTRA_LENGTH_ANNO(p, wire_length - p->length());
+analysis/timerange.cc:48:    const Timestamp& tv = p->timestamp_anno();
+analysis/ipsumdumpinfo.hh:208:    if ((!is_ip || !p->has_network_header()
+analysis/ipsumdumpinfo.hh:209:	 || p->network_length() < (int) sizeof(click_ip))
+analysis/ipsumdumpinfo.hh:212:    return !ip_p || !p->ip_header()->ip_p || p->ip_header()->ip_p == ip_p;
+analysis/ipsumdumpinfo.hh:218:    assert(is_ip && p->network_header());
+analysis/ipsumdumpinfo.hh:219:    if (!IP_FIRSTFRAG(p->ip_header()))
+analysis/ipsumdumpinfo.hh:221:    if (p->transport_length() < 8)
+ethernet/arpprint.cc:5: * Shameless graft of ipprint.hh/cc and tcpdump-3.8.3/print-arp.c
+ethernet/arpprint.cc:115:    if (!p->has_network_header())
+ethernet/arpprint.cc:122:	sa << p->timestamp_anno() << ": ";
+ethernet/arpprint.cc:125:	const unsigned char *x = p->mac_header();
+ethernet/arpprint.cc:127:	    x = p->data();
+ethernet/arpprint.cc:128:	if (x + 14 <= p->network_header() && x + 14 <= p->end_data()) {
+ethernet/arpprint.cc:135:    if (p->network_length() < (int) sizeof(click_arp))
+ethernet/arpprint.cc:136:	sa << "truncated-arp (" << p->network_length() << ")";
+ethernet/arpprint.cc:138:	const click_ether_arp *ap = (const click_ether_arp *) p->network_header();
+ethernet/arpprint.cc:139:	uint16_t hrd = ntohs(ap->ea_hdr.ar_hrd);
+ethernet/arpprint.cc:140:	uint16_t pro = ntohs(ap->ea_hdr.ar_pro);
+ethernet/arpprint.cc:141:	uint8_t hln = ap->ea_hdr.ar_hln;
+ethernet/arpprint.cc:142:	uint8_t pln = ap->ea_hdr.ar_pln;
+ethernet/arpprint.cc:143:	uint16_t op = ntohs(ap->ea_hdr.ar_op);
+ethernet/arpprint.cc:147:	    sa << "arp-#" << op << " for proto #" << pro << " (" << pln << ") "
+ethernet/arpprint.cc:151:	const unsigned char *sha = (const unsigned char *)ap->arp_sha;
+ethernet/arpprint.cc:152:	const unsigned char *spa = (const unsigned char *)ap->arp_spa;
+ethernet/arpprint.cc:153:	const unsigned char *tha = (const unsigned char *)ap->arp_tha;
+ethernet/arpprint.cc:154:	const unsigned char *tpa = (const unsigned char *)ap->arp_tpa;
+ethernet/arpprint.cc:195:	    sa << "arp-#" << op;
+ethernet/ip6ndsolicitor.cc:70:	t->p->kill();
+ethernet/ip6ndsolicitor.cc:109:	    e->p->kill();
+ethernet/ip6ndsolicitor.cc:192: * May call p->kill().
+ethernet/ip6ndsolicitor.cc:210:      Packet *q = p->push(sizeof(click_ether));
+ethernet/ip6ndsolicitor.cc:218:        ae->p->kill();
+ethernet/ip6ndsolicitor.cc:245:  if (p->length() < sizeof(click_ether) + sizeof(click_ip6) + sizeof(click_nd_sol))
+ethernet/ip6ndsolicitor.cc:248:  click_ether *ethh = (click_ether *) p->data();
+ethernet/ip6ndsolicitor.cc:285:    p->kill();
+ethernet/ip6ndadvertiser.cc:226:   click_ether *e = (click_ether *) p->data();
+ethernet/ip6ndadvertiser.cc:241:  if (p->length() >= sizeof(*e) + sizeof(click_ip6) + sizeof(click_nd_sol) &&
+ethernet/ip6ndadvertiser.cc:268:  p->kill();
+ethernet/arpprint.hh:19:Prints out ARP packets in a human-readable tcpdump-like format, preceded by
+ethernet/arpresponder.cc:123:	q->set_device_anno(p->device_anno());
+ethernet/arpresponder.cc:166:    click_ether *e = (click_ether *) p->data();
+ethernet/arpresponder.cc:173:    if (p->length() >= sizeof(*e) + sizeof(click_ether_arp)
+ethernet/arpresponder.cc:185:	p->kill();
+ethernet/storeetheraddress.cc:53:    if (_offset + 6 <= p->length()) {
+ethernet/storeetheraddress.cc:54:	if (WritablePacket *q = p->uniqueify()) {
+ethernet/ethermirror.cc:34:  if (WritablePacket *q = p->uniqueify()) {
+ethernet/etherencap.cc:53:  if (WritablePacket *q = p->push_mac_header(14)) {
+ethernet/hostetherfilter.cc:58:    p->kill();
+ethernet/hostetherfilter.cc:65:  const click_ether *e = (const click_ether *) (p->data() + _offset);
+ethernet/hostetherfilter.cc:71:    p->set_packet_type_anno(Packet::HOST);
+ethernet/hostetherfilter.cc:74:    p->set_packet_type_anno(Packet::BROADCAST);
+ethernet/hostetherfilter.cc:77:    p->set_packet_type_anno(Packet::MULTICAST);
+ethernet/hostetherfilter.cc:80:    p->set_packet_type_anno(Packet::OTHERHOST);
+ethernet/checkarpheader.cc:85:  const click_arp *ap = reinterpret_cast<const click_arp *>(p->data() + _offset);
+ethernet/checkarpheader.cc:86:  unsigned plen = p->length() - _offset;
+ethernet/checkarpheader.cc:93:  hlen = (int) sizeof(click_arp) + 2*ap->ar_hln + 2*ap->ar_pln;
+ethernet/checkarpheader.cc:96:  else if (ap->ar_hrd == htons(ARPHRD_ETHER) && ap->ar_hln != 6)
+ethernet/checkarpheader.cc:98:  else if ((ap->ar_pro == htons(ETHERTYPE_IP) && ap->ar_pln != 4)
+ethernet/checkarpheader.cc:99:	   || (ap->ar_pro == htons(ETHERTYPE_IP6) && ap->ar_pln != 16))
+ethernet/checkarpheader.cc:102:  p->set_network_header((const unsigned char *) ap, hlen);
+ethernet/ensureether.cc:55:  if (!p->has_network_header() || p->ip_header_offset() < 0)
+ethernet/ensureether.cc:58:  if (p->ip_header_offset() == 14) {
+ethernet/ensureether.cc:60:    const click_ether *ethh = (const click_ether *)p->data();
+ethernet/ensureether.cc:64:  } else if (p->ip_header_offset() == 0 && p->headroom() >= 14) {
+ethernet/ensureether.cc:66:    const click_ether *ethh = (const click_ether *)(p->data() - 14);
+ethernet/ensureether.cc:69:      return p->nonunique_push(14);
+ethernet/ensureether.cc:73:  p->pull(p->ip_header_offset());
+ethernet/ensureether.cc:74:  if (WritablePacket *q = p->push(14)) {
+ethernet/arpquerier.cc:216:	memcpy(e->ether_dhost, p->ether_header()->ether_dhost, 6);
+ethernet/arpquerier.cc:231:    IPAddress want_ip = p->dst_ip_anno();
+ethernet/arpquerier.cc:234:    q->set_timestamp_anno(p->timestamp_anno());
+ethernet/arpquerier.cc:245: * May call p->kill().
+ethernet/arpquerier.cc:252:	p->kill();
+ethernet/arpquerier.cc:260:	assert(!p->shared());
+ethernet/arpquerier.cc:261:	q = p->uniqueify();
+ethernet/arpquerier.cc:262:    } else if (!(q = p->push_mac_header(sizeof(click_ether)))) {
+ethernet/arpquerier.cc:327:    if (p->length() < sizeof(click_ether) + sizeof(click_ether_arp))
+ethernet/arpquerier.cc:332:    click_ether *ethh = (click_ether *) p->data();
+ethernet/arpquerier.cc:360:	p->kill();
+ethernet/arptable.cc:74:	    ae->_head = p->next();
+ethernet/arptable.cc:75:	    p->kill();
+ethernet/arptable.cc:120:	    ae->_head = p->next();
+ethernet/arptable.cc:121:	    p->kill();
+ethernet/arptable.cc:134:	    if (!(ae->_head = p->next()))
+ethernet/arptable.cc:136:	    p->kill();
+ethernet/arptable.cc:203:	for (Packet *p = *head; p; p = p->next())
+ethernet/arptable.cc:254:    p->set_next(0);
+standard/hub.cc:41:	    q = p->clone();
+standard/hub.cc:46:	p->kill();
+standard/checkcrc32.cc:37:  int len = p->length();
+standard/checkcrc32.cc:41:  crc = update_crc(0xffffffff, (char *) p->data(), len - 4);
+standard/checkcrc32.cc:44:  memcpy(&pcrc, p->data() + len - 4, 4);
+standard/checkcrc32.cc:48:  p->take(4);
+standard/checkcrc32.cc:53:              p->length());
+standard/checkcrc32.cc:54:  p->kill();
+standard/drr.cc:103:	else if (p->length() <= _deficit[_next]) {
+standard/drr.cc:104:	    _deficit[_next] -= p->length();
+standard/truncate.cc:53:    if (p->length() > nbytes) {
+standard/truncate.cc:54:	nbytes = p->length() - nbytes;
+standard/truncate.cc:57:        p->take(nbytes);
+standard/linkunqueue.cc:81:	_qhead = p->next();
+standard/linkunqueue.cc:82:	p->kill();
+standard/linkunqueue.cc:89:    uint32_t length = p->length() + EXTRA_LENGTH_ANNO(p);
+standard/linkunqueue.cc:91:    p->set_timestamp_anno(tv + Timestamp::make_usec(delay));
+standard/linkunqueue.cc:139:	p->set_next(0);
+standard/linkunqueue.cc:147:	_qhead = p->next();
+standard/linkunqueue.cc:150:	p->set_next(0);
+standard/linkunqueue.cc:151:	//click_chatter("%{timestamp}: RELEASE %{timestamp}", &now, &p->timestamp_anno());
+standard/strip.cc:45:    p->pull(_nbytes);
+standard/bwratedunqueue.cc:38:	    _rate.update_with(p->length());
+standard/dropbroadcasts.cc:24:    p->kill();
+standard/dropbroadcasts.cc:30:  if (p->packet_type_anno() == Packet::BROADCAST || p->packet_type_anno() == Packet::MULTICAST) {
+standard/fullnotequeue.hh:126:    p->kill();
+standard/bandwidthshaper.cc:39:	    _rate.update_with(p->length());
+standard/painttee.cc:50:    if (p->anno_u8(_anno) == _color)
+standard/painttee.cc:51:	output(1).push(p->clone());
+standard/counter.cc:90:    _byte_count += p->length();
+standard/counter.cc:92:    _byte_rate.update(p->length());
+standard/print.cc:99:    if (bytes < 0 || (int) p->length() < bytes)
+standard/print.cc:100:	bytes = p->length();
+standard/print.cc:127:	sa << sep << p->timestamp_anno();
+standard/print.cc:133:    len = sprintf(sa.reserve(11), "%s%4d", sep, p->length());
+standard/print.cc:138:	len = sprintf(sa.reserve(16), " (h%d t%d)", p->headroom(), p->tailroom());
+standard/print.cc:147:	    sprintf(buf + pos, "%02x", p->anno_u8(j));
+standard/print.cc:154:	const unsigned char *data = p->data();
+standard/setannobyte.cc:50:    p->set_anno_u8(_offset, _value);
+standard/paintswitch.cc:49:    int output_port = static_cast<int>(p->anno_u8(_anno));
+standard/paintswitch.cc:55:	    if (Packet *q = p->clone())
+standard/delayunqueue.cc:57:	_p->kill();
+standard/delayunqueue.cc:68:	if (!_p->timestamp_anno().sec()) // get timestamp if not set
+standard/delayunqueue.cc:69:	    _p->timestamp_anno().set_now();
+standard/delayunqueue.cc:70:	_p->timestamp_anno() += _delay;
+standard/delayunqueue.cc:75:	if (_p->timestamp_anno() <= now) {
+standard/delayunqueue.cc:77:	    _p->timestamp_anno() = now;
+standard/delayunqueue.cc:84:	Timestamp expiry = _p->timestamp_anno() - Timer::adjustment();
+standard/setpackettype.cc:84:    p->set_packet_type_anno(_ptype);
+standard/timedsink.cc:55:    p->kill();
+standard/ratedsource.cc:105:	p->set_timestamp_anno(now);
+standard/ratedsource.cc:132:	p->set_timestamp_anno(now);
+standard/frontdropqueue.hh:14:stores packets in drop-from-front FIFO queue
+standard/idle.cc:43:  p->kill();
+standard/simplequeue.hh:132:	p->kill();
+standard/discard.cc:48:    p->kill();
+standard/discard.cc:57:      p->kill();
+standard/bandwidthmeter.cc:78:  _rate.update(p->length());
+standard/delayshaper.cc:68:	_p->kill();
+standard/delayshaper.cc:76:	if (!_p->timestamp_anno().sec()) // get timestamp if not set
+standard/delayshaper.cc:77:	    _p->timestamp_anno().set_now();
+standard/delayshaper.cc:78:	_p->timestamp_anno() += _delay;
+standard/delayshaper.cc:83:	if (_p->timestamp_anno() <= now) {
+standard/delayshaper.cc:86:	    p->timestamp_anno() = now;
+standard/delayshaper.cc:92:	Timestamp expiry = _p->timestamp_anno() - Timer::adjustment();
+standard/classifier.cc:1081:  const unsigned char *packet_data = p->data() - _align_offset;
+standard/classifier.cc:1082:  int packet_length = p->length() + _align_offset; // XXX >= MAXINT?
+standard/classifier.cc:1114:  const unsigned char *packet_data = p->data() - _align_offset;
+standard/classifier.cc:1123:  } else if (p->length() < _safe_length) {
+standard/infinitesource.cc:113:	p->timestamp_anno().set_now();
+standard/infinitesource.cc:140:    p->timestamp_anno().set_now();
+standard/unstrip.cc:45:  return p->push(_nbytes);
+standard/suppressor.cc:44:	p->kill();
+standard/suppressor.cc:63:    return (sup->suppressed(port) ? "false" : "true");
+standard/suppressor.cc:75:	sup->set(port, !active);
+standard/suppressor.cc:84:    sup->allow_all();
+standard/striptonet.cc:36:    int off = p->network_header_offset();
+standard/striptonet.cc:38:	p->pull(off);
+standard/striptonet.cc:41:	return p->nonunique_push(-off);
+standard/hashswitch.cc:50:  const unsigned char *data = p->data();
+standard/hashswitch.cc:52:  if ((int)p->length() < o + l)
+standard/staticswitch.cc:49:    p->kill();
+standard/strideswitch.cc:44:	p->kill();
+standard/checklength.cc:43:  if (p->length() > _max)
+standard/checklength.cc:53:  if (p && p->length() > _max) {
+standard/storedata.cc:44:    if (p->length() <= _offset)
+standard/storedata.cc:46:    else if (WritablePacket *q = p->uniqueify()) {
+standard/setcrc32.cc:34:  int len = p->length();
+standard/setcrc32.cc:36:  crc = update_crc(crc, (char *) p->data(), len);
+standard/setcrc32.cc:38:  WritablePacket *q = p->put(4);
+standard/pokehandlers.cc:141:    return cp_unparse_bool(p->_paused);
+standard/pokehandlers.cc:148:    p->unpause();
+standard/tee.cc:50:    if (Packet *q = p->clone())
+standard/tee.cc:87:      if (Packet *q = p->clone())
+standard/timedsource.cc:83:	p->timestamp_anno().set_now();
+standard/msqueue.hh:48:  struct sk_buff *skb = p->skb();
+standard/compblock.cc:49:  // int network = *((unsigned char *)&p->ip_header()->ip_src);
+standard/align.cc:53:  int delta = _offset - (reinterpret_cast<uintptr_t>(p->data()) & _mask);
+standard/align.cc:58:  return p->shift_data(delta);
+standard/settimestamp.cc:58:	p->timestamp_anno().set_now();
+standard/settimestamp.cc:60:	p->timestamp_anno() = _tv;
+standard/settimestamp.cc:66:	p->timestamp_anno() -= FIRST_TIMESTAMP_ANNO(p);
+standard/checkpaint.cc:50:    if (p->anno_u8(_anno) != _color)
+standard/checkpaint.cc:60:    if (p && p->anno_u8(_anno) != _color) {
+standard/averagecounter.cc:70:	_byte_count += p->length();
+standard/bwratedsplitter.cc:35:	_rate.update_with(p->length());
+standard/paint.cc:51:    p->set_anno_u8(_anno, _color);
+standard/randomerror.cc:161:  unsigned char *data = p->data();
+standard/randomerror.cc:162:  unsigned len = p->length();
+standard/randomsource.cc:65:    char *d = (char *) p->data();
+standard/randomsource.cc:71:    p->timestamp_anno().set_now();
+grid/filterbyrange.cc:72:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/incseqno.cc:36:  if (p->length() < _offset + 4) {
+grid/incseqno.cc:38:		  name().c_str(), p->length(), _offset);
+grid/incseqno.cc:42:  WritablePacket *wp = p->uniqueify();
+grid/incseqno.cc:43:  uint32_t *up = (uint32_t *) (wp->data() + _offset);
+grid/dsrroutetable.hh:59: * not specified, minimum hop-count is used.
+grid/dsrroutetable.hh:309:      assert(p->has_network_header());
+grid/dsrroutetable.hh:310:      const click_ip *ip = p->ip_header();
+grid/dsrroutetable.hh:312:      if (ip->ip_p != IP_PROTO_DSR)
+grid/dsrroutetable.hh:315:      const click_dsr *dsr = (const click_dsr *)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.hh:325:	if (op->dsr_type == DSR_TYPE_RREP) {
+grid/dsrroutetable.hh:327:	  op = (const click_dsr_option *)(rrep->next_option());
+grid/dsrroutetable.hh:328:	} else if (op->dsr_type == DSR_TYPE_RREQ) {
+grid/dsrroutetable.hh:331:	} else if (op->dsr_type == DSR_TYPE_RERR) {
+grid/dsrroutetable.hh:334:	} else if (op->dsr_type == DSR_TYPE_SOURCE_ROUTE) {
+grid/dsrroutetable.hh:335:	  int offset = (unsigned char *)op - p->data();
+grid/hopcountmetric.cc:2: * hopcountmetric.{cc,hh} -- minimum hop-count metric
+grid/gridencap.cc:83:  _gh.total_len = htons(p->length() - sizeof(_eh));
+grid/gridencap.cc:84:  _nb.dst_ip = p->dst_ip_anno();
+grid/gridencap.cc:86:  memcpy(p->data(), &_eh, sizeof(_eh));
+grid/gridencap.cc:87:  memcpy(p->data() + sizeof(_eh), &_gh, sizeof(_gh));
+grid/gridencap.cc:88:  memcpy(p->data() + sizeof(_eh) + sizeof(_gh), &_nb, sizeof(_nb));
+grid/gridtxerror.cc:61:  p->kill();
+grid/dsrarptable.cc:157:  const click_ip *ip = (const click_ip *)(p->data() + sizeof(click_ether));
+grid/dsrarptable.cc:174:      IPAddress src_addr(ip->ip_src.s_addr);
+grid/dsrarptable.cc:195:    if (dsr_rrep->length() == dsr_len) {
+grid/dsrarptable.cc:197:      IPAddress src_addr(ip->ip_src.s_addr);
+grid/dsrarptable.cc:200:      dsr_option = (click_dsr_option *)(dsr_rrep->next_option());
+grid/dsrarptable.cc:224:      IPAddress src_addr(ip->ip_src.s_addr);
+grid/dsrarptable.cc:254:      IPAddress src(ip->ip_src.s_addr);
+grid/floodinglocquerier.cc:98:	i.value().p->kill();
+grid/floodinglocquerier.cc:156: * May call p->kill().  */
+grid/floodinglocquerier.cc:160:  click_ether *eh = (click_ether *) p->data();
+grid/floodinglocquerier.cc:170:  p->kill();
+grid/floodinglocquerier.cc:194:      WritablePacket *q = p->uniqueify();
+grid/floodinglocquerier.cc:214:      ae->p->kill();
+grid/floodinglocquerier.cc:246:  if (p->length() < sizeof(click_ether) + sizeof(grid_hdr) + sizeof(grid_nbr_encap))
+grid/floodinglocquerier.cc:249:  click_ether *ethh = (click_ether *) p->data();
+grid/floodinglocquerier.cc:261:    p->kill();
+grid/floodinglocquerier.cc:268:    p->kill();
+grid/floodinglocquerier.cc:275:    p->kill();
+grid/floodinglocquerier.cc:300:  p->kill();
+grid/floodinglocquerier.cc:306:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/floodinglocquerier.cc:315:    p->kill();
+grid/floodinglocquerier.cc:327:      p->kill();
+grid/floodinglocquerier.cc:334:    WritablePacket *wp = p->uniqueify();
+grid/floodinglocquerier.cc:335:    click_ether *eh = (click_ether *) wp->data();
+grid/floodinglocquerier.cc:350:    grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/gridprobereplyreceiver.cc:64:  click_ether *e = (click_ether *) p->data();
+grid/gridprobereplyreceiver.cc:72:    p->kill();
+grid/gridprobereplyreceiver.cc:80:  struct timeval rtt = p->timestamp_anno().timeval() - tx_time;
+grid/gridprobereplyreceiver.cc:97:  p->kill();
+grid/hopcountmetric.hh:15: * Child class of GridGenericMetric that implements the minimum hop-count metric.
+grid/linktestreceiver.cc:56:  click_ether *eh = (click_ether *) p->data();
+grid/linktestreceiver.cc:79:		&p->timestamp_anno(),
+grid/simplelocquerier.cc:68:  WritablePacket *wp = p->uniqueify();
+grid/simplelocquerier.cc:69:  grid_nbr_encap *nb = (grid_nbr_encap *) (p->data() + sizeof(grid_hdr) + sizeof(click_ether));
+grid/simplelocquerier.cc:75:    wp->kill();
+grid/linkstat.cc:72:  ASSERT_4ALIGNED(p->data());
+grid/linkstat.cc:73:  p->pull(2);
+grid/linkstat.cc:74:  memset(p->data(), 0, p->length());
+grid/linkstat.cc:76:  p->set_timestamp_anno(Timestamp::now());
+grid/linkstat.cc:79:  click_ether *eh = (click_ether *) p->data();
+grid/linkstat.cc:97:  unsigned char *d = p->data() + sizeof(click_ether);
+grid/linkstat.cc:115:  link_probe::update_cksum(p->data() + sizeof(click_ether));
+grid/linkstat.cc:173:  if (p->length() < min_sz) {
+grid/linkstat.cc:175:    p->kill();
+grid/linkstat.cc:179:  click_ether *eh = (click_ether *) p->data();
+grid/linkstat.cc:183:    p->kill();
+grid/linkstat.cc:187:  link_probe lp(p->data() + sizeof(click_ether));
+grid/linkstat.cc:188:  if (link_probe::calc_cksum(p->data() + sizeof(click_ether)) != 0) {
+grid/linkstat.cc:190:    p->kill();
+grid/linkstat.cc:194:  if (p->length() < lp.psz)
+grid/linkstat.cc:196:		  name().c_str(), p->length(), lp.psz);
+grid/linkstat.cc:202:  unsigned int max_entries = (p->length() - sizeof(*eh) - link_probe::size) / link_entry::size;
+grid/linkstat.cc:210:  const unsigned char *d = p->data() + sizeof(click_ether) + link_probe::size;
+grid/linkstat.cc:219:  p->kill();
+grid/gridprobesender.cc:85:  rp->nonce = htonl(nonce);
+grid/gridprobesender.cc:86:  rp->send_time.tv_sec = htonl(q->timestamp_anno().sec());
+grid/gridprobesender.cc:87:  rp->send_time.tv_usec = htonl(q->timestamp_anno().usec());
+grid/fixsrcloc.cc:66:  WritablePacket *p = xp->uniqueify();
+grid/fixsrcloc.cc:67:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/gridprobehandler.cc:100:  click_ether *e = (click_ether *) p->data();
+grid/gridprobehandler.cc:108:    p->kill();
+grid/gridprobehandler.cc:141:  rr->nonce = rp->nonce; /* keep in net byte order */
+grid/gridprobehandler.cc:142:  rr->probe_send_time = rp->send_time;
+grid/gridprobehandler.cc:188:    p->kill();
+grid/gridproxy.cc:107:  /* do ip-to-ip encapsulation */
+grid/gridproxy.cc:114:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+grid/gridproxy.cc:116:  ip->ip_len = htons(p->length());
+grid/gridproxy.cc:117:  ip->ip_id = htons(_id.fetch_and_add(1));
+grid/gridproxy.cc:119:  p->set_dst_ip_anno(nfo->_gw);
+grid/gridproxy.cc:120:  p->set_ip_header(ip, sizeof(click_ip));
+grid/gridproxy.cc:121:  p->ip_header()->ip_dst = nfo->_gw.in_addr();
+grid/gridproxy.cc:126:    ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+grid/gridproxy.cc:128:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/gridproxy.cc:130:  ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+grid/gridproxy.cc:132:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/gridproxy.cc:151:  p_in->set_ip_header(ip, ip->ip_hl << 2);
+grid/gridroutetable.hh:12: * Implements a DSDV-like loop-free routing protocol by originating
+grid/gridroutetable.hh:27: * the lower hop-count entry prevails.  Entry ttls decrease while the
+grid/fixdstloc.cc:64:  grid_hdr *gh = (grid_hdr *) (xp->data() + sizeof(click_ether));
+grid/fixdstloc.cc:71:  WritablePacket *p = xp->uniqueify();
+grid/fixdstloc.cc:72:  grid_nbr_encap *nb = (grid_nbr_encap *) (p->data() + sizeof(click_ether) + sizeof(grid_hdr));
+grid/gridlogger.hh:164:    if (ip->ip_p == IP_PROTO_UDP) {
+grid/gridlogger.hh:166:      if (udp->uh_dport == htons(8021)) {
+grid/gridlogger.hh:334:    struct click_ether *eh = (click_ether *) (p->data());
+grid/gridlogger.hh:347:    struct click_ether *eh = (click_ether *) (p->data());
+grid/locqueryresponder.cc:68:  for (smi_t i = resp->_query_seqs.begin(); i.live(); i++)
+grid/locqueryresponder.cc:69:    if (jiff - i.value().last_jiffies > resp->_timeout_jiffies)
+grid/locqueryresponder.cc:73:    resp->_query_seqs.remove(old_seqs[i]);
+grid/locqueryresponder.cc:75:  resp->_expire_timer.schedule_after_msec(EXPIRE_TIMEOUT_MS);
+grid/locqueryresponder.cc:82:  click_ether *e = (click_ether *) p->data();
+grid/locqueryresponder.cc:89:    p->kill();
+grid/locqueryresponder.cc:96:    p->kill();
+grid/locqueryresponder.cc:107:    p->kill();
+grid/locqueryresponder.cc:121:  p->set_timestamp_anno(Timestamp::now());
+grid/locqueryresponder.cc:144:  p->kill();
+grid/updateroutes.hh:15: * Implements a DSDV-like loop-free routing protocol by originating
+grid/updateroutes.hh:26: * hop-count entry prevails.  Entries increase in age while sitting in
+grid/regionpep.cc:153:  fp->fix_seq = htonl(fp->fix_seq);
+grid/regionpep.cc:154:  fp->fix_hops = htonl(fp->fix_hops);
+grid/regionpep.cc:160:  fp->fix_seq = ntohl(fp->fix_seq);
+grid/regionpep.cc:161:  fp->fix_hops = ntohl(fp->fix_hops);
+grid/regionpep.cc:168:  memset(p->data(), 0, p->length());
+grid/regionpep.cc:170:  pep_rgn_proto *pp = (pep_rgn_proto *) p->data();
+grid/regionpep.cc:171:  pp->id = _my_ip.addr();
+grid/regionpep.cc:175:    pep_rgn_fix *f = pp->fixes + nf;
+grid/regionpep.cc:185:    pep_rgn_fix *f = pp->fixes + nf;
+grid/regionpep.cc:200:      pp->fixes[nf] = _entries[i]._fix;
+grid/regionpep.cc:201:      externalize(&(pp->fixes[nf]));
+grid/regionpep.cc:206:  pp->n_fixes = htonl(nf);
+grid/regionpep.cc:246:  if(p->length() != sizeof(pep_rgn_proto)) {
+grid/regionpep.cc:247:    click_chatter("EstimateRouterRegion: bad size packet (%d bytes)", p->length());
+grid/regionpep.cc:251:  pp = (pep_rgn_proto *) p->data();
+grid/regionpep.cc:252:  nf = ntohl(pp->n_fixes);
+grid/regionpep.cc:253:  if(nf < 0 || (const u_char*)&pp->fixes[nf] > p->data()+p->length()){
+grid/regionpep.cc:260:    pep_rgn_fix f = pp->fixes[i];
+grid/regionpep.cc:289:  p->kill();
+grid/ackretrysender2.cc:52:    p->kill();
+grid/ackretrysender2.cc:57:  // IPAddress src(p->data());
+grid/ackretrysender2.cc:58:  IPAddress dst(p->data() + 4);
+grid/ackretrysender2.cc:63:    p->kill();
+grid/ackretrysender2.cc:73:  p->kill();
+grid/ackretrysender2.cc:96:  memcpy(p->data(), _ip.data(), 4);
+grid/ackretrysender2.cc:97:  memcpy(p->data() + 4, p->dst_ip_anno().data(), 4);
+grid/ackretrysender2.cc:100:    _waiting_packet = p->clone();
+grid/ackretrysender2.cc:157:    add_stat(p->timestamp_anno(), _num_tries, false);
+grid/ackretrysender2.cc:164:    _waiting_packet = p->clone();
+grid/packetlogger.cc:79:  int n = p->_p.size() * bytes_per_entry;
+grid/packetlogger.cc:83:  // click_chatter("have %d packets; n is %d", p->_p.size(), n);
+grid/packetlogger.cc:85:  while (p->_p.size() &&
+grid/packetlogger.cc:88:    d = p->_p[0];
+grid/packetlogger.cc:89:    p->_p.pop_front();
+grid/printgrid.cc:84:  click_ether *eh = (click_ether *) p->data();
+grid/printgrid.cc:98:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/printgrid.cc:109:      line << p->timestamp_anno() << ' ';
+grid/printgrid.cc:179:    line << " nonce=" << ntohl(rp->nonce);
+grid/printgrid.cc:193:    line << " seq_no=" << ntohl(lp->seq_no)
+grid/printgrid.cc:194:	 << " period=" << ntohl(lp->period)
+grid/printgrid.cc:195:	 << " tau=" << ntohl(lp->tau)
+grid/printgrid.cc:196:	 << " num_links=" << ntohl(lp->num_links);
+grid/printgrid.cc:221:      line << p->timestamp_anno();
+grid/printgrid.cc:224:  if (p->length() < min_sz) {
+grid/printgrid.cc:231:    click_ether *eh = (click_ether *) p->data();
+grid/printgrid.cc:241:  LinkStat::link_probe lp(p->data() + sizeof(click_ether));
+grid/printgrid.cc:242:  if (LinkStat::link_probe::calc_cksum(p->data() + sizeof(click_ether)) != 0) {
+grid/printgrid.cc:250:  if (p->length() < lp.psz)
+grid/printgrid.cc:253:  unsigned int max_entries = (p->length() - sizeof(click_ether) - LinkStat::link_probe::size) / LinkStat::link_entry::size;
+grid/printgrid.cc:261:    const unsigned char *d = p->data() + sizeof(click_ether) + LinkStat::link_probe::size;
+grid/printgrid.cc:276:  for (unsigned i = 0; i < ntohl(lp->num_links); i++, le++) {
+grid/printgrid.cc:285:      unsigned num_expected = ntohl(lp->tau) / ntohl(le->period);
+grid/lookupgeogridroute.cc:155:    struct click_ether *eh = (click_ether *) xp->data();
+grid/lookupgeogridroute.cc:158:    struct grid_hdr *gh = (grid_hdr *) (xp->data() + sizeof(click_ether));
+grid/lookupgeogridroute.cc:172:      xp->pull(ip_off);
+grid/lookupgeogridroute.cc:173:      IPAddress src_ip(xp->data() + 12);
+grid/lookupgeogridroute.cc:174:      IPAddress dst_ip(xp->data() + 16);
+grid/lookupgeogridroute.cc:175:      unsigned short *sp = (unsigned short *) (xp->data() + 20);
+grid/lookupgeogridroute.cc:176:      unsigned short *dp = (unsigned short *) (xp->data() + 22);
+grid/lookupgeogridroute.cc:251:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/lookupgeogridroute.cc:260:    encap = (grid_nbr_encap *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:261:    encap->hops_travelled++;
+grid/lookupgeogridroute.cc:264:    gc = (grid_geocast *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:276:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/lookupgeogridroute.cc:285:    encap = (grid_nbr_encap *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:286:    return IPAddress(encap->dst_ip) == _ipaddr;
+grid/lookupgeogridroute.cc:289:    gc = (grid_geocast *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:303:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/lookupgeogridroute.cc:311:    struct grid_nbr_encap *encap = (grid_nbr_encap *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:312:    return encap->dst_loc_good;
+grid/lookupgeogridroute.cc:331:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/lookupgeogridroute.cc:339:    struct grid_nbr_encap *encap = (grid_nbr_encap *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:340:    return encap->dst_loc;
+grid/lookupgeogridroute.cc:347:    struct grid_geocast *gc = (grid_geocast *) (p->data() + sizeof(click_ether) + gh->hdr_len);
+grid/lookupgeogridroute.cc:363: * ``lookup-and-modify-packet'' element that lets me plug in the
+grid/checkgridheader.cc:48:    p->kill();
+grid/checkgridheader.cc:54:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/checkgridheader.cc:56:  if(p->length() < sizeof(click_ether) + sizeof(grid_hdr)) {
+grid/checkgridheader.cc:74:     p->kill();
+grid/checkgridheader.cc:78:  if (tlen + sizeof(click_ether) > p->length()) {
+grid/checkgridheader.cc:83:		  tlen + sizeof(click_ether), p->length());
+grid/checkgridheader.cc:92:		  name().c_str(), p->length(), (unsigned long) ntohs(gh->cksum));
+grid/setgridchecksum.cc:39:  WritablePacket *p = xp->uniqueify();
+grid/setgridchecksum.cc:40:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/setgridchecksum.cc:41:  unsigned plen = p->length();
+grid/setgridchecksum.cc:60:  p->kill();
+grid/pingpong.cc:60:  click_ether *eh = (click_ether *) p->data();
+grid/radiosim.cc:112:          output(out).push(p->clone());
+grid/radiosim.cc:115:      p->kill();
+grid/dsdvroutetable.hh:84: * to compare two routes.  If not specified, minimum hop-count is
+grid/linktracker.cc:234:  click_ether *eh = (click_ether *) p->data();
+grid/gridgatewayinfo.cc:96:    p->set_dst_ip_anno(gw.dest_ip);
+grid/gridgatewayinfo.cc:101:    p->kill();
+grid/gridsrforwarder.cc:57:  if (p->length() != 124 - 14) {
+grid/gridsrforwarder.cc:59:		  p->length());
+grid/gridsrforwarder.cc:60:    p->kill();
+grid/gridsrforwarder.cc:64:  click_ip *iph = (click_ip *) p->data();
+grid/gridsrforwarder.cc:96:    p->kill();
+grid/gridsrforwarder.cc:103:    p->kill();
+grid/gridsrforwarder.cc:143:    csum += htons(p->length() - sizeof(click_ip));
+grid/dsdvroutetable.cc:272:    errh->warning("No metric elements specified, will default to minimum hop-count");
+grid/dsdvroutetable.cc:683:  if (_use_seen && next_hop->metric.val() == _metric_seen) {
+grid/dsdvroutetable.cc:691:    r.metric = metric_t(r.metric.val() + next_hop->metric.val());
+grid/dsdvroutetable.cc:697:    r.metric = _metric->prepend_metric(r.metric, next_hop->metric);
+grid/dsdvroutetable.cc:1499:  ASSERT_4ALIGNED(p->data());
+grid/dsdvroutetable.cc:1500:  p->pull(2);
+grid/dsdvroutetable.cc:1501:  memset(p->data(), 0, p->length());
+grid/dsdvroutetable.cc:1504:  p->set_timestamp_anno(Timestamp::now());
+grid/dsdvroutetable.cc:1507:  click_ether *eh = (click_ether *) p->data();
+grid/dsdvroutetable.cc:1528:    _log->log_sent_advertisement(_seq_no, p->timestamp_anno());
+grid/ackresponder2.cc:37:  IPAddress src(p->data());
+grid/ackresponder2.cc:38:  IPAddress dst(p->data() + 4);
+grid/ackresponder2.cc:42:    memcpy(xp->data(), _ip.data(), 4);
+grid/ackresponder2.cc:43:    memcpy(xp->data() + 4, src.data(), 4);
+grid/ackresponder2.cc:46:  p->pull(8);
+grid/filterbyhops.cc:65:  grid_nbr_encap *nb = (grid_nbr_encap *) (p->data() + sizeof(click_ether) + sizeof(grid_hdr));
+grid/pep.cc:155:  fp->fix_seq = htonl(fp->fix_seq);
+grid/pep.cc:156:  fp->fix_hops = htonl(fp->fix_hops);
+grid/pep.cc:162:  fp->fix_seq = ntohl(fp->fix_seq);
+grid/pep.cc:163:  fp->fix_hops = ntohl(fp->fix_hops);
+grid/pep.cc:170:  memset(p->data(), 0, p->length());
+grid/pep.cc:172:  pep_proto *pp = (pep_proto *) p->data();
+grid/pep.cc:173:  pp->id = _my_ip.addr();
+grid/pep.cc:177:    pep_fix *f = pp->fixes + nf;
+grid/pep.cc:190:      pp->fixes[nf] = _entries[i]._fix;
+grid/pep.cc:191:      pp->fixes[nf].fix_hops += 1;
+grid/pep.cc:192:      externalize(&(pp->fixes[nf]));
+grid/pep.cc:197:  pp->n_fixes = htonl(nf);
+grid/pep.cc:237:  if(p->length() != sizeof(pep_proto)){
+grid/pep.cc:238:    click_chatter("PEP: bad size packet (%d bytes)", p->length());
+grid/pep.cc:242:  pp = (pep_proto *) p->data();
+grid/pep.cc:243:  nf = ntohl(pp->n_fixes);
+grid/pep.cc:244:  if(nf < 0 || (const u_char*)&pp->fixes[nf] > p->data()+p->length()){
+grid/pep.cc:251:    pep_fix f = pp->fixes[i];
+grid/pep.cc:279:  p->kill();
+grid/lookuplocalgridroute2.cc:124:  WritablePacket *packet = xp->uniqueify();
+grid/lookuplocalgridroute2.cc:144:    encap->hops_travelled++;
+grid/hello.cc:91:  ASSERT_4ALIGNED(p->data());
+grid/hello.cc:92:  p->pull(2);
+grid/hello.cc:93:  memset(p->data(), 0, p->length());
+grid/hello.cc:95:  p->set_timestamp_anno(Timestamp::now());
+grid/hello.cc:97:  click_ether *eh = (click_ether *) p->data();
+grid/updateroutes.cc:536:  ASSERT_4ALIGNED(p->data());
+grid/updateroutes.cc:537:  p->pull(2);
+grid/updateroutes.cc:538:  memset(p->data(), 0, p->length());
+grid/updateroutes.cc:540:  p->set_timestamp_anno(Timestamp::now());
+grid/updateroutes.cc:542:  click_ether *eh = (click_ether *) p->data();
+grid/packetlogger2.cc:65:  while (p->_p.size()) {
+grid/packetlogger2.cc:66:    p->_p.pop_front();
+grid/packetlogger2.cc:76:  return String(p->_p.size());
+grid/packetlogger2.cc:90:  bytes_per_entry += 2 * p->_nb;
+grid/packetlogger2.cc:91:  bytes_per_entry += p->_nb / 4;   // ' ' every 4 bytes of data
+grid/packetlogger2.cc:94:  int n = p->_p.size() * bytes_per_entry;
+grid/packetlogger2.cc:100:  while (p->_p.size() &&
+grid/packetlogger2.cc:102:    const log_entry &d = p->_p.front();
+grid/packetlogger2.cc:115:    unsigned num_to_print = p->_nb > d.length ? d.length : p->_nb;
+grid/packetlogger2.cc:125:    p->_p.pop_front();
+grid/ackresponder.cc:37:  click_ether *e = (click_ether *) p->data();
+grid/ackresponder.cc:41:    xp->pull(2);
+grid/ackresponder.cc:42:    click_ether *eth = (click_ether *) xp->data();
+grid/lookuplocalgridroute.cc:159:	IPAddress dest_ip(encap->dst_ip);
+grid/lookuplocalgridroute.cc:189:	  forward_grid_packet(packet, encap->dst_ip);
+grid/lookuplocalgridroute.cc:243:      encap->hops_travelled = 0;
+grid/lookuplocalgridroute.cc:244:      encap->dst_ip = dst;
+grid/lookuplocalgridroute.cc:247:      encap->dst_loc_good = false;
+grid/lookuplocalgridroute.cc:293:  WritablePacket *packet = xp->uniqueify();
+grid/lookuplocalgridroute.cc:329:    encap->hops_travelled++;
+grid/gridroutetable.cc:547:  if (!next_hop->metric_valid) {
+grid/gridroutetable.cc:554:    if (next_hop->metric > 1)
+grid/gridroutetable.cc:556:		    next_hop->dest_ip.unparse().c_str(), next_hop->metric);
+grid/gridroutetable.cc:562:      if (next_hop->metric < 100)
+grid/gridroutetable.cc:564:		      &next_hop->dest_ip, &r.dest_ip, next_hop->metric);
+grid/gridroutetable.cc:566:    r.metric += next_hop->metric;
+grid/gridroutetable.cc:571:    r.metric = (r.metric * next_hop->metric) / 100;
+grid/gridroutetable.cc:574:    r.metric = (next_hop->metric < r.metric) ? next_hop->metric : r.metric;
+grid/gridroutetable.cc:580:    r.metric = (next_hop->metric > r.metric) ? next_hop->metric : r.metric;
+grid/gridroutetable.cc:1475:  ASSERT_4ALIGNED(p->data());
+grid/gridroutetable.cc:1476:  p->pull(2);
+grid/gridroutetable.cc:1477:  memset(p->data(), 0, p->length());
+grid/gridroutetable.cc:1480:  p->set_timestamp_anno(Timestamp::now());
+grid/gridroutetable.cc:1483:  click_ether *eh = (click_ether *) p->data();
+grid/ackretrysender.cc:52:    p->kill();
+grid/ackretrysender.cc:56:  click_ether *e_ack = (click_ether *) p->data();
+grid/ackretrysender.cc:59:    p->kill();
+grid/ackretrysender.cc:70:    p->kill();
+grid/ackretrysender.cc:83:  p->kill();
+grid/ackretrysender.cc:103:    _waiting_packet = p->clone();
+grid/ackretrysender.cc:157:    _history.push_back(tx_result_t(p->timestamp_anno(), _num_tries, false));
+grid/ackretrysender.cc:166:    _waiting_packet = p->clone();
+grid/linktester.cc:331:  click_ether *eh = (click_ether *) (p->data());
+grid/linktester.cc:347:    memcpy(p->data() + sizeof(click_ether) + sizeof(payload_t),
+grid/linktester.cc:358:  click_ether *eh = (click_ether *) (p->data());
+grid/linktester.cc:376:    memcpy(p->data() + sizeof(click_ether) + sizeof(payload_t),
+grid/lrhello.cc:115:  ASSERT_4ALIGNED(p->data());
+grid/lrhello.cc:116:  p->pull(2);
+grid/lrhello.cc:117:  memset(p->data(), 0, p->length());
+grid/lrhello.cc:119:  p->set_timestamp_anno(Timestamp::now());
+grid/lrhello.cc:121:  click_ether *eh = (click_ether *) p->data();
+grid/lrhello.cc:126:  grid_hdr *gh = (grid_hdr *) (p->data() + sizeof(click_ether));
+grid/lrhello.cc:132:  grid_hello *hlo = (grid_hello *) (p->data() + sizeof(click_ether) + sizeof(grid_hdr));
+grid/lrhello.cc:139:  grid_nbr_entry *curr = (grid_nbr_entry *) (p->data() + sizeof(click_ether) +
+grid/dsrroutetable.cc:70:    if (frv.p) frv.p->kill();
+grid/dsrroutetable.cc:107:      sb[j]._p->kill();
+grid/dsrroutetable.cc:247:	val.p->kill();
+grid/dsrroutetable.cc:376:	sb[j]._p->kill();
+grid/dsrroutetable.cc:398:  IPAddress dst = IPAddress(p->dst_ip_anno());
+grid/dsrroutetable.cc:409:    p->kill();
+grid/dsrroutetable.cc:453:    IPAddress dst_addr(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:502:      unsigned src = ip->ip_src.s_addr;
+grid/dsrroutetable.cc:549:	if (ip->ip_ttl == 1) {
+grid/dsrroutetable.cc:653:	      old_frv->p->kill();
+grid/dsrroutetable.cc:675:      IPAddress dst_addr(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:773:      unsigned ip_dst = ip->ip_dst.s_addr;
+grid/dsrroutetable.cc:827:	int hop_count = dsr_rrep->num_addrs();
+grid/dsrroutetable.cc:854:    unsigned src = ip->ip_src.s_addr;
+grid/dsrroutetable.cc:945:  ip = (click_ip *)(p->data());
+grid/dsrroutetable.cc:949:  click_dsr *dsr = (click_dsr *)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.cc:951:  dsr->dsr_next_header = ip->ip_p; // save IP protocol type
+grid/dsrroutetable.cc:952:  ip->ip_p = IP_PROTO_DSR; // set new protocol type to DSR
+grid/dsrroutetable.cc:956:  DEBUG_CHATTER(" * add_dsr_header: new packet size is %d, old was %d \n", p->length(), old_len);
+grid/dsrroutetable.cc:964:  ip->ip_ttl = 255;
+grid/dsrroutetable.cc:966:  ip->ip_len = htons(p->length());
+grid/dsrroutetable.cc:967:  ip->ip_dst.s_addr = (unsigned)p->dst_ip_anno(); // XXX not sure I understand why we need to reset this
+grid/dsrroutetable.cc:968:  ip->ip_sum = 0;
+grid/dsrroutetable.cc:969:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/dsrroutetable.cc:971:  p->set_ip_header(ip, sizeof(click_ip));
+grid/dsrroutetable.cc:974:  click_dsr_source *dsr_source=(click_dsr_source *)(p->data()+sizeof(click_ip)+sizeof(click_dsr));
+grid/dsrroutetable.cc:986:  p->set_dst_ip_anno(source_route[hop_count].addr());
+grid/dsrroutetable.cc:998:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+grid/dsrroutetable.cc:999:  click_dsr *dsr = (click_dsr *)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.cc:1001:  assert(ip->ip_p == IP_PROTO_DSR);
+grid/dsrroutetable.cc:1012:  p->pull(dsr_len);
+grid/dsrroutetable.cc:1013:  memcpy(p->data(), &new_ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1014:  ip=reinterpret_cast<click_ip *>(p->data());
+grid/dsrroutetable.cc:1015:  ip->ip_len=htons(p->length());
+grid/dsrroutetable.cc:1016:  ip->ip_sum=0;
+grid/dsrroutetable.cc:1017:  ip->ip_sum=click_in_cksum((unsigned char *)ip,sizeof(click_ip));
+grid/dsrroutetable.cc:1019:  p->set_ip_header((click_ip*)p->data(),sizeof(click_ip));
+grid/dsrroutetable.cc:1035:  unsigned src = ip->ip_src.s_addr;
+grid/dsrroutetable.cc:1091:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+grid/dsrroutetable.cc:1092:  click_dsr *dsr = (click_dsr *)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.cc:1093:  click_dsr_rrep *dsr_rrep = (click_dsr_rrep *)( p->data() +
+grid/dsrroutetable.cc:1096:  click_dsr_source *dsr_source = (click_dsr_source *)( p->data() +
+grid/dsrroutetable.cc:1102:  p->set_ip_header(ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1119:  dsr_rrep->dsr_type = DSR_TYPE_RREP;
+grid/dsrroutetable.cc:1120:  dsr_rrep->dsr_len = sizeof(DSRHop)*reply_hop_count+1;
+grid/dsrroutetable.cc:1121:  dsr_rrep->dsr_flags = 0;
+grid/dsrroutetable.cc:1122:  //  dsr_rrep->dsr_id = htons(id);
+grid/dsrroutetable.cc:1128:    dsr_rrep->addr[i-1]._ip = reply_route[i]._ip;
+grid/dsrroutetable.cc:1129:    dsr_rrep->addr[i-1]._metric = reply_route[i]._metric;
+grid/dsrroutetable.cc:1133:  ip->ip_v = 4;
+grid/dsrroutetable.cc:1134:  ip->ip_hl = sizeof(click_ip) >> 2;
+grid/dsrroutetable.cc:1135:  ip->ip_len = htons(p->length());
+grid/dsrroutetable.cc:1136:  //  ip->ip_id = htons(id); // XXXXX
+grid/dsrroutetable.cc:1137:  ip->ip_p = IP_PROTO_DSR;
+grid/dsrroutetable.cc:1138:  ip->ip_src.s_addr = src.addr();
+grid/dsrroutetable.cc:1139:  ip->ip_dst.s_addr = dst.addr();
+grid/dsrroutetable.cc:1140:  ip->ip_tos = 0;
+grid/dsrroutetable.cc:1141:  ip->ip_off = 0;
+grid/dsrroutetable.cc:1142:  ip->ip_ttl = ttl;
+grid/dsrroutetable.cc:1143:  ip->ip_sum = 0;
+grid/dsrroutetable.cc:1144:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1147:  dsr->dsr_next_header = ip->ip_p;
+grid/dsrroutetable.cc:1152:  p->set_dst_ip_anno(source_route[1]._ip);
+grid/dsrroutetable.cc:1153:  IPAddress dst_anno_address(p->dst_ip_anno());
+grid/dsrroutetable.cc:1199:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+grid/dsrroutetable.cc:1201:  click_dsr *dsr = (click_dsr *)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.cc:1203:  click_dsr_rerr *dsr_rerr = (click_dsr_rerr *)(p->data() +
+grid/dsrroutetable.cc:1206:  in_addr *dsr_unreach_addr=(in_addr *)(p->data() +
+grid/dsrroutetable.cc:1211:  click_dsr_source *dsr_source = (click_dsr_source *)(p->data() +
+grid/dsrroutetable.cc:1217:  p->set_ip_header(ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1231:  ip->ip_v = 4;
+grid/dsrroutetable.cc:1232:  ip->ip_hl = sizeof(click_ip) >> 2;
+grid/dsrroutetable.cc:1233:  ip->ip_len = htons(p->length());
+grid/dsrroutetable.cc:1238:  ip->ip_id = htons(1);
+grid/dsrroutetable.cc:1239:  ip->ip_p = IP_PROTO_DSR;
+grid/dsrroutetable.cc:1240:  ip->ip_src.s_addr = bad_src.addr();
+grid/dsrroutetable.cc:1241:  ip->ip_dst.s_addr = src.addr();
+grid/dsrroutetable.cc:1242:  ip->ip_tos = 0;
+grid/dsrroutetable.cc:1243:  ip->ip_off = 0;
+grid/dsrroutetable.cc:1244:  ip->ip_ttl = ttl;
+grid/dsrroutetable.cc:1245:  ip->ip_sum = 0;
+grid/dsrroutetable.cc:1246:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1249:  dsr->dsr_next_header = ip->ip_p;
+grid/dsrroutetable.cc:1270:  p->set_dst_ip_anno(source_route[1]._ip);
+grid/dsrroutetable.cc:1272:  IPAddress dst_anno_address(p->dst_ip_anno());
+grid/dsrroutetable.cc:1285:  const click_ip *ip = p->ip_header();
+grid/dsrroutetable.cc:1286:  const click_dsr_rrep *dsr_rrep = (const click_dsr_rrep *)(p->data()+
+grid/dsrroutetable.cc:1289:  IPAddress dest_ip(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1291:  assert(dsr_rrep->dsr_type == DSR_TYPE_RREP);
+grid/dsrroutetable.cc:1293:  int hop_count = dsr_rrep->num_addrs();
+grid/dsrroutetable.cc:1312:    route.push_back(dsr_rrep->addr[i]);
+grid/dsrroutetable.cc:1336:  IPAddress src(ip->ip_src.s_addr);
+grid/dsrroutetable.cc:1337:  IPAddress dst(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1359:  click_dsr_rrep *dsr_rrep=(click_dsr_rrep *)(p->data()+
+grid/dsrroutetable.cc:1364:  int num_addr = dsr_rrep->num_addrs();
+grid/dsrroutetable.cc:1406:  const click_ip *ip = (const click_ip*)(p->data() + sizeof(click_ether));
+grid/dsrroutetable.cc:1408:  click_dsr *dsr = (click_dsr *)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.cc:1411:  click_dsr_option *dsr_option = (click_dsr_option *)(p->data() +
+grid/dsrroutetable.cc:1427:    if (dsr_rrep->length() == dsr_len) {
+grid/dsrroutetable.cc:1429:      IPAddress dst_addr(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1432:      dsr_option = (click_dsr_option *)(dsr_rrep->next_option());
+grid/dsrroutetable.cc:1450:      IPAddress dst_addr(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1479:      IPAddress dst(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1515:    IPAddress final_dst(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1535:  click_dsr_source *dsr_source = (click_dsr_source *)(p->data() +
+grid/dsrroutetable.cc:1540:    p->kill();
+grid/dsrroutetable.cc:1546:  p->set_dst_ip_anno(next_sr_hop(p, offset));
+grid/dsrroutetable.cc:1573:  p = p->put(sizeof(DSRHop));
+grid/dsrroutetable.cc:1575:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+grid/dsrroutetable.cc:1576:  click_dsr *dsr = (click_dsr *)(p->data()+
+grid/dsrroutetable.cc:1578:  click_dsr_rreq *dsr_rreq = (click_dsr_rreq *)(p->data() +
+grid/dsrroutetable.cc:1590:  ip->ip_ttl--;
+grid/dsrroutetable.cc:1591:  ip->ip_len = htons(p->length());
+grid/dsrroutetable.cc:1592:  ip->ip_sum = 0;
+grid/dsrroutetable.cc:1593:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1595:  p->set_dst_ip_anno(0xffffffff);
+grid/dsrroutetable.cc:1614:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+grid/dsrroutetable.cc:1615:  click_dsr *dsr = (click_dsr*)(p->data() + sizeof(click_ip));
+grid/dsrroutetable.cc:1616:  click_dsr_rreq *dsr_rreq = (click_dsr_rreq*)(p->data() +
+grid/dsrroutetable.cc:1620:  ip->ip_v = 4;
+grid/dsrroutetable.cc:1621:  ip->ip_hl = sizeof(click_ip) >> 2;
+grid/dsrroutetable.cc:1622:  ip->ip_len = htons(p->length());
+grid/dsrroutetable.cc:1623:  ip->ip_id = htons(_rreq_id); // XXX eh?  why this?
+grid/dsrroutetable.cc:1624:  ip->ip_p = IP_PROTO_DSR;
+grid/dsrroutetable.cc:1625:  ip->ip_src.s_addr = me->addr();
+grid/dsrroutetable.cc:1627:    ip->ip_dst.s_addr = dst.addr();
+grid/dsrroutetable.cc:1629:    ip->ip_dst.s_addr = 0xffffffff;
+grid/dsrroutetable.cc:1630:  ip->ip_tos = 0;
+grid/dsrroutetable.cc:1631:  ip->ip_off = 0;
+grid/dsrroutetable.cc:1632:  ip->ip_ttl = ttl;
+grid/dsrroutetable.cc:1633:  ip->ip_sum = 0;
+grid/dsrroutetable.cc:1634:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+grid/dsrroutetable.cc:1644:  p->set_dst_ip_anno(ip->ip_dst.s_addr);
+grid/dsrroutetable.cc:1881:    // default to hop-count, all links have a hop-count of 1
+grid/dsrroutetable.cc:1890:    return (a < b); // fallback to minimum hop-count
+grid/dsrroutetable.cc:1918:    return r.size(); // fallback to hop-count
+local/forceicmp.cc:60:  click_ip *ip = p->ip_header();
+local/forceicmp.cc:61:  unsigned plen = p->network_length();
+local/forceicmp.cc:65:  if (!p->has_network_header() || plen < sizeof(click_ip))
+local/forceicmp.cc:68:  hlen = ip->ip_hl << 2;
+local/forceicmp.cc:72:  ilen = ntohs(ip->ip_len);
+local/forceicmp.cc:97:  p->kill();
+local/chuckcheck.cc:44:    s.saddr = p->ip_header()->ip_src.s_addr;
+local/bufconv.cc:55:  p->kill();
+local/bufconv.cc:81:  ip->ip_v = 4;
+local/bufconv.cc:82:  ip->ip_hl = 5;
+local/bufconv.cc:83:  ip->ip_tos = 0x10;
+local/bufconv.cc:84:  ip->ip_len = htons(q->length());
+local/bufconv.cc:85:  ip->ip_id = htons(0); // what is this used for exactly?
+local/bufconv.cc:86:  ip->ip_off = htons(IP_DF);
+local/bufconv.cc:87:  ip->ip_ttl = 255;
+local/bufconv.cc:88:  ip->ip_p = IP_PROTO_TCP;
+local/bufconv.cc:89:  ip->ip_sum = 0;
+local/bufconv.cc:91:  tcp->th_off = 5;
+local/bufconv.cc:92:  tcp->th_flags = TH_PUSH; // how should we set the PUSH bit?
+local/bufconv.cc:93:  tcp->th_win = htons(32120); // when and where should this be set?
+local/bufconv.cc:94:  tcp->th_sum = htons(0);
+local/bufconv.cc:95:  tcp->th_urp = htons(0);
+local/bufconv.cc:115:  q->set_ip_header(ip, ip->ip_hl << 2);
+local/bufconv.cc:124:    const click_ip *iph = p->ip_header();
+local/bufconv.cc:125:    const click_tcp *tcph = p->tcp_header();
+local/bufconv.cc:128:      p->kill();
+local/bufconv.cc:134:    p->kill();
+local/forceip.cc:38:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+local/forceip.cc:39:  unsigned plen = p->length();
+local/forceip.cc:41:  ip->ip_v = 4;
+local/forceip.cc:42:  ip->ip_len = htons(plen);
+local/forceip.cc:45:    ip->ip_off = 0;
+local/forceip.cc:48:  unsigned hlen = ip->ip_hl << 2;
+local/forceip.cc:50:    ip->ip_hl = plen >> 2;
+local/forceip.cc:53:  ip->ip_sum = 0;
+local/forceip.cc:54:  ip->ip_sum = click_in_cksum((unsigned char *)ip, ip->ip_hl << 2);
+local/forceip.cc:56:  p->set_ip_header(ip, hlen);
+local/rogueStaDetect.cc:167:		if(!strcmp(chksta.mac->unparse().c_str(), lkup->mac->unparse().c_str())) {
+local/rogueStaDetect.cc:384:	struct click_wifi *w = (struct click_wifi *) p->data();
+local/rogueStaDetect.cc:401:		p->kill();
+local/rogueStaDetect.cc:410:				p->kill();
+local/rogueStaDetect.cc:457:		p->kill();
+local/reframe.cc:84:    _qhead = p->next();
+local/reframe.cc:85:    p->kill();
+local/reframe.cc:100:	     p = p->next()) {
+local/reframe.cc:101:	  memcpy(_header->end_data(), p->data(),
+local/reframe.cc:102:		 MIN(p->length(), _foff + _flen - _header->length()));
+local/reframe.cc:103:	  _header->put(MIN(p->length(), _foff + _flen - _header->length()));
+local/reframe.cc:157:      if ((int) p->length() > _need) {
+local/reframe.cc:159:	memcpy(p1->end_data(), p->data(), _need);
+local/reframe.cc:162:	p->pull(_need);
+local/reframe.cc:167:	memcpy(p1->end_data(), p->data(), p->length());
+local/reframe.cc:168:	p1->put(p->length());
+local/reframe.cc:169:	_have -= p->length();
+local/reframe.cc:170:	_need -= p->length();
+local/reframe.cc:172:	_qhead = p->next();
+local/reframe.cc:175:	p->kill();
+local/reframe.cc:202:  p->set_next(0);
+local/reframe.cc:203:  _have += p->length();
+local/rogueDetect.cc:167:		if(!strcmp(chksta.mac->unparse().c_str(), lkup->mac->unparse().c_str())) {
+local/rogueDetect.cc:360:	struct click_wifi *w = (struct click_wifi *) p->data();
+local/rogueDetect.cc:377:		p->kill();
+local/rogueDetect.cc:386:				p->kill();
+local/rogueDetect.cc:433:		p->kill();
+local/tcpbuffer.cc:59:    p->kill();
+local/tcpbuffer.cc:71:    p->kill();
+local/tcpreflector.cc:37:  WritablePacket *p = xp->uniqueify();
+local/tcpreflector.cc:39:  unsigned plen = p->length();
+local/tcpreflector.cc:50:  ip = (click_ip *) p->data();
+local/tcpreflector.cc:51:  hlen = ip->ip_hl << 2;
+local/tcpreflector.cc:59:  src = ip->ip_src;
+local/tcpreflector.cc:60:  dst = ip->ip_dst;
+local/tcpreflector.cc:89:  ip->ip_src = dst;
+local/tcpreflector.cc:90:  ip->ip_dst = src;
+local/tcpreflector.cc:91:  ip->ip_ttl = 250;
+local/tcpreflector.cc:92:  p->set_dst_ip_anno(IPAddress(ip->ip_dst));
+local/tcpreflector.cc:100:  ip->ip_sum = 0;
+local/tcpreflector.cc:101:  ip->ip_len = htons(plen - 20);
+local/tcpreflector.cc:107:  ip->ip_len = htons(plen);
+local/tcpreflector.cc:109:  ip->ip_sum = 0;
+local/tcpreflector.cc:110:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+local/tcpreflector.cc:116:    p->kill();
+local/webgen.cc:243:  unsigned plen = p->length ();
+local/webgen.cc:248:  click_ip *ip = (click_ip *) p->data();
+local/webgen.cc:249:  unsigned iplen = ntohs(ip->ip_len);
+local/webgen.cc:250:  unsigned hlen = ip->ip_hl << 2;
+local/webgen.cc:252:    p->kill();
+local/webgen.cc:260:  CB *cb = find_cb(ip->ip_dst.s_addr, th->th_dport, th->th_sport);
+local/webgen.cc:266:		ip->ip_dst, th->th_dport,
+local/webgen.cc:267:		ip->ip_src, th->th_sport,
+local/webgen.cc:312:    p->kill ();
+local/webgen.cc:331:      xp->shared () ||
+local/webgen.cc:332:      xp->headroom () < headroom ||
+local/webgen.cc:333:      xp->length () + xp->tailroom() < plen) {
+local/webgen.cc:335:      xp->kill ();
+local/webgen.cc:338:    p = xp->uniqueify ();
+local/webgen.cc:339:    if (p->length () < plen)
+local/webgen.cc:340:      p = p->put (plen - p->length ());
+local/webgen.cc:341:    else if (p->length () > plen)
+local/webgen.cc:342:      p->take (p->length () - plen);
+local/webgen.cc:374:      xp->kill ();
+local/webgen.cc:416:  unsigned plen = p->length ();
+local/webgen.cc:418:  click_ip *ip = (click_ip *) p->data ();
+local/webgen.cc:419:  ip->ip_v = 4;
+local/webgen.cc:420:  ip->ip_hl = sizeof (click_ip) >> 2;
+local/webgen.cc:421:  ip->ip_id = htons (_id.fetch_and_add (1));
+local/webgen.cc:422:  ip->ip_p = 6;
+local/webgen.cc:423:  ip->ip_src = src;
+local/webgen.cc:424:  ip->ip_dst = dst;
+local/webgen.cc:425:  ip->ip_tos = 0;
+local/webgen.cc:426:  ip->ip_off = 0;
+local/webgen.cc:427:  ip->ip_ttl = 250;
+local/webgen.cc:428:  p->set_dst_ip_anno (IPAddress (ip->ip_dst));
+local/webgen.cc:429:  p->set_ip_header (ip, sizeof (click_ip));
+local/webgen.cc:449:  ip->ip_sum = 0;
+local/webgen.cc:450:  ip->ip_len = htons (plen - 20);
+local/webgen.cc:456:  ip->ip_len = htons (plen);
+local/webgen.cc:458:  ip->ip_sum = 0;
+local/webgen.cc:459:  ip->ip_sum = click_in_cksum ((unsigned char *) ip, sizeof (click_ip));
+local/print80211.cc:219:    sa << p->timestamp_anno() << ": ";
+local/print80211.cc:222:  snprintf(sbuf, sizeof(sbuf), "%4d | ", p->length());
+local/print80211.cc:226:  ieee80211_frame *frame = (ieee80211_frame *) p->data();
+local/print80211.cc:244:  case IEEE80211_FC0_TYPE_DATA: print_data(sa, _verbose, p->data(), p->length()); break;
+local/print80211.cc:245:  case IEEE80211_FC0_TYPE_MGT: print_mgmt(sa, _verbose, p->data(), p->length()); break;
+local/print80211.cc:246:  case IEEE80211_FC0_TYPE_CTL: print_ctl(sa, _verbose, p->data(), p->length()); break;
+local/basic.cc:88:		if(!strcmp(chksta.mac->unparse().c_str(), lkup->mac->unparse().c_str())) {
+local/basic.cc:199:	struct click_wifi *w = (struct click_wifi *) p->data();
+local/tcpconn.cc:80:    p->kill();
+local/tcpconn.cc:99:  const click_tcp *tcph = p->tcp_header();
+local/tcpconn.cc:124:  if (WritablePacket *q = p->uniqueify()) {
+local/tcpconn.cc:186:  ip->ip_v = 4;
+local/tcpconn.cc:187:  ip->ip_hl = 5;
+local/tcpconn.cc:188:  ip->ip_tos = 0x10;
+local/tcpconn.cc:189:  ip->ip_len = htons(q->length());
+local/tcpconn.cc:190:  ip->ip_id = htons(0); // what is this used for exactly?
+local/tcpconn.cc:191:  ip->ip_off = htons(IP_DF);
+local/tcpconn.cc:192:  ip->ip_ttl = 255;
+local/tcpconn.cc:193:  ip->ip_p = IP_PROTO_TCP;
+local/tcpconn.cc:194:  ip->ip_sum = 0;
+local/tcpconn.cc:197:  memmove((void *) &(ip->ip_src), (void *) &sa, 4);
+local/tcpconn.cc:198:  memmove((void *) &(ip->ip_dst), (void *) &da, 4);
+local/tcpconn.cc:200:  tcp->th_sport = _flow.sport();
+local/tcpconn.cc:201:  tcp->th_dport = _flow.dport();
+local/tcpconn.cc:202:  tcp->th_seq = htonl(_seq_nxt);
+local/tcpconn.cc:203:  tcp->th_ack = 0;
+local/tcpconn.cc:204:  tcp->th_off = 5;
+local/tcpconn.cc:205:  tcp->th_flags = TH_SYN;
+local/tcpconn.cc:206:  tcp->th_win = htons(32120); // when and where should this be set?
+local/tcpconn.cc:207:  tcp->th_sum = htons(0);
+local/tcpconn.cc:208:  tcp->th_urp = htons(0);
+local/tcpconn.cc:210:  q->set_ip_header(ip, ip->ip_hl << 2);
+local/copytcpseq.cc:74:  const click_tcp *tcph = p->tcp_header();
+local/copytcpseq.cc:88:  if (WritablePacket *q = p->uniqueify()) {
+local/tcpdemux.cc:45:  const click_ip *iph = p->ip_header();
+local/tcpdemux.cc:46:  const click_tcp *tcph = p->tcp_header();
+local/tcpdemux.cc:87:    p->kill();
+local/copyflowid.cc:83:  if (WritablePacket *q = p->uniqueify()) {
+local/forcetcp.cc:53:  click_ip *ip = p->ip_header();
+local/forcetcp.cc:54:  unsigned plen = p->network_length();
+local/forcetcp.cc:59:  if (!p->has_network_header() || plen < sizeof(click_ip))
+local/forcetcp.cc:62:  hlen = ip->ip_hl << 2;
+local/forcetcp.cc:66:  ilen = ntohs(ip->ip_len);
+local/forcetcp.cc:109:  oisum = ip->ip_sum;
+local/forcetcp.cc:110:  ip->ip_sum = 0;
+local/forcetcp.cc:111:  ip->ip_len = htons(ilen - hlen);
+local/forcetcp.cc:117:  ip->ip_sum = oisum;
+local/forcetcp.cc:118:  ip->ip_len = htons(ilen);
+local/forcetcp.cc:124:  p->kill();
+local/staTest.cc:200:		if(!strcmp(chksta.mac->unparse().c_str(), lkup->mac->unparse().c_str())) {
+local/staTest.cc:387:	struct click_wifi *w = (struct click_wifi *) p->data();
+local/staTest.cc:406:		p->kill();
+local/printairo.cc:110:  struct an_rxframe *frame = (struct an_rxframe *) p->data();
+local/printairo.cc:112:  if (p->length() < sizeof(*frame)) {
+local/printairo.cc:148:	sa << p->timestamp_anno() << ": ";
+local/printairo.cc:154:	       sa.c_str(), p->length(), (int) frame->an_rx_signal_strength,
+local/printairo.cc:215:  p->kill();
+local/tcpbuffer.hh:129:        p->kill();
+local/tcpbuffer.hh:219:  const click_ip *iph = p->ip_header();
+local/tcpbuffer.hh:221:    reinterpret_cast<const click_tcp *>(p->transport_header());
+local/tcpbuffer.hh:231:    reinterpret_cast<const click_tcp *>(p->transport_header());
+local/forceudp.cc:55:  click_ip *ip = p->ip_header();
+local/forceudp.cc:56:  unsigned plen = p->network_length();
+local/forceudp.cc:61:  if (!p->has_network_header() || plen < sizeof(click_ip))
+local/forceudp.cc:64:  hlen = ip->ip_hl << 2;
+local/forceudp.cc:68:  ilen = ntohs(ip->ip_len);
+local/forceudp.cc:85:  oisum = ip->ip_sum;
+local/forceudp.cc:86:  ip->ip_sum = 0;
+local/forceudp.cc:87:  ip->ip_len = htons(ilen - hlen);
+local/forceudp.cc:93:  ip->ip_sum = oisum;
+local/forceudp.cc:94:  ip->ip_len = htons(ilen);
+local/forceudp.cc:100:  p->kill();
+local/duppath.cc:51:  unsigned d = ntohl(p->ip_header()->ip_src.s_addr);
+local/duppath.cc:58:      p->kill();
+local/tcpack.cc:75:    p->kill();
+local/tcpack.cc:91:      p->kill();
+local/tcpack.cc:101:  const click_tcp *tcph = p->tcp_header();
+local/tcpack.cc:135:  const click_tcp *tcph = p->tcp_header();
+local/tcpack.cc:145:  click_tcp *tcph_new = p->uniqueify()->tcp_header();
+local/tcpack.cc:173:  ip->ip_v = 4;
+local/tcpack.cc:174:  ip->ip_hl = 5;
+local/tcpack.cc:175:  ip->ip_tos = 0x10;
+local/tcpack.cc:176:  ip->ip_len = htons(q->length());
+local/tcpack.cc:177:  ip->ip_id = htons(0); // what is this used for exactly?
+local/tcpack.cc:178:  ip->ip_off = htons(IP_DF);
+local/tcpack.cc:179:  ip->ip_ttl = 255;
+local/tcpack.cc:180:  ip->ip_p = IP_PROTO_TCP;
+local/tcpack.cc:181:  ip->ip_sum = 0;
+local/tcpack.cc:183:  tcp->th_ack = htonl(_ack_nxt);
+local/tcpack.cc:184:  tcp->th_off = 5;
+local/tcpack.cc:185:  tcp->th_flags = TH_ACK;
+local/tcpack.cc:186:  tcp->th_win = htons(32120); // when and where should this be set?
+local/tcpack.cc:187:  tcp->th_sum = htons(0);
+local/tcpack.cc:188:  tcp->th_urp = htons(0);
+local/tcpack.cc:190:  q->set_ip_header(ip, ip->ip_hl << 2);
+local/toytcp.cc:99:  click_tcp *th = (click_tcp *) p->data();
+local/toytcp.cc:102:  if(p->length() < sizeof(*th))
+local/toytcp.cc:134:    p->kill();
+local/toytcp.cc:157:     xp->shared() ||
+local/toytcp.cc:158:     xp->headroom() < headroom ||
+local/toytcp.cc:159:     xp->length() + xp->tailroom() < plen){
+local/toytcp.cc:162:                    xp->headroom(), xp->length(), xp->tailroom());
+local/toytcp.cc:163:      xp->kill();
+local/toytcp.cc:167:    p = xp->uniqueify();
+local/toytcp.cc:168:    if (p->length() > plen)
+local/toytcp.cc:169:	p->take(p->length() - plen);
+local/toytcp.cc:170:    else if (p->length() < plen)
+local/toytcp.cc:171:	if (!(p = p->put(plen - p->length())))
+local/toytcp.cc:175:  click_tcp *th = (click_tcp *) p->data();
+aqm/pi.cc:227:	p->kill();
+aqm/red.cc:265:	p->kill();
+ip/ipreassembler.cc:86:    if (p->has_network_header()) {
+ip/ipreassembler.cc:87:	const click_ip *iph = p->ip_header();
+ip/ipreassembler.cc:142:    const click_ip *iph = p->ip_header();
+ip/ipreassembler.cc:181:    const click_ip *iph = p->ip_header();
+ip/ipreassembler.cc:202:    memcpy(q->transport_header() + p_off, p->transport_header(), PACKET_DLEN(p));
+ip/ipreassembler.cc:226:    assert(p->has_network_header());
+ip/ipreassembler.cc:227:    const click_ip *iph = p->ip_header();
+ip/ipreassembler.cc:232:    int now = p->timestamp_anno().sec();
+ip/ipreassembler.cc:234:	p->timestamp_anno().set_now();
+ip/ipreassembler.cc:235:	now = p->timestamp_anno().sec();
+ip/ipreassembler.cc:249:	p->kill();
+ip/ipreassembler.cc:252:    p->take(PACKET_DLEN(p) - (p_lastoff - p_off));
+ip/ipreassembler.cc:265:	p->kill();
+ip/ipreassembler.cc:274:	    p->kill();
+ip/ipreassembler.cc:291:	    p->kill();
+ip/ipreassembler.cc:323:    memcpy(q->transport_header() + p_off, p->transport_header(), p_lastoff - p_off);
+ip/ipreassembler.cc:334:	memcpy(q->ip_header(), p->ip_header(), hl);
+ip/ipreassembler.cc:337:	q->set_device_anno(p->device_anno());
+ip/ipreassembler.cc:352:    p->kill();
+ip/ipinputcombo.cc:73:  p->pull(14);
+ip/ipinputcombo.cc:76:  const click_ip *ip = reinterpret_cast<const click_ip *>(p->data());
+ip/ipinputcombo.cc:79:  if(p->length() < sizeof(click_ip))
+ip/ipinputcombo.cc:82:  if(ip->ip_v != 4)
+ip/ipinputcombo.cc:85:  hlen = ip->ip_hl << 2;
+ip/ipinputcombo.cc:89:  len = ntohs(ip->ip_len);
+ip/ipinputcombo.cc:90:  if (len > p->length() || len < hlen)
+ip/ipinputcombo.cc:95:    if (ip_fast_csum((unsigned char *)ip, ip->ip_hl) != 0)
+ip/ipinputcombo.cc:102:  if (ip_fast_csum((unsigned char *)ip, ip->ip_hl) != 0)
+ip/ipinputcombo.cc:114:  if (find(_bad_src.begin(), _bad_src.end(), IPAddress(ip->ip_src)) < _bad_src.end()
+ip/ipinputcombo.cc:115:      && find(_good_dst.begin(), _good_dst.end(), IPAddress(ip->ip_dst)) == _good_dst.end())
+ip/ipinputcombo.cc:123:  p->set_ip_header(ip, hlen);
+ip/ipinputcombo.cc:126:  if (p->length() > len)
+ip/ipinputcombo.cc:127:    p->take(p->length() - len);
+ip/ipinputcombo.cc:130:  p->set_dst_ip_anno(ip->ip_dst);
+ip/ipinputcombo.cc:137:  p->kill();
+ip/sortediplookup.cc:155:    IPAddress a = p->dst_ip_anno();
+ip/sortediplookup.cc:173:	p->kill();
+ip/sortediplookup.cc:179:	p->set_dst_ip_anno(e.gw);
+ip/setipdscp.cc:53:  assert(p->has_network_header());
+ip/setipdscp.cc:54:  click_ip *ip = p->ip_header();
+ip/setipdscp.cc:57:  ip->ip_tos = (ip->ip_tos & 0x3) | _dscp;
+ip/setipdscp.cc:62:  uint32_t sum = (~ip->ip_sum & 0xFFFF) + (~old_hw & 0xFFFF) + new_hw;
+ip/setipdscp.cc:64:  ip->ip_sum = ~(sum + (sum >> 16));
+ip/iprw.cc:89:    in_map->initialize(ip_p, inf, outf, foutput, 0, out_map);
+ip/iprw.cc:90:    out_map->initialize(ip_p, outf.reverse(), inf.reverse(), routput, F_REVERSE, in_map);
+ip/iprw.cc:96:    assert(p->has_network_header());
+ip/iprw.cc:97:    click_ip *iph = p->ip_header();
+ip/iprw.cc:103:	p->set_dst_ip_anno(_mapto.daddr());
+ip/iprw.cc:118:	click_tcp *tcph = p->tcp_header();
+ip/iprw.cc:133:	click_udp *udph = p->udp_header();
+ip/iprw.cc:513:	is.u.pattern.p->use();
+ip/iprw.cc:571:		p->mapping_freed(m);
+ip/rfc2507c.cc:43:  WritablePacket *q = Packet::make(p->length() + 1);
+ip/rfc2507c.cc:45:  memcpy(q->data() + 1, p->data(), p->length());
+ip/rfc2507c.cc:57:  WritablePacket *q = Packet::make(p->length() + 2);
+ip/rfc2507c.cc:60:  memcpy(q->data() + 2, p->data(), p->length());
+ip/rfc2507c.cc:109:  const click_ip *ipp = p->ip_header();
+ip/rfc2507c.cc:110:  const click_tcp *tcpp = p->tcp_header();
+ip/rfc2507c.cc:114:  if(ipp->ip_v != ctx->_ip.ip_v ||
+ip/rfc2507c.cc:115:     ipp->ip_hl != ctx->_ip.ip_hl ||
+ip/rfc2507c.cc:116:     ipp->ip_tos != ctx->_ip.ip_tos ||
+ip/rfc2507c.cc:117:     (ipp->ip_off & htons(IP_DF)) != (ctx->_ip.ip_off & htons(IP_DF)) ||
+ip/rfc2507c.cc:118:     ipp->ip_ttl != ctx->_ip.ip_ttl ||
+ip/rfc2507c.cc:119:     tcpp->th_off != ctx->_tcp.th_off){
+ip/rfc2507c.cc:124:  x = encode16(ctx->_tcp.th_urp, tcpp->th_urp, fbuf, flen);
+ip/rfc2507c.cc:132:  x = encode16(ctx->_tcp.th_win, tcpp->th_win, fbuf, flen);
+ip/rfc2507c.cc:140:  x = encode32(ctx->_tcp.th_ack, tcpp->th_ack, fbuf, flen);
+ip/rfc2507c.cc:148:  x = encode32(ctx->_tcp.th_seq, tcpp->th_seq, fbuf, flen);
+ip/rfc2507c.cc:156:  if(ntohs(ipp->ip_id) != ntohs(ctx->_ip.ip_id) + 1){
+ip/rfc2507c.cc:157:    x = encode16(ctx->_ip.ip_id, ipp->ip_id, fbuf, flen);
+ip/rfc2507c.cc:166:  if(tcpp->th_flags & TH_PUSH)
+ip/rfc2507c.cc:169:  WritablePacket *q = Packet::make(p->length() - sizeof(click_ip)
+ip/rfc2507c.cc:174:  memcpy(q->data() + 3, &tcpp->th_sum, 2);
+ip/rfc2507c.cc:177:         p->data() + sizeof(click_ip) + sizeof(struct click_tcp),
+ip/rfc2507c.cc:178:         p->length() - sizeof(click_ip) - sizeof(struct click_tcp));
+ip/rfc2507c.cc:210:  assert(p->has_network_header() && p->network_header_offset() == 0);
+ip/rfc2507c.cc:211:  const click_ip *ipp = p->ip_header();
+ip/rfc2507c.cc:212:  const click_tcp *tcpp = p->tcp_header();
+ip/rfc2507c.cc:216:  if(ipp->ip_hl != 5 ||
+ip/rfc2507c.cc:217:     ipp->ip_v != 4 ||
+ip/rfc2507c.cc:218:     (ipp->ip_off & htons(IP_OFFMASK | IP_MF)) != 0 ||
+ip/rfc2507c.cc:219:     ipp->ip_p != IPPROTO_TCP ||
+ip/rfc2507c.cc:220:     (tcpp->th_flags & (TH_FIN|TH_SYN|TH_RST|TH_ACK)) != TH_ACK){
+ip/rfc2507c.cc:255:  p->kill();
+ip/checkipheader.cc:189:	p->kill();
+ip/checkipheader.cc:197:  const click_ip *ip = reinterpret_cast<const click_ip *>(p->data() + _offset);
+ip/checkipheader.cc:198:  unsigned plen = p->length() - _offset;
+ip/checkipheader.cc:205:  if (ip->ip_v != 4)
+ip/checkipheader.cc:208:  hlen = ip->ip_hl << 2;
+ip/checkipheader.cc:212:  len = ntohs(ip->ip_len);
+ip/checkipheader.cc:220:      val = ip_fast_csum((unsigned char *)ip, ip->ip_hl);
+ip/checkipheader.cc:224:    val = ip_fast_csum((unsigned char *)ip, ip->ip_hl);
+ip/checkipheader.cc:237:  if (find(_bad_src.begin(), _bad_src.end(), IPAddress(ip->ip_src)) < _bad_src.end()
+ip/checkipheader.cc:238:      && find(_good_dst.begin(), _good_dst.end(), IPAddress(ip->ip_dst)) == _good_dst.end())
+ip/checkipheader.cc:246:  p->set_ip_header(ip, hlen);
+ip/checkipheader.cc:250:    p->take(plen - len);
+ip/checkipheader.cc:256:  p->set_dst_ip_anno(ip->ip_dst);
+ip/ipaddrrewriter.cc:32:    assert(p->has_network_header());
+ip/ipaddrrewriter.cc:33:    click_ip *iph = p->ip_header();
+ip/ipaddrrewriter.cc:41:	    p->set_dst_ip_anno(_mapto.daddr());
+ip/ipaddrrewriter.cc:115:	    _input_specs[i].u.pattern.p->unuse();
+ip/ipaddrrewriter.cc:122:    if (!p->allow_nat())
+ip/ipaddrrewriter.cc:124:    else if (p->daddr())
+ip/ipaddrrewriter.cc:168:    click_ip *iph = p->ip_header();
+ip/ipaddrrewriter.cc:205:	    p->kill();
+ip/ipaddrrewriter.cc:243:	    s += rw->_input_specs[i].u.pattern.p->unparse() + "\n";
+ip/ipnameinfo.hh:26:domain, echo, finger, ftp, ftp-data, https, imap3, imaps, irc, netbios-dgm,
+ip/ipnameinfo.hh:28:snmp-trap, ssh, sunrpc, telnet, tftp, www.
+ip/ipnameinfo.hh:32:sourcequench, timeexceeded, timestamp, timestamp-reply, unreachable.
+ip/getipaddress.cc:45:  p->set_dst_ip_anno(IPAddress(p->data() + _offset));
+ip/lookupiproutelinux.cc:169:  IPAddress a = p->dst_ip_anno();
+ip/lookupiproutelinux.cc:179:      p->set_dst_ip_anno(gw);
+ip/ipclassifier.hh:172:Valid IP port names: 'echo', 'discard', 'daytime', 'chargen', 'ftp-data',
+ip/ipclassifier.hh:175:'netbios-ns', 'netbios-dgm', 'netbios-ssn', 'snmp', 'snmp-trap', 'irc',
+ip/ipclassifier.hh:184:'parameterproblem', 'timestamp', 'timestamp-reply', 'inforeq',
+ip/ipaddrpairrewriter.cc:32:    assert(p->has_network_header());
+ip/ipaddrpairrewriter.cc:33:    click_ip *iph = p->ip_header();
+ip/ipaddrpairrewriter.cc:39:	p->set_dst_ip_anno(_mapto.daddr());
+ip/ipaddrpairrewriter.cc:109:	    _input_specs[i].u.pattern.p->unuse();
+ip/ipaddrpairrewriter.cc:116:    if (!p->allow_nat())
+ip/ipaddrpairrewriter.cc:160:    click_ip *iph = p->ip_header();
+ip/ipaddrpairrewriter.cc:192:	    p->kill();
+ip/ipaddrpairrewriter.cc:230:	    s += rw->_input_specs[i].u.pattern.p->unparse() + "\n";
+ip/ipprint.cc:159:    const click_ip *iph = p->ip_header();
+ip/ipprint.cc:160:    const click_tcp *tcph = p->tcp_header();
+ip/ipprint.cc:191:       << '(' << seqlen << ',' << p->length() << ',' << ip_len << ')';
+ip/ipprint.cc:208:    const click_ip *iph = p->ip_header();
+ip/ipprint.cc:209:    const click_udp *udph = p->udp_header();
+ip/ipprint.cc:244:    const click_ip *iph = p->ip_header();
+ip/ipprint.cc:245:    const click_icmp *icmph = p->icmp_header();
+ip/ipprint.cc:325:    if (!_active || !p->has_network_header())
+ip/ipprint.cc:333:	sa << p->timestamp_anno() << ": ";
+ip/ipprint.cc:341:    if (p->network_length() < (int) sizeof(click_ip))
+ip/ipprint.cc:344:	const click_ip *iph = p->ip_header();
+ip/ipprint.cc:347:	int transport_length = p->transport_length();
+ip/ipprint.cc:367:	    sa << IPAddress(iph->ip_src) << " > " << IPAddress(iph->ip_dst) << ": ip-proto-" << (int)iph->ip_p;
+ip/ipprint.cc:380:		    data = p->transport_header() + (p->tcp_header()->th_off << 2);
+ip/ipprint.cc:382:		    data = p->transport_header() + sizeof(click_udp);
+ip/ipprint.cc:384:		    data = p->transport_header();
+ip/ipprint.cc:386:		data = p->data();
+ip/ipprint.cc:389:	    if (data >= p->end_data())
+ip/ipprint.cc:391:	    else if (bytes < 0 || (int) (p->end_data() - data) < bytes)
+ip/ipprint.cc:392:		bytes = p->end_data() - data;
+ip/rangeiplookup.cc:72:    int port = lookup_route(p->dst_ip_anno(), gw);
+ip/rangeiplookup.cc:77:    int port1 = _helper.lookup_route(p->dst_ip_anno(), gw1);
+ip/rangeiplookup.cc:84:            p->set_dst_ip_anno(gw);
+ip/rangeiplookup.cc:87:        p->kill();
+ip/ipnameinfo.cc:67:    { "timestamp-reply", ICMP_TSTAMPREPLY },
+ip/ipnameinfo.cc:120:    { "ftp-data", 20 },
+ip/ipnameinfo.cc:137:    { "snmp-trap", 162 },
+ip/ipnameinfo.cc:190:	    uint32_t proto = p->p_proto;
+ip/ipnameinfo.cc:191:	    _db->define(p->p_name, &proto, 4);
+ip/ipnameinfo.cc:192:	    for (const char **a = (const char **) p->p_aliases; a && *a; a++)
+ip/ipfragmenter.cc:103:    click_ip *ip = p->ip_header();
+ip/ipfragmenter.cc:107:    if (ip->ip_off & htons(IP_DF)) {
+ip/ipfragmenter.cc:108:	ip->ip_id = click_random();
+ip/ipfragmenter.cc:109:	ip->ip_off &= ~htons(IP_DF);
+ip/ipfragmenter.cc:111:    bool had_mf = (ip->ip_off & htons(IP_MF)) != 0;
+ip/ipfragmenter.cc:112:    ip->ip_len = htons(hlen + first_dlen);
+ip/ipfragmenter.cc:113:    ip->ip_off |= htons(IP_MF);
+ip/ipfragmenter.cc:114:    ip->ip_sum = 0;
+ip/ipfragmenter.cc:115:    ip->ip_sum = click_in_cksum((const unsigned char *)ip, hlen);
+ip/ipfragmenter.cc:116:    Packet *first_fragment = p->clone();
+ip/ipfragmenter.cc:117:    first_fragment->take(p->length() - p->network_header_offset() - hlen - first_dlen);
+ip/ipfragmenter.cc:137:	    memcpy(q->transport_header(), p->transport_header() + off, out_dlen);
+ip/ipfragmenter.cc:139:	    qip->ip_hl = out_hlen >> 2;
+ip/ipfragmenter.cc:140:	    qip->ip_off = htons(ntohs(ip->ip_off) + (off >> 3));
+ip/ipfragmenter.cc:142:		qip->ip_off &= ~htons(IP_MF);
+ip/ipfragmenter.cc:143:	    qip->ip_len = htons(out_hlen + out_dlen);
+ip/ipfragmenter.cc:144:	    qip->ip_sum = 0;
+ip/ipfragmenter.cc:145:	    qip->ip_sum = click_in_cksum((const unsigned char *)qip, out_hlen);
+ip/ipfragmenter.cc:156:    p->kill();
+ip/ipfragmenter.cc:162:    if (p->network_length() <= (int) _mtu)
+ip/setipchecksum.cc:39:	if (!p->has_network_header())
+ip/setipchecksum.cc:41:	plen = p->network_length();
+ip/setipchecksum.cc:44:	ip = p->ip_header();
+ip/setipchecksum.cc:45:	hlen = ip->ip_hl << 2;
+ip/setipchecksum.cc:49:	ip->ip_sum = 0;
+ip/setipchecksum.cc:50:	ip->ip_sum = click_in_cksum((unsigned char *)ip, hlen);
+ip/setipchecksum.cc:55:	p->kill();
+ip/ripsend.cc:62:  memset(p->data(), '\0', p->length());
+ip/ripsend.cc:65:  click_ip *ipp = reinterpret_cast<click_ip *>(p->data());
+ip/ripsend.cc:66:  ipp->ip_len = htons(p->length() - sizeof(*ipp));
+ip/ripsend.cc:67:  ipp->ip_p = IPPROTO_UDP;
+ip/ripsend.cc:68:  ipp->ip_src = _src.in_addr();
+ip/ripsend.cc:69:  ipp->ip_dst = _dst.in_addr();
+ip/ripsend.cc:82:  udpp->uh_sport = htons(520);
+ip/ripsend.cc:83:  udpp->uh_dport = htons(520);
+ip/ripsend.cc:84:  udpp->uh_ulen = htons(p->length() - sizeof(*ipp));
+ip/ripsend.cc:85:  udpp->uh_sum = click_in_cksum(p->data(), p->length());
+ip/ripsend.cc:88:  ipp->ip_len = htons(p->length());
+ip/ripsend.cc:89:  ipp->ip_hl = sizeof(click_ip) >> 2;
+ip/ripsend.cc:90:  ipp->ip_v = 4;
+ip/ripsend.cc:91:  ipp->ip_ttl = 200;
+ip/ripsend.cc:92:  ipp->ip_sum = click_in_cksum((unsigned char *) ipp, sizeof(*ipp));
+ip/ripsend.cc:94:  p->set_ip_header(ipp, sizeof(click_ip));
+ip/ipprint.hh:20:Prints out IP packets in a human-readable tcpdump-like format, preceded by
+ip/decipttl.cc:36:    WritablePacket *q = p->uniqueify();
+ip/decipttl.cc:42:    if (unlikely(ip->ip_ttl <= 1)) {
+ip/decipttl.cc:48:	--ip->ip_ttl;
+ip/decipttl.cc:57:	unsigned long sum = (~ntohs(ip->ip_sum) & 0xFFFF) + 0xFEFF;
+ip/decipttl.cc:58:	ip->ip_sum = ~htons(sum + (sum >> 16));
+ip/storeipaddress.cc:58:    IPAddress ipa = (_use_address ? _address : p->dst_ip_anno());
+ip/storeipaddress.cc:59:    if ((ipa || _use_address) && _offset + 4 <= p->length()) {
+ip/storeipaddress.cc:60:	if (WritablePacket *q = p->uniqueify()) {
+ip/storeipaddress.cc:66:    } else if (_offset >= (unsigned) -16 && p->has_network_header()
+ip/storeipaddress.cc:67:	       && p->ip_header_length() >= sizeof(click_ip)) {
+ip/storeipaddress.cc:70:	if (WritablePacket *q = p->uniqueify()) {
+ip/directiplookup.cc:518:    int port = lookup_route(p->dst_ip_anno(), gw);
+ip/directiplookup.cc:522:            p->set_dst_ip_anno(gw);
+ip/directiplookup.cc:525:        p->kill();
+ip/lookupiproutemp.cc:100:  IPAddress a = p->dst_ip_anno();
+ip/lookupiproutemp.cc:113:	p->set_dst_ip_anno(e->_last_gw_1);
+ip/lookupiproutemp.cc:119:	p->set_dst_ip_anno(e->_last_gw_2);
+ip/lookupiproutemp.cc:133:      p->set_dst_ip_anno(gw);
+ip/lookupiproutemp.cc:137:    p->kill();
+ip/ipoutputcombo.cc:64:  assert(p->has_network_header());
+ip/ipoutputcombo.cc:65:  click_ip *ip = p->ip_header();
+ip/ipoutputcombo.cc:66:  unsigned hlen = (ip->ip_hl << 2);
+ip/ipoutputcombo.cc:69:    uint8_t *woa = p->network_header();
+ip/ipoutputcombo.cc:70:    int hlen = p->network_header_length();
+ip/ipoutputcombo.cc:174:    ip->ip_src = _my_ip;
+ip/ipoutputcombo.cc:180:    ip->ip_sum = 0;
+ip/ipoutputcombo.cc:181:    ip->ip_sum = click_in_cksum(p->data(), hlen);
+ip/ipoutputcombo.cc:185:  if (ip->ip_ttl <= 1) {
+ip/ipoutputcombo.cc:189:    ip->ip_ttl--;
+ip/ipoutputcombo.cc:192:    unsigned long sum = (~ntohs(ip->ip_sum) & 0xFFFF) + 0xFEFF;
+ip/ipoutputcombo.cc:193:    ip->ip_sum = ~htons(sum + (sum >> 16));
+ip/ipoutputcombo.cc:197:  if (p->length() > _mtu) {
+ip/markipheader.cc:44:  const click_ip *ip = reinterpret_cast<const click_ip *>(p->data() + _offset);
+ip/markipheader.cc:45:  p->set_ip_header(ip, ip->ip_hl << 2);
+ip/iproutetable.cc:153:    int port = lookup_route(p->dst_ip_anno(), gw);
+ip/iproutetable.cc:157:	    p->set_dst_ip_anno(gw);
+ip/iproutetable.cc:162:	    click_chatter("IPRouteTable: no route for %s", p->dst_ip_anno().unparse().c_str());
+ip/iproutetable.cc:163:	p->kill();
+ip/rfc2507d.cc:71:  if(p->length() < 2)
+ip/rfc2507d.cc:74:  if (p->data()[0] == PT_OTHER) {
+ip/rfc2507d.cc:75:    q = Packet::make(p->length() - 1);
+ip/rfc2507d.cc:76:    memcpy(q->data(), p->data() + 1, p->length() - 1);
+ip/rfc2507d.cc:77:  } else if (p->data()[0] == PT_FULL_HEADER) {
+ip/rfc2507d.cc:79:    int cid = p->data()[1] & 0xff;
+ip/rfc2507d.cc:83:    memcpy(&(ctx->_ip), p->data() + 2, sizeof(click_ip));
+ip/rfc2507d.cc:84:    memcpy(&(ctx->_tcp), p->data() + 2 + sizeof(click_ip),
+ip/rfc2507d.cc:86:    q = Packet::make(p->length() - 2);
+ip/rfc2507d.cc:87:    memcpy(q->data(), p->data() + 2, p->length() - 2);
+ip/rfc2507d.cc:88:  } else if (p->data()[0] == PT_COMPRESSED_TCP) {
+ip/rfc2507d.cc:89:    int cid = p->data()[1] & 0xff;
+ip/rfc2507d.cc:94:    int flags = p->data()[2];
+ip/rfc2507d.cc:95:    memcpy(&(ctx->_tcp.th_sum), p->data() + 3, 2);
+ip/rfc2507d.cc:96:    const u_char *in = p->data() + 5;
+ip/rfc2507d.cc:128:    int len = p->length() - (in - p->data());
+ip/rfc2507d.cc:142:           p->length() - (in - p->data()));
+ip/rfc2507d.cc:163:      int hlen = ipp->ip_hl << 2;
+ip/rfc2507d.cc:169:      int len = ntohs(ipp->ip_len);
+ip/rfc2507d.cc:172:      ipp->ip_sum = htons(len - sizeof(click_ip));
+ip/rfc2507d.cc:182:  p->kill();
+ip/truncateippayload.cc:57:    const click_ip *iph = p->ip_header();
+ip/truncateippayload.cc:60:    if (!p->has_network_header()) {
+ip/truncateippayload.cc:61:	if (p->length() <= nbytes)
+ip/truncateippayload.cc:63:	nbytes = p->length() - nbytes;
+ip/truncateippayload.cc:70:	if ((_nbytes & 1) && p->network_length() >= 10)
+ip/truncateippayload.cc:73:		if (p->transport_length() >= 12
+ip/truncateippayload.cc:74:		    && p->tcp_header()->th_off >= (sizeof(click_tcp) >> 2))
+ip/truncateippayload.cc:75:		    nbytes += p->tcp_header()->th_off << 2;
+ip/truncateippayload.cc:83:		if (p->transport_length() >= 8)
+ip/truncateippayload.cc:84:		    nbytes += click_icmp_hl(p->icmp_header()->icmp_type);
+ip/truncateippayload.cc:89:    if (p->network_length() <= (int) nbytes)
+ip/truncateippayload.cc:91:    nbytes = p->network_length() - nbytes;
+ip/truncateippayload.cc:96:    p->take(nbytes);
+ip/ipgwoptions.cc:54:  const uint8_t *oa = p->network_header();
+ip/ipgwoptions.cc:55:  int hlen = p->network_header_length();
+ip/ipgwoptions.cc:82:      if (!(wp = p->uniqueify()))
+ip/ipgwoptions.cc:84:      oa = wp->network_header(); // may have changed due to packet copy
+ip/ipgwoptions.cc:86:    uint8_t *woa = wp->network_header();
+ip/ipgwoptions.cc:159:    click_ip *iph = wp->ip_header();
+ip/ipgwoptions.cc:161:    iph->ip_sum = click_in_cksum(p->network_header(), hlen);
+ip/ipgwoptions.cc:176:  assert(p->has_network_header());
+ip/ipgwoptions.cc:177:  const click_ip *ip = p->ip_header();
+ip/ipgwoptions.cc:178:  unsigned hlen = ip->ip_hl << 2;
+ip/lineariplookup.cc:216:    IPAddress a = p->dst_ip_anno();
+ip/lineariplookup.cc:236:	p->kill();
+ip/lineariplookup.cc:242:	p->set_dst_ip_anno(e.gw);
+ip/siphmapper.cc:89:      p->use();
+ip/siphmapper.cc:128:  const click_ip *iph = p->ip_header();
+ip/markipce.cc:43:  const click_ip *iph = p->ip_header();
+ip/markipce.cc:45:  if (!p->has_network_header() || (iph->ip_tos & IP_ECNMASK) == IP_ECN_NOT_ECT) {
+ip/markipce.cc:46:    p->kill();
+ip/markipce.cc:51:    WritablePacket *q = p->uniqueify();
+ip/ipfilter.cc:1208:  const unsigned char *neth_data = p->network_header();
+ip/ipfilter.cc:1209:  const unsigned char *transph_data = p->transport_header();
+ip/ipfilter.cc:1210:  int packet_length = p->length() + TRANSP_FAKE_OFFSET - p->transport_header_offset();
+ip/ipfilter.cc:1273:  const unsigned char *neth_data = p->network_header();
+ip/ipfilter.cc:1274:  const unsigned char *transph_data = p->transport_header();
+ip/ipfilter.cc:1281:  } else if (p->length() + TRANSP_FAKE_OFFSET - p->transport_header_offset() < _safe_length) {
+ip/setrandipaddress.cc:78:  p->set_dst_ip_anno(ipa);
+ip/setipaddress.cc:43:  p->set_dst_ip_anno(_ip);
+ip/ipratemon.hh:329:  const click_ip *ip = p->ip_header();
+ip/ipratemon.hh:330:  int val = _count_packets ? 1 : ntohs(ip->ip_len);
+ip/ipratemon.hh:333:    update(ip->ip_src.s_addr, val, p, true, update_ewma);
+ip/ipratemon.hh:335:    update(ip->ip_dst.s_addr, val, p, false, update_ewma);
+ip/rripmapper.cc:57:      p->use();
+ip/fixipsrc.cc:52:  click_ip *ip = p->ip_header();
+ip/fixipsrc.cc:56:                ip->ip_src.s_addr,
+ip/fixipsrc.cc:59:  ip->ip_src = _my_ip;
+ip/fixipsrc.cc:60:  int hlen = ip->ip_hl << 2;
+ip/fixipsrc.cc:61:  ip->ip_sum = 0;
+ip/fixipsrc.cc:62:  ip->ip_sum = click_in_cksum((unsigned char *)ip, hlen);
+ip/fixipsrc.cc:69:  if (FIX_IP_SRC_ANNO(p) && p->has_network_header())
+ip/unstripipheader.cc:34:    assert(p->network_header());
+ip/unstripipheader.cc:35:    ptrdiff_t offset = p->network_header() - p->data();
+ip/unstripipheader.cc:37:	p = p->push(-offset);	// should never create a new packet
+ip/iprwpatterns.cc:41:      return rwp->configure(conf, errh);
+ip/iprwpatterns.cc:57:      p->use();
+ip/iprwpatterns.cc:78:      int x = rwp->_name_map.get(name);
+ip/iprwpatterns.cc:80:	return rwp->_patterns[x];
+ip/ipencap.cc:128:    click_update_in_cksum(&ip->ip_sum, 0, ((uint16_t *) ip)[off/2]);
+ip/ipencap.cc:132:    click_update_in_cksum(&ip->ip_sum, 0, u[off]*256 + u[off+1]);
+ip/ipencap.cc:134:    click_update_in_cksum(&ip->ip_sum, 0, u[off] + u[off+1]*256);
+ip/ipencap.cc:145:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+ip/ipencap.cc:147:  if (ip->ip_len) {		// use_dst_anno
+ip/ipencap.cc:148:      ip->ip_dst = p->dst_ip_anno();
+ip/ipencap.cc:152:      p->set_dst_ip_anno(IPAddress(ip->ip_dst));
+ip/ipencap.cc:153:  ip->ip_len = htons(p->length());
+ip/ipencap.cc:154:  ip->ip_id = htons(_id.fetch_and_add(1));
+ip/ipencap.cc:158:  p->set_ip_header(ip, sizeof(click_ip));
+ip/stripipheader.cc:34:    p->pull(p->transport_header_offset());
+ip/ipmirror.cc:49:  click_ip *iph = p->ip_header();
+ip/ipmirror.cc:54:      p->set_dst_ip_anno(tmpa);
+ip/ipmirror.cc:57:  if ((iph->ip_p == IP_PROTO_TCP || iph->ip_p == IP_PROTO_UDP) && IP_FIRSTFRAG(iph) && (int)p->length() >= p->transport_header_offset() + 8) {
+ip/ipmirror.cc:58:    click_udp *udph = p->udp_header();
+ip/ipmirror.cc:63:      click_tcp *tcph = p->tcp_header();
+tcpudp/statelesstcpresp.cc:38:    if (endo > p->end_data())
+tcpudp/statelesstcpresp.cc:39:	endo = p->end_data();
+tcpudp/statelesstcpresp.cc:61:    const click_ip *iph = p->ip_header();
+tcpudp/statelesstcpresp.cc:62:    if (!p->has_network_header()
+tcpudp/statelesstcpresp.cc:64:	|| p->transport_length() < sizeof(click_tcp)) {
+tcpudp/statelesstcpresp.cc:69:    const click_tcp *tcph = p->tcp_header();
+tcpudp/statelesstcpresp.cc:74:	p->kill();
+tcpudp/statelesstcpresp.cc:83:	p->kill();
+tcpudp/statelesstcpresp.cc:107:    nip->ip_v = 4;
+tcpudp/statelesstcpresp.cc:108:    nip->ip_hl = sizeof(click_ip) >> 2;
+tcpudp/statelesstcpresp.cc:109:    nip->ip_tos = 0;
+tcpudp/statelesstcpresp.cc:110:    nip->ip_id = htons(_id);
+tcpudp/statelesstcpresp.cc:112:    nip->ip_off = 0;
+tcpudp/statelesstcpresp.cc:113:    nip->ip_ttl = 200;
+tcpudp/statelesstcpresp.cc:114:    nip->ip_p = IP_PROTO_TCP;
+tcpudp/statelesstcpresp.cc:115:    nip->ip_sum = 0;
+tcpudp/statelesstcpresp.cc:116:    nip->ip_src = ip->ip_dst;
+tcpudp/statelesstcpresp.cc:117:    nip->ip_dst = ip->ip_src;
+tcpudp/statelesstcpresp.cc:120:    ntcp->th_sport = tcp->th_dport;
+tcpudp/statelesstcpresp.cc:121:    ntcp->th_dport = tcp->th_sport;
+tcpudp/statelesstcpresp.cc:122:    ntcp->th_seq = ntohl(ackno);
+tcpudp/statelesstcpresp.cc:123:    ntcp->th_ack = tcp->th_seq;
+tcpudp/statelesstcpresp.cc:124:    ntcp->th_flags2 = 0;
+tcpudp/statelesstcpresp.cc:125:    ntcp->th_off = (ntcp_hl >> 2);
+tcpudp/statelesstcpresp.cc:126:    ntcp->th_flags = (tcph->th_flags & TH_SYN ? TH_SYN | TH_ACK : TH_ACK);
+tcpudp/statelesstcpresp.cc:128:	ntcp->th_flags |= TH_FIN;
+tcpudp/statelesstcpresp.cc:129:    ntcp->th_win = 0xFFFF;
+tcpudp/statelesstcpresp.cc:130:    ntcp->th_sum = 0;
+tcpudp/statelesstcpresp.cc:131:    ntcp->th_urp = 0;
+tcpudp/statelesstcpresp.cc:148:    nip->ip_len = htons(len);
+tcpudp/statelesstcpresp.cc:149:    nip->ip_sum = click_in_cksum(nip, nip->ip_hl << 2);
+tcpudp/statelesstcpresp.cc:151:    ntcp->th_sum = click_in_cksum_pseudohdr(sum1, nip, len);
+tcpudp/statelesstcpresp.cc:153:    p->kill();
+tcpudp/setudpchecksum.cc:44:    click_ip *iph = p->ip_header();
+tcpudp/setudpchecksum.cc:45:    click_udp *udph = p->udp_header();
+tcpudp/setudpchecksum.cc:48:	|| p->transport_length() < (int) sizeof(click_udp)
+tcpudp/setudpchecksum.cc:50:	    p->transport_length() < len)) {
+tcpudp/udpipencap.cc:84:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+tcpudp/udpipencap.cc:88:  ip->ip_v = 4;
+tcpudp/udpipencap.cc:89:  ip->ip_hl = sizeof(click_ip) >> 2;
+tcpudp/udpipencap.cc:90:  ip->ip_len = htons(p->length());
+tcpudp/udpipencap.cc:91:  ip->ip_id = htons(_id.fetch_and_add(1));
+tcpudp/udpipencap.cc:92:  ip->ip_p = IP_PROTO_UDP;
+tcpudp/udpipencap.cc:93:  ip->ip_src = _saddr;
+tcpudp/udpipencap.cc:95:      ip->ip_dst = p->dst_ip_anno();
+tcpudp/udpipencap.cc:97:      ip->ip_dst = _daddr;
+tcpudp/udpipencap.cc:98:      p->set_dst_ip_anno(IPAddress(_daddr));
+tcpudp/udpipencap.cc:100:  ip->ip_tos = 0;
+tcpudp/udpipencap.cc:101:  ip->ip_off = 0;
+tcpudp/udpipencap.cc:102:  ip->ip_ttl = 250;
+tcpudp/udpipencap.cc:104:  ip->ip_sum = 0;
+tcpudp/udpipencap.cc:107:    ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+tcpudp/udpipencap.cc:109:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+tcpudp/udpipencap.cc:111:  ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+tcpudp/udpipencap.cc:113:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+tcpudp/udpipencap.cc:116:  p->set_ip_header(ip, sizeof(click_ip));
+tcpudp/udpipencap.cc:119:  udp->uh_sport = _sport;
+tcpudp/udpipencap.cc:120:  udp->uh_dport = _dport;
+tcpudp/udpipencap.cc:121:  uint16_t len = p->length() - sizeof(click_ip);
+tcpudp/udpipencap.cc:122:  udp->uh_ulen = htons(len);
+tcpudp/udpipencap.cc:123:  udp->uh_sum = 0;
+tcpudp/udpipencap.cc:126:    udp->uh_sum = click_in_cksum_pseudohdr(csum, ip, len);
+tcpudp/tcpipsend.cc:85:  ip->ip_v = 4;
+tcpudp/tcpipsend.cc:86:  ip->ip_hl = 5;
+tcpudp/tcpipsend.cc:87:  ip->ip_tos = 0;
+tcpudp/tcpipsend.cc:88:  ip->ip_len = htons(q->length());
+tcpudp/tcpipsend.cc:89:  ip->ip_id = htons(0);
+tcpudp/tcpipsend.cc:90:  ip->ip_off = htons(IP_DF);
+tcpudp/tcpipsend.cc:91:  ip->ip_ttl = 255;
+tcpudp/tcpipsend.cc:92:  ip->ip_p = IP_PROTO_TCP;
+tcpudp/tcpipsend.cc:93:  ip->ip_sum = 0;
+tcpudp/tcpipsend.cc:94:  memcpy((void *) &(ip->ip_src), (void *) &saddr, sizeof(saddr));
+tcpudp/tcpipsend.cc:95:  memcpy((void *) &(ip->ip_dst), (void *) &daddr, sizeof(daddr));
+tcpudp/tcpipsend.cc:96:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+tcpudp/tcpipsend.cc:101:  memcpy((void *) &(tcp->th_sport), (void *) &sport, sizeof(sport));
+tcpudp/tcpipsend.cc:102:  memcpy((void *) &(tcp->th_dport), (void *) &dport, sizeof(dport));
+tcpudp/tcpipsend.cc:103:  tcp->th_seq = htonl(seqn);
+tcpudp/tcpipsend.cc:104:  tcp->th_ack = htonl(ackn);
+tcpudp/tcpipsend.cc:105:  tcp->th_off = 5;
+tcpudp/tcpipsend.cc:106:  tcp->th_flags = bits;
+tcpudp/tcpipsend.cc:107:  tcp->th_win = htons(32120);
+tcpudp/tcpipsend.cc:108:  tcp->th_sum = htons(0);
+tcpudp/tcpipsend.cc:109:  tcp->th_urp = htons(0);
+tcpudp/tcpipsend.cc:113:  tcp->th_sum = click_in_cksum_pseudohdr(csum, ip, sizeof(click_tcp));
+tcpudp/snooptcp.cc:196:  _s_cache[entry].packet = p->clone();
+tcpudp/snooptcp.cc:269:    p->kill();
+tcpudp/snooptcp.cc:278:    p->kill();
+tcpudp/snooptcp.cc:283:    p->kill();
+tcpudp/snooptcp.cc:292:      p->kill();
+tcpudp/snooptcp.cc:360:  const click_ip *iph = p->ip_header();
+tcpudp/snooptcp.cc:361:  if (p->length() < 40 || iph->ip_p != IPPROTO_TCP) {
+tcpudp/snooptcp.cc:367:  const click_tcp *tcph = p->tcp_header();
+tcpudp/snooptcp.cc:369:  int datalen = p->length() - header_len;
+tcpudp/snooptcp.cc:476:	if (_cache[i].packet->length() <= p->length()) {
+tcpudp/snooptcp.cc:479:	  _cache[i].packet = p->clone();
+tcpudp/snooptcp.cc:506:  p->use();
+tcpudp/snooptcp.cc:601:      snp->output(2).push(_cache[entry].packet);
+tcpudp/settcpchecksum.cc:50:  click_ip *iph = p->ip_header();
+tcpudp/settcpchecksum.cc:51:  click_tcp *tcph = p->tcp_header();
+tcpudp/settcpchecksum.cc:55:  if (!p->has_transport_header() || plen < sizeof(click_tcp)
+tcpudp/settcpchecksum.cc:56:      || plen > (unsigned)p->transport_length())
+tcpudp/settcpchecksum.cc:75:  p->kill();
+tcpudp/iprewriter.cc:125:      _input_specs[i].u.pattern.p->unuse();
+tcpudp/iprewriter.cc:132:  if (!p->allow_napt())
+tcpudp/iprewriter.cc:277:  click_ip *iph = p->ip_header();
+tcpudp/iprewriter.cc:289:      p->kill();
+tcpudp/iprewriter.cc:348:      p->kill();
+tcpudp/iprewriter.cc:356:    click_tcp *tcph = p->tcp_header();
+tcpudp/iprewriter.cc:399:  for (Map::iterator iter = map->begin(); iter.live(); iter++) {
+tcpudp/iprewriter.cc:449:      s += rw->_input_specs[i].u.pattern.p->unparse() + "\n";
+tcpudp/checktcpheader.cc:80:    p->kill();
+tcpudp/checktcpheader.cc:88:  const click_ip *iph = p->ip_header();
+tcpudp/checktcpheader.cc:89:  const click_tcp *tcph = p->tcp_header();
+tcpudp/checktcpheader.cc:92:  if (!p->has_network_header() || iph->ip_p != IP_PROTO_TCP)
+tcpudp/checktcpheader.cc:99:      || p->length() < len + iph_len + p->network_header_offset())
+tcpudp/checkudpheader.cc:79:    p->kill();
+tcpudp/checkudpheader.cc:87:  const click_ip *iph = p->ip_header();
+tcpudp/checkudpheader.cc:88:  const click_udp *udph = p->udp_header();
+tcpudp/checkudpheader.cc:91:  if (!p->has_network_header() || iph->ip_p != IP_PROTO_UDP)
+tcpudp/checkudpheader.cc:97:      || p->length() < len + iph_len + p->network_header_offset())
+tcpudp/tcprewriter.cc:112:    assert(p->has_network_header());
+tcpudp/tcprewriter.cc:113:    click_ip *iph = p->ip_header();
+tcpudp/tcprewriter.cc:119:	p->set_dst_ip_anno(_mapto.daddr());
+tcpudp/tcprewriter.cc:132:    click_tcp *tcph = p->tcp_header();
+tcpudp/tcprewriter.cc:158:	csum_delta += reverse()->apply_sack(tcph, p->transport_length());
+tcpudp/tcprewriter.cc:266:      _input_specs[i].u.pattern.p->unuse();
+tcpudp/tcprewriter.cc:273:  if (!p->allow_napt())
+tcpudp/tcprewriter.cc:356:  click_ip *iph = p->ip_header();
+tcpudp/tcprewriter.cc:357:  click_tcp *tcph = p->tcp_header();
+tcpudp/tcprewriter.cc:365:      p->kill();
+tcpudp/tcprewriter.cc:398:      p->kill();
+tcpudp/tcprewriter.cc:433:	    s += rw->_input_specs[i].u.pattern.p->unparse() + "\n";
+tcpudp/dynudpipencap.cc:77:  click_ip *ip = reinterpret_cast<click_ip *>(p->data());
+tcpudp/dynudpipencap.cc:81:  ip->ip_v = 4;
+tcpudp/dynudpipencap.cc:82:  ip->ip_hl = sizeof(click_ip) >> 2;
+tcpudp/dynudpipencap.cc:83:  ip->ip_len = htons(p->length());
+tcpudp/dynudpipencap.cc:84:  ip->ip_id = htons(_id.fetch_and_add(1));
+tcpudp/dynudpipencap.cc:85:  ip->ip_p = IP_PROTO_UDP;
+tcpudp/dynudpipencap.cc:86:  ip->ip_src = _saddr;
+tcpudp/dynudpipencap.cc:87:  ip->ip_dst = _daddr;
+tcpudp/dynudpipencap.cc:88:  ip->ip_tos = 0;
+tcpudp/dynudpipencap.cc:89:  ip->ip_off = 0;
+tcpudp/dynudpipencap.cc:90:  ip->ip_ttl = 250;
+tcpudp/dynudpipencap.cc:92:  ip->ip_sum = 0;
+tcpudp/dynudpipencap.cc:95:    ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+tcpudp/dynudpipencap.cc:98:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+tcpudp/dynudpipencap.cc:103:  p->set_dst_ip_anno(IPAddress(_daddr));
+tcpudp/dynudpipencap.cc:104:  p->set_ip_header(ip, sizeof(click_ip));
+tcpudp/dynudpipencap.cc:107:  udp->uh_sport = htons(_sport);
+tcpudp/dynudpipencap.cc:108:  udp->uh_dport = htons(_dport);
+tcpudp/dynudpipencap.cc:109:  unsigned short len = p->length() - sizeof(click_ip);
+tcpudp/dynudpipencap.cc:110:  udp->uh_ulen = htons(len);
+tcpudp/dynudpipencap.cc:111:  udp->uh_sum = 0;
+tcpudp/dynudpipencap.cc:114:    udp->uh_sum = click_in_cksum_pseudohdr(csum, ip, len);
+icmp/checkicmpheader.cc:81:    p->kill();
+icmp/checkicmpheader.cc:89:  const click_ip *iph = p->ip_header();
+icmp/checkicmpheader.cc:91:  const click_icmp *icmph = p->icmp_header();
+icmp/checkicmpheader.cc:93:  if (!p->has_network_header() || iph->ip_p != IP_PROTO_ICMP)
+icmp/checkicmpheader.cc:96:  icmp_len = p->length() - p->transport_header_offset();
+icmp/icmpsendpings.cc:121:    nip->ip_v = 4;
+icmp/icmpsendpings.cc:122:    nip->ip_hl = sizeof(click_ip) >> 2;
+icmp/icmpsendpings.cc:123:    nip->ip_len = htons(q->length());
+icmp/icmpsendpings.cc:125:    nip->ip_id = htons(ip_id);
+icmp/icmpsendpings.cc:126:    nip->ip_p = IP_PROTO_ICMP; /* icmp */
+icmp/icmpsendpings.cc:127:    nip->ip_ttl = 200;
+icmp/icmpsendpings.cc:128:    nip->ip_src = _src;
+icmp/icmpsendpings.cc:129:    nip->ip_dst = _dst;
+icmp/icmpsendpings.cc:130:    nip->ip_sum = click_in_cksum((unsigned char *)nip, sizeof(click_ip));
+icmp/icmpsendpings.cc:133:    icp->icmp_type = ICMP_ECHO;
+icmp/icmpsendpings.cc:134:    icp->icmp_code = 0;
+icmp/icmpsendpings.cc:135:    icp->icmp_identifier = _icmp_id;
+icmp/icmpsendpings.cc:137:    icp->icmp_sequence = ip_id;
+icmp/icmpsendpings.cc:139:    icp->icmp_sequence = htons(ip_id);
+icmp/icmpsendpings.cc:142:    icp->icmp_cksum = click_in_cksum((const unsigned char *)icp, sizeof(click_icmp_sequenced) + _data.length());
+icmp/icmpsendpings.cc:149:	_receiver->send_timestamp[icp->icmp_sequence] = q->timestamp_anno();
+icmp/icmpsendpings.cc:177:    const click_ip *iph = p->ip_header();
+icmp/icmpsendpings.cc:178:    const click_icmp_echo *icmph = reinterpret_cast<const click_icmp_echo *>(p->icmp_header());
+icmp/icmpsendpings.cc:179:    if (p->has_network_header() && iph->ip_p == IP_PROTO_ICMP
+icmp/icmpsendpings.cc:180:	&& p->transport_length() >= (int)sizeof(click_icmp_echo)
+icmp/icmpsendpings.cc:194:	    if (p->timestamp_anno()) {
+icmp/icmpsendpings.cc:195:		Timestamp diff = p->timestamp_anno() - *send_ts;
+icmp/icmpsendpings.cc:218:    p->kill();
+icmp/icmppingrewriter.cc:154:  in_map->initialize(inf, outf, false, out_map);
+icmp/icmppingrewriter.cc:155:  out_map->initialize(outf.reverse(), inf.reverse(), true, in_map);
+icmp/icmppingrewriter.cc:161:  assert(p->has_network_header());
+icmp/icmppingrewriter.cc:162:  click_ip *iph = p->ip_header();
+icmp/icmppingrewriter.cc:168:    p->set_dst_ip_anno(_mapto.daddr());
+icmp/icmppingrewriter.cc:175:  click_icmp_echo *icmph = reinterpret_cast<click_icmp_echo *>(p->icmp_header());
+icmp/icmppingrewriter.cc:191:    icmph->icmp_cksum = click_in_cksum((const unsigned char *)icmph, p->length() - p->transport_header_offset());
+icmp/icmppingrewriter.cc:266:  click_ip *iph = p->ip_header();
+icmp/icmppingrewriter.cc:269:  click_icmp_echo *icmph = reinterpret_cast<click_icmp_echo *>(p->icmp_header());
+icmp/icmppingrewriter.cc:278:    p->kill();
+icmp/icmppingrewriter.cc:283:  Mapping *m = map->get(flow);
+icmp/icmppingrewriter.cc:294:      p->kill();
+icmp/icmprewriter.cc:77:    click_ip *iph = p->ip_header();
+icmp/icmprewriter.cc:78:    click_icmp *icmph = p->icmp_header();
+icmp/icmprewriter.cc:83:	&& reinterpret_cast<uint8_t *>(embedded_udph + 1) <= p->end_data()
+icmp/icmprewriter.cc:87:	     && reinterpret_cast<uint8_t *>(embedded_udph) + 18 <= p->end_data())
+icmp/icmprewriter.cc:98:	    p->set_dst_ip_anno(new_flow.saddr());
+icmp/icmprewriter.cc:131:    click_ip *iph = p->ip_header();
+icmp/icmprewriter.cc:132:    click_icmp *icmph = p->icmp_header();
+icmp/icmprewriter.cc:144:	    p->set_dst_ip_anno(new_flow.saddr());
+icmp/icmprewriter.cc:172:  else if (p->ip_header()->ip_p != IP_PROTO_ICMP) {
+icmp/icmprewriter.cc:173:    p->kill();
+icmp/icmprewriter.cc:177:  click_icmp *icmph = p->icmp_header();
+icmp/icmprewriter.cc:188:     if (p->transport_length() < (int)(sizeof(click_icmp) + hlen + 8)
+icmp/icmprewriter.cc:235:    p->kill();
+icmp/icmppingencap.cc:68:    if (WritablePacket *q = p->push(sizeof(click_ip) + sizeof(struct click_icmp_echo))) {
+icmp/icmppingencap.cc:70:	ip->ip_v = 4;
+icmp/icmppingencap.cc:71:	ip->ip_hl = sizeof(click_ip) >> 2;
+icmp/icmppingencap.cc:72:	ip->ip_tos = 0;
+icmp/icmppingencap.cc:73:	ip->ip_len = htons(q->length());
+icmp/icmppingencap.cc:74:	ip->ip_id = htons(_ip_id);
+icmp/icmppingencap.cc:75:	ip->ip_off = 0;
+icmp/icmppingencap.cc:76:	ip->ip_ttl = 255;
+icmp/icmppingencap.cc:77:	ip->ip_p = IP_PROTO_ICMP; /* icmp */
+icmp/icmppingencap.cc:78:	ip->ip_sum = 0;
+icmp/icmppingencap.cc:79:	ip->ip_src = _src;
+icmp/icmppingencap.cc:80:	ip->ip_dst = _dst;
+icmp/icmppingencap.cc:83:	icmp->icmp_type = ICMP_ECHO;
+icmp/icmppingencap.cc:84:	icmp->icmp_code = 0;
+icmp/icmppingencap.cc:85:	icmp->icmp_cksum = 0;
+icmp/icmppingencap.cc:87:	icmp->icmp_identifier = _icmp_id;
+icmp/icmppingencap.cc:88:	icmp->icmp_sequence = _ip_id;
+icmp/icmppingencap.cc:90:	icmp->icmp_identifier = htons(_icmp_id);
+icmp/icmppingencap.cc:91:	icmp->icmp_sequence = htons(_ip_id);
+icmp/icmppingencap.cc:96:	    ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+icmp/icmppingencap.cc:98:	    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+icmp/icmppingencap.cc:100:	ip->ip_sum = ip_fast_csum((unsigned char *)ip, sizeof(click_ip) >> 2);
+icmp/icmppingencap.cc:102:	ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+icmp/icmppingencap.cc:104:	icmp->icmp_cksum = click_in_cksum((const unsigned char *)icmp, q->length() - sizeof(click_ip));
+icmp/icmperror.cc:164:  const click_ip *ipp = p->ip_header();
+icmp/icmperror.cc:171:  if (!p->has_network_header())
+icmp/icmperror.cc:174:  hlen = ipp->ip_hl << 2;
+icmp/icmperror.cc:179:  if(ipp->ip_p == IP_PROTO_ICMP) {
+icmp/icmperror.cc:180:    const click_icmp *icmph = p->icmp_header();
+icmp/icmperror.cc:181:    if(hlen + 4 > p->length() || is_error_type(icmph->icmp_type))
+icmp/icmperror.cc:186:  if(!unicast(ipp->ip_dst))
+icmp/icmperror.cc:190:  if (p->packet_type_anno() == Packet::BROADCAST || p->packet_type_anno() == Packet::MULTICAST)
+icmp/icmperror.cc:194:  if(!valid_source(ipp->ip_src))
+icmp/icmperror.cc:222:  nip->ip_v = 4;
+icmp/icmperror.cc:223:  nip->ip_tos = 0;		// XXX should be same as incoming datagram?
+icmp/icmperror.cc:224:  nip->ip_id = htons(id++);
+icmp/icmperror.cc:225:  nip->ip_off = 0;
+icmp/icmperror.cc:226:  nip->ip_ttl = 200;
+icmp/icmperror.cc:227:  nip->ip_p = IP_PROTO_ICMP;
+icmp/icmperror.cc:228:  nip->ip_sum = 0;
+icmp/icmperror.cc:229:  nip->ip_src = _src_ip.in_addr();
+icmp/icmperror.cc:230:  nip->ip_dst = ipp->ip_src;
+icmp/icmperror.cc:243:    nip->ip_hl = (sizeof(click_ip) + olen + 3) >> 2;
+icmp/icmperror.cc:245:    nip->ip_hl = sizeof(click_ip) >> 2;
+icmp/icmperror.cc:246:  q->set_ip_header(nip, nip->ip_hl << 2);
+icmp/icmperror.cc:250:  icp->icmp_type = _type;
+icmp/icmperror.cc:251:  icp->icmp_code = _code;
+icmp/icmperror.cc:252:  icp->icmp_cksum = 0;
+icmp/icmperror.cc:253:  icp->padding = 0;
+icmp/icmperror.cc:260:    ((click_icmp_redirect *) icp)->icmp_gateway = p->dst_ip_anno();
+icmp/icmperror.cc:266:  if ((int)xlen > p->network_length()) {
+icmp/icmperror.cc:267:    q->take(xlen - p->network_length());
+icmp/icmperror.cc:268:    xlen = p->network_length();
+icmp/icmperror.cc:270:  memcpy((uint8_t *)(icp + 1), p->network_header(), xlen);
+icmp/icmperror.cc:271:  icp->icmp_cksum = click_in_cksum((unsigned char *)icp, sizeof(click_icmp) + xlen);
+icmp/icmperror.cc:274:  nip->ip_len = htons(q->length());
+icmp/icmperror.cc:275:  nip->ip_sum = click_in_cksum((unsigned char *)nip, nip->ip_hl << 2);
+icmp/icmperror.cc:278:  q->set_dst_ip_anno(IPAddress(nip->ip_dst));
+icmp/icmperror.cc:283:  p->kill();
+linuxmodule/polldevice.cc:277:	p->timestamp_anno().set_now();
+linuxmodule/fastudpflows.cc:85:  udp->uh_sport = (click_random() >> 2) % 0xFFFF;
+linuxmodule/fastudpflows.cc:86:  udp->uh_dport = (click_random() >> 2) % 0xFFFF;
+linuxmodule/fastudpflows.cc:87:  udp->uh_sum = 0;
+linuxmodule/fastudpflows.cc:91:    udp->uh_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fastudpflows.cc:94:    udp->uh_sum = 0;
+linuxmodule/fastudpflows.cc:131:    ip->ip_v = 4;
+linuxmodule/fastudpflows.cc:132:    ip->ip_hl = sizeof(click_ip) >> 2;
+linuxmodule/fastudpflows.cc:133:    ip->ip_len = htons(_len-14);
+linuxmodule/fastudpflows.cc:134:    ip->ip_id = 0;
+linuxmodule/fastudpflows.cc:135:    ip->ip_p = IP_PROTO_UDP;
+linuxmodule/fastudpflows.cc:136:    ip->ip_src = _sipaddr;
+linuxmodule/fastudpflows.cc:137:    ip->ip_dst = _dipaddr;
+linuxmodule/fastudpflows.cc:138:    ip->ip_tos = 0;
+linuxmodule/fastudpflows.cc:139:    ip->ip_off = 0;
+linuxmodule/fastudpflows.cc:140:    ip->ip_ttl = 250;
+linuxmodule/fastudpflows.cc:141:    ip->ip_sum = 0;
+linuxmodule/fastudpflows.cc:142:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+linuxmodule/fastudpflows.cc:147:    udp->uh_sport = (click_random() >> 2) % 0xFFFF;
+linuxmodule/fastudpflows.cc:148:    udp->uh_dport = (click_random() >> 2) % 0xFFFF;
+linuxmodule/fastudpflows.cc:149:    udp->uh_sum = 0;
+linuxmodule/fastudpflows.cc:151:    udp->uh_ulen = htons(len);
+linuxmodule/fastudpflows.cc:154:      udp->uh_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fastudpflows.cc:157:      udp->uh_sum = 0;
+linuxmodule/todevice.cc:284:		p->kill();
+linuxmodule/todevice.cc:409:    struct sk_buff *skb1 = p->skb();
+linuxmodule/todevice.cc:416:    int need_tail = 60 - p->length();
+linuxmodule/fromhost.cc:286:	p->kill();
+linuxmodule/fromhost.cc:384:	    p->set_timestamp_anno(Timestamp::now());
+linuxmodule/fromhost.cc:386:		p->clear_annotations(false);
+linuxmodule/fromhost.cc:388:	    fl->_stats.tx_bytes += p->length();
+linuxmodule/fromhost.cc:415:	if (_dev->type == ARPHRD_NONE && p->length() >= 1) {
+linuxmodule/fromhost.cc:416:	    const click_ip *iph = (const click_ip *) p->data();
+linuxmodule/fromhost.cc:420:		    && reinterpret_cast<const uint8_t *>(iph) + (iph->ip_hl << 2) <= p->end_data()) {
+linuxmodule/fromhost.cc:421:		    p->set_ip_header(iph, iph->ip_hl << 2);
+linuxmodule/fromhost.cc:422:		    p->set_dst_ip_anno(iph->ip_dst);
+linuxmodule/fromhost.cc:426:		if (reinterpret_cast<const uint8_t *>(iph) + sizeof(click_ip6) <= p->end_data())
+linuxmodule/fromhost.cc:427:		    p->set_ip6_header(reinterpret_cast<const click_ip6 *>(iph));
+linuxmodule/tohost.cc:137:    p->clear_annotations(false);
+linuxmodule/tohost.cc:139:    struct sk_buff *skb = p->skb();
+linuxmodule/tohost.cc:149:	p->kill();
+linuxmodule/fastudpsrc.cc:86:  udp->uh_sport = htons(_sport+_incr);
+linuxmodule/fastudpsrc.cc:87:  udp->uh_dport = htons(_dport+_incr);
+linuxmodule/fastudpsrc.cc:88:  udp->uh_sum = 0;
+linuxmodule/fastudpsrc.cc:92:    udp->uh_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fastudpsrc.cc:95:    udp->uh_sum = 0;
+linuxmodule/fastudpsrc.cc:109:  ip->ip_v = 4;
+linuxmodule/fastudpsrc.cc:110:  ip->ip_hl = sizeof(click_ip) >> 2;
+linuxmodule/fastudpsrc.cc:111:  ip->ip_len = htons(_len-14);
+linuxmodule/fastudpsrc.cc:112:  ip->ip_id = 0;
+linuxmodule/fastudpsrc.cc:113:  ip->ip_p = IP_PROTO_UDP;
+linuxmodule/fastudpsrc.cc:114:  ip->ip_src = _sipaddr;
+linuxmodule/fastudpsrc.cc:115:  ip->ip_dst = _dipaddr;
+linuxmodule/fastudpsrc.cc:116:  ip->ip_tos = 0;
+linuxmodule/fastudpsrc.cc:117:  ip->ip_off = 0;
+linuxmodule/fastudpsrc.cc:118:  ip->ip_ttl = 250;
+linuxmodule/fastudpsrc.cc:119:  ip->ip_sum = 0;
+linuxmodule/fastudpsrc.cc:120:  ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+linuxmodule/fastudpsrc.cc:125:  udp->uh_sport = htons(_sport);
+linuxmodule/fastudpsrc.cc:126:  udp->uh_dport = htons(_dport);
+linuxmodule/fastudpsrc.cc:127:  udp->uh_sum = 0;
+linuxmodule/fastudpsrc.cc:129:  udp->uh_ulen = htons(len);
+linuxmodule/fastudpsrc.cc:132:    udp->uh_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fastudpsrc.cc:135:    udp->uh_sum = 0;
+linuxmodule/fromuserdevice.cc:117:    filp->private_data = elem[num];
+linuxmodule/fromuserdevice.cc:124:    FromUserDevice *elem = (FromUserDevice*)filp->private_data;
+linuxmodule/fromuserdevice.cc:139:    FromUserDevice *elem = (FromUserDevice*)filp->private_data;
+linuxmodule/fromuserdevice.cc:168:    err = copy_from_user((char*)p->data(), buf, count);
+linuxmodule/fromuserdevice.cc:171:        p->kill();
+linuxmodule/fromuserdevice.cc:185:            p->kill();
+linuxmodule/fromuserdevice.cc:215:    //click_chatter("%x %x %d %d", ip->ip_src.s_addr, ip->ip_dst.s_addr,
+linuxmodule/fromuserdevice.cc:216:    //              ip->ip_v, ip->ip_hl);
+linuxmodule/fromuserdevice.cc:271:    FromUserDevice *elem = (FromUserDevice*)filp->private_data;
+linuxmodule/fromuserdevice.cc:341:	    p->kill();
+linuxmodule/fasttcpflows.cc:90:  tcp->th_sport = sport;
+linuxmodule/fasttcpflows.cc:91:  tcp->th_dport = dport;
+linuxmodule/fasttcpflows.cc:92:  tcp->th_sum = 0;
+linuxmodule/fasttcpflows.cc:95:  tcp->th_sum = csum_tcpudp_magic
+linuxmodule/fasttcpflows.cc:100:  tcp->th_sport = sport;
+linuxmodule/fasttcpflows.cc:101:  tcp->th_dport = dport;
+linuxmodule/fasttcpflows.cc:102:  tcp->th_sum = 0;
+linuxmodule/fasttcpflows.cc:105:  tcp->th_sum = csum_tcpudp_magic
+linuxmodule/fasttcpflows.cc:110:  tcp->th_sport = sport;
+linuxmodule/fasttcpflows.cc:111:  tcp->th_dport = dport;
+linuxmodule/fasttcpflows.cc:112:  tcp->th_sum = 0;
+linuxmodule/fasttcpflows.cc:115:  tcp->th_sum = csum_tcpudp_magic
+linuxmodule/fasttcpflows.cc:174:    ip->ip_v = 4;
+linuxmodule/fasttcpflows.cc:175:    ip->ip_hl = sizeof(click_ip) >> 2;
+linuxmodule/fasttcpflows.cc:176:    ip->ip_len = htons(_len-14);
+linuxmodule/fasttcpflows.cc:177:    ip->ip_id = 0;
+linuxmodule/fasttcpflows.cc:178:    ip->ip_p = IP_PROTO_TCP;
+linuxmodule/fasttcpflows.cc:179:    ip->ip_src = _sipaddr;
+linuxmodule/fasttcpflows.cc:180:    ip->ip_dst = _dipaddr;
+linuxmodule/fasttcpflows.cc:181:    ip->ip_tos = 0;
+linuxmodule/fasttcpflows.cc:182:    ip->ip_off = 0;
+linuxmodule/fasttcpflows.cc:183:    ip->ip_ttl = 250;
+linuxmodule/fasttcpflows.cc:184:    ip->ip_sum = 0;
+linuxmodule/fasttcpflows.cc:185:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+linuxmodule/fasttcpflows.cc:189:    tcp->th_sport = sport;
+linuxmodule/fasttcpflows.cc:190:    tcp->th_dport = dport;
+linuxmodule/fasttcpflows.cc:191:    tcp->th_seq = click_random();
+linuxmodule/fasttcpflows.cc:192:    tcp->th_ack = click_random();
+linuxmodule/fasttcpflows.cc:193:    tcp->th_off = sizeof(click_tcp) >> 2;
+linuxmodule/fasttcpflows.cc:194:    tcp->th_flags = TH_SYN;
+linuxmodule/fasttcpflows.cc:195:    tcp->th_win = 65535;
+linuxmodule/fasttcpflows.cc:196:    tcp->th_urp = 0;
+linuxmodule/fasttcpflows.cc:197:    tcp->th_sum = 0;
+linuxmodule/fasttcpflows.cc:200:    tcp->th_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fasttcpflows.cc:209:    ip->ip_v = 4;
+linuxmodule/fasttcpflows.cc:210:    ip->ip_hl = sizeof(click_ip) >> 2;
+linuxmodule/fasttcpflows.cc:211:    ip->ip_len = htons(_len-14);
+linuxmodule/fasttcpflows.cc:212:    ip->ip_id = 0;
+linuxmodule/fasttcpflows.cc:213:    ip->ip_p = IP_PROTO_TCP;
+linuxmodule/fasttcpflows.cc:214:    ip->ip_src = _sipaddr;
+linuxmodule/fasttcpflows.cc:215:    ip->ip_dst = _dipaddr;
+linuxmodule/fasttcpflows.cc:216:    ip->ip_tos = 0;
+linuxmodule/fasttcpflows.cc:217:    ip->ip_off = 0;
+linuxmodule/fasttcpflows.cc:218:    ip->ip_ttl = 250;
+linuxmodule/fasttcpflows.cc:219:    ip->ip_sum = 0;
+linuxmodule/fasttcpflows.cc:220:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+linuxmodule/fasttcpflows.cc:224:    tcp->th_sport = sport;
+linuxmodule/fasttcpflows.cc:225:    tcp->th_dport = dport;
+linuxmodule/fasttcpflows.cc:226:    tcp->th_seq = click_random();
+linuxmodule/fasttcpflows.cc:227:    tcp->th_ack = click_random();
+linuxmodule/fasttcpflows.cc:228:    tcp->th_off = sizeof(click_tcp) >> 2;
+linuxmodule/fasttcpflows.cc:229:    tcp->th_flags = TH_PUSH | TH_ACK;
+linuxmodule/fasttcpflows.cc:230:    tcp->th_win = 65535;
+linuxmodule/fasttcpflows.cc:231:    tcp->th_urp = 0;
+linuxmodule/fasttcpflows.cc:232:    tcp->th_sum = 0;
+linuxmodule/fasttcpflows.cc:235:    tcp->th_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fasttcpflows.cc:244:    ip->ip_v = 4;
+linuxmodule/fasttcpflows.cc:245:    ip->ip_hl = sizeof(click_ip) >> 2;
+linuxmodule/fasttcpflows.cc:246:    ip->ip_len = htons(_len-14);
+linuxmodule/fasttcpflows.cc:247:    ip->ip_id = 0;
+linuxmodule/fasttcpflows.cc:248:    ip->ip_p = IP_PROTO_TCP;
+linuxmodule/fasttcpflows.cc:249:    ip->ip_src = _sipaddr;
+linuxmodule/fasttcpflows.cc:250:    ip->ip_dst = _dipaddr;
+linuxmodule/fasttcpflows.cc:251:    ip->ip_tos = 0;
+linuxmodule/fasttcpflows.cc:252:    ip->ip_off = 0;
+linuxmodule/fasttcpflows.cc:253:    ip->ip_ttl = 250;
+linuxmodule/fasttcpflows.cc:254:    ip->ip_sum = 0;
+linuxmodule/fasttcpflows.cc:255:    ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+linuxmodule/fasttcpflows.cc:259:    tcp->th_sport = sport;
+linuxmodule/fasttcpflows.cc:260:    tcp->th_dport = dport;
+linuxmodule/fasttcpflows.cc:261:    tcp->th_seq = click_random();
+linuxmodule/fasttcpflows.cc:262:    tcp->th_ack = click_random();
+linuxmodule/fasttcpflows.cc:263:    tcp->th_off = sizeof(click_tcp) >> 2;
+linuxmodule/fasttcpflows.cc:264:    tcp->th_flags = TH_FIN;
+linuxmodule/fasttcpflows.cc:265:    tcp->th_win = 65535;
+linuxmodule/fasttcpflows.cc:266:    tcp->th_urp = 0;
+linuxmodule/fasttcpflows.cc:267:    tcp->th_sum = 0;
+linuxmodule/fasttcpflows.cc:270:    tcp->th_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/touserdevice.cc:103:#define GETELEM(filp)		((ToUserDevice *) ((uintptr_t) filp->private_data & ~(uintptr_t) 1))
+linuxmodule/touserdevice.cc:115:    filp->private_data = (void *) elem[num];
+linuxmodule/touserdevice.cc:138:	return ((uintptr_t) filp->private_data) & 1;
+linuxmodule/touserdevice.cc:142:	filp->private_data = (void *) ((uintptr_t) elem | (int) address);
+linuxmodule/touserdevice.cc:151:    int multi = ((uintptr_t) filp->private_data) & 1;
+linuxmodule/touserdevice.cc:184:	if (nfetched > 0 && nread + sizeof(int) + p->length() > len)
+linuxmodule/touserdevice.cc:195:	    int len = p->length();
+linuxmodule/touserdevice.cc:199:		p->kill();
+linuxmodule/touserdevice.cc:205:	ssize_t to_copy = p->length();
+linuxmodule/touserdevice.cc:208:	if (copy_to_user(buff + nread, p->data(), to_copy)) {
+linuxmodule/touserdevice.cc:211:	    p->kill();
+linuxmodule/touserdevice.cc:220:	p->kill();
+linuxmodule/touserdevice.cc:349:	p->kill();
+linuxmodule/fastudpsrcip6.cc:86:  udp->uh_sport = htons(_sport+_incr);
+linuxmodule/fastudpsrcip6.cc:87:  udp->uh_dport = htons(_dport+_incr);
+linuxmodule/fastudpsrcip6.cc:88:  udp->uh_sum = 0;
+linuxmodule/fastudpsrcip6.cc:93:    //udp->uh_sum = csum_tcpudp_magic(_sip6addr.s_addr, _dip6addr.s_addr,
+linuxmodule/fastudpsrcip6.cc:95:    udp->uh_sum = htons(in6_fast_cksum(&ip6->ip6_src, &ip6->ip6_dst, ip6->ip6_plen, ip6->ip6_nxt, udp->uh_sum, (unsigned char *)udp, ip6->ip6_plen));
+linuxmodule/fastudpsrcip6.cc:97:    udp->uh_sum = 0;
+linuxmodule/fastudpsrcip6.cc:122:  udp->uh_sport = htons(_sport);
+linuxmodule/fastudpsrcip6.cc:123:  udp->uh_dport = htons(_dport);
+linuxmodule/fastudpsrcip6.cc:124:  udp->uh_sum = 0;
+linuxmodule/fastudpsrcip6.cc:126:  udp->uh_ulen = htons(len);
+linuxmodule/fastudpsrcip6.cc:130:    //udp->uh_sum = csum_tcpudp_magic(_sipaddr.s_addr, _dipaddr.s_addr,
+linuxmodule/fastudpsrcip6.cc:132:    udp->uh_sum = htons(in6_fast_cksum(&ip6->ip6_src, &ip6->ip6_dst, ip6->ip6_plen, ip6->ip6_nxt, udp->uh_sum, (unsigned char *)udp, ip6->ip6_plen));
+linuxmodule/fastudpsrcip6.cc:135:    udp->uh_sum = 0;
+linuxmodule/cpuqueue.cc:70:	p->kill();
+exopc/xokwriter.cc:60:  assert(p->length() >= 14);
+exopc/xokwriter.cc:63:  int r = ae_eth_send(p->data(), p->length(), cardno);
+exopc/xokwriter.cc:68:  p->kill();
+etherswitch/debugbridge.cc:45:    reinterpret_cast<const BridgeMessage::wire *>(p->data());
+etherswitch/etherswitch.cc:54:      Packet *pp = (sent < n - 2 ? p->clone() : p);
+etherswitch/etherswitch.cc:64:    click_ether* e = (click_ether*) p->data();
+etherswitch/etherswitch.cc:69:	_table.set(EtherAddress(e->ether_shost), AddrInfo(source, p->timestamp_anno()));
+etherswitch/etherswitch.cc:76:		if (p->timestamp_anno() < dst_info.value().stamp + Timestamp(_timeout, 0))
+etherswitch/etherswitch.cc:87:    p->kill();
+etherswitch/spantree.cc:197:    _input_sup->suppress(i);
+etherswitch/spantree.cc:198:    _output_sup->suppress(i);
+etherswitch/spantree.cc:201:    _input_sup->allow(i);
+etherswitch/spantree.cc:202:    _output_sup->suppress(i);
+etherswitch/spantree.cc:205:    _input_sup->allow(i);
+etherswitch/spantree.cc:206:    _output_sup->allow(i);
+etherswitch/spantree.cc:217:    reinterpret_cast<const BridgeMessage::wire*>(p->data());
+etherswitch/spantree.cc:230:  p->kill();
+etherswitch/spantree.cc:268:  BridgeMessage::wire* msg = reinterpret_cast<BridgeMessage::wire*>(p->data());
+etherswitch/listenetherswitch.cc:38:    const click_ether* e = (const click_ether*) p->data();
+etherswitch/listenetherswitch.cc:43:	_table.set(EtherAddress(e->ether_shost), AddrInfo(source, p->timestamp_anno()));
+etherswitch/listenetherswitch.cc:50:		if (p->timestamp_anno() < dst_info.value().stamp + Timestamp(_timeout, 0))
+etherswitch/listenetherswitch.cc:63:	output(noutputs() - 1).push(p->clone());
+wifi/station/associationrequester.cc:92:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/associationrequester.cc:106:  uint8_t *ptr = (uint8_t *)  p->data() + sizeof(click_wifi);
+wifi/station/associationrequester.cc:173:  p->take(max_len - actual_length);
+wifi/station/associationrequester.cc:181:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/associationrequester.cc:185:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/station/associationrequester.cc:270:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/associationrequester.cc:271:  uint8_t *ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/station/associationrequester.cc:300:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/station/associationrequester.cc:303:		  p->length(),
+wifi/station/associationrequester.cc:306:    p->kill();
+wifi/station/associationrequester.cc:311:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/associationrequester.cc:321:    p->kill();
+wifi/station/associationrequester.cc:327:    p->kill();
+wifi/station/associationrequester.cc:333:    p->kill();
+wifi/station/associationrequester.cc:340:  p->kill();
+wifi/station/beaconscanner.cc:76:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/station/beaconscanner.cc:79:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/beaconscanner.cc:96:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/station/beaconscanner.cc:108:  uint8_t *end  = (uint8_t *) p->data() + p->length();
+wifi/station/beaconscanner.cc:169:    ap->_ssid = "";
+wifi/station/beaconscanner.cc:174:  ap->_eth = bssid;
+wifi/station/beaconscanner.cc:177:    ap->_ssid = ssid;
+wifi/station/beaconscanner.cc:179:  ap->_channel = (ds_l) ? ds_l[2] : -1;
+wifi/station/beaconscanner.cc:180:  ap->_rssi = ceh->rssi;
+wifi/station/beaconscanner.cc:182:  ap->_capability = capability;
+wifi/station/beaconscanner.cc:183:  ap->_beacon_int = beacon_int;
+wifi/station/beaconscanner.cc:184:  ap->_basic_rates.clear();
+wifi/station/beaconscanner.cc:185:  ap->_rates.clear();
+wifi/station/beaconscanner.cc:187:  ap->_last_rx.set_now();
+wifi/station/beaconscanner.cc:193:	ap->_basic_rates.push_back((int)(rate & WIFI_RATE_VAL));
+wifi/station/beaconscanner.cc:195:	ap->_rates.push_back((int)(rate & WIFI_RATE_VAL));
+wifi/station/beaconscanner.cc:207:	ap->_basic_rates.push_back((int)(rate & WIFI_RATE_VAL));
+wifi/station/beaconscanner.cc:209:	ap->_rates.push_back((int)(rate & WIFI_RATE_VAL));
+wifi/station/beacontracker.cc:68:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/station/beacontracker.cc:71:		  p->length(),
+wifi/station/beacontracker.cc:74:    p->kill();
+wifi/station/beacontracker.cc:78:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/beacontracker.cc:88:    p->kill();
+wifi/station/beacontracker.cc:96:    p->kill();
+wifi/station/beacontracker.cc:104:    p->kill();
+wifi/station/beacontracker.cc:110:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/station/beacontracker.cc:123:  b.rx = p->timestamp_anno();
+wifi/station/proberequester.cc:79:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/proberequester.cc:92:  uint8_t *ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/station/proberequester.cc:145:  p->take(max_len - actual_length);
+wifi/station/openauthrequester.cc:66:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/station/openauthrequester.cc:69:		  p->length(),
+wifi/station/openauthrequester.cc:72:    p->kill();
+wifi/station/openauthrequester.cc:76:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/openauthrequester.cc:86:    p->kill();
+wifi/station/openauthrequester.cc:93:    p->kill();
+wifi/station/openauthrequester.cc:99:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/station/openauthrequester.cc:119:    p->kill();
+wifi/station/openauthrequester.cc:132:  p->kill();
+wifi/station/openauthrequester.cc:151:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/station/openauthrequester.cc:166:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/prism2decap.cc:53:  u_int32_t *ptr = (u_int32_t *) p->data();
+wifi/prism2decap.cc:56:    wlan_ng_prism2_header *ph = (wlan_ng_prism2_header *) p->data();
+wifi/prism2decap.cc:66:    p->pull(sizeof(wlan_ng_prism2_header));
+wifi/radiotapdecap.cc:152:	struct ieee80211_radiotap_header *th = (struct ieee80211_radiotap_header *) p->data();
+wifi/radiotapdecap.cc:153:	struct ath_rx_radiotap_header *rh = (struct ath_rx_radiotap_header *) p->data();
+wifi/radiotapdecap.cc:156:	if (rt_check_header(th, p->length())) {
+wifi/radiotapdecap.cc:173:			     p->take(4);
+wifi/radiotapdecap.cc:210:		p->pull(th->it_len);
+wifi/radiotapdecap.cc:211:		p->set_mac_header(p->data());  // reset mac-header pointer
+wifi/extraencap.cc:52:  WritablePacket *p_out = p->uniqueify();
+wifi/extraencap.cc:54:    p->kill();
+wifi/printtxfeedback.cc:60:  uint8_t *dst_ptr = (uint8_t *) p->data() + _offset;
+wifi/printtxfeedback.cc:71:  sa << " " << p->timestamp_anno();
+wifi/wifidefrag.hh:64:	p->kill();
+wifi/radiotapencap.cc:76:  WritablePacket *p_out = p->uniqueify();
+wifi/radiotapencap.cc:78:    p->kill();
+wifi/wififragment.cc:57:  click_wifi *w = (click_wifi *) p->data();
+wifi/wififragment.cc:60:      p->length() <= sizeof(click_wifi) + _max_length) {
+wifi/wififragment.cc:69:  int num_frags = (p->length() - sizeof(click_wifi))  / _max_length;
+wifi/wififragment.cc:70:  int last_len = (p->length() - sizeof(click_wifi))  % _max_length;
+wifi/wififragment.cc:91:    memcpy((void *) p_out->data(), p->data(), sizeof(click_wifi));
+wifi/wififragment.cc:94:	   p->data() + sizeof(click_wifi) + frag*_max_length,
+wifi/wififragment.cc:105:  p->kill();
+wifi/wifidecap.cc:56:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/wifidecap.cc:67:  if (p->length() < wifi_header_size + sizeof(struct click_llc)) {
+wifi/wifidecap.cc:68:    p->kill();
+wifi/wifidecap.cc:73:    p->kill();
+wifi/wifidecap.cc:105:      p->kill();
+wifi/wifidecap.cc:113:  WritablePacket *p_out = p->uniqueify();
+wifi/wepencap.cc:92:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/wepencap.cc:105:  if (!(p = p->push(WIFI_WEP_HEADERSIZE)))
+wifi/wepencap.cc:107:  memmove((void *) p->data(), p->data() + WIFI_WEP_HEADERSIZE, sizeof(click_wifi));
+wifi/wepencap.cc:108:  u_int8_t *ivp = p->data() + sizeof(click_wifi);
+wifi/wepencap.cc:126:  memcpy(rc4key, p->data() + sizeof(click_wifi), WIFI_WEP_IVLEN);
+wifi/wepencap.cc:132:		   (p->data() + sizeof(click_wifi) + WIFI_WEP_HEADERSIZE),
+wifi/wepencap.cc:133:		   p->length() - (sizeof(click_wifi) + WIFI_WEP_HEADERSIZE));
+wifi/wepencap.cc:137:		 p->data() + sizeof(click_wifi) + WIFI_WEP_HEADERSIZE,
+wifi/wepencap.cc:138:		 p->data() + sizeof(click_wifi) + WIFI_WEP_HEADERSIZE,
+wifi/wepencap.cc:139:		 p->length() - (sizeof(click_wifi) + WIFI_WEP_HEADERSIZE),
+wifi/wepencap.cc:143:  p = p->put(WIFI_WEP_CRCLEN);
+wifi/wepencap.cc:144:  icv = p->end_data() - WIFI_WEP_CRCLEN;
+wifi/printwifi.cc:55:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/printwifi.cc:70:  uint8_t *end  = (uint8_t *) p->data() + p->length();
+wifi/printwifi.cc:307:  struct click_wifi *wh = (struct click_wifi *) p->data();
+wifi/printwifi.cc:324:    sa << p->timestamp_anno() << ": ";
+wifi/printwifi.cc:327:  len = sprintf(sa.reserve(9), "%4d | ", p->length());
+wifi/printwifi.cc:371:  uint8_t *ptr = (uint8_t *) p->data() + sizeof(click_wifi);
+wifi/printwifi.cc:500:  if (p->length() >= 16) {
+wifi/printwifi.cc:503:  if (p->length() > 22) {
+wifi/printwifi.cc:508:  if (p->length() >= sizeof(click_wifi)) {
+wifi/athdescencap.cc:55:  WritablePacket *p_out = p->push(ATHDESC_HEADER_SIZE);
+wifi/prism2encap.cc:53:  WritablePacket *p_out = p->uniqueify();
+wifi/prism2encap.cc:55:    p->kill();
+wifi/fromhandler.cc:102:    p->set_timestamp_anno(t);
+wifi/fromhandler.cc:103:    memset(p->data(), 0, p->length());
+wifi/fromhandler.cc:105:	p->data()[x/2] = (char_to_hex(s[x]) << 4) | char_to_hex(s[x + 1]);
+wifi/filtertx.cc:26:    struct click_wifi_extra *cehp = (struct click_wifi_extra *) p->data();
+wifi/filtertx.cc:30:      (cehp->magic == WIFI_EXTRA_MAGIC && cehp->flags & WIFI_EXTRA_TX)) {
+wifi/filtertx.cc:34:      p->kill();
+wifi/filterfailures.cc:27:    struct click_wifi_extra *cehp = (struct click_wifi_extra *) p->data();
+wifi/filterfailures.cc:31:      (cehp->magic == WIFI_EXTRA_MAGIC && cehp->flags & WIFI_EXTRA_TX_FAIL)) {
+wifi/filterfailures.cc:35:      p->kill();
+wifi/filterphyerr.cc:43:    struct click_wifi_extra *cehp = (struct click_wifi_extra *) p->data();
+wifi/filterphyerr.cc:47:      (cehp->magic == WIFI_EXTRA_MAGIC && cehp->flags & WIFI_EXTRA_RX_ERR)) {
+wifi/filterphyerr.cc:51:      p->kill();
+wifi/wepdecap.cc:93:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/wepdecap.cc:105:  u_int8_t *icp = p->data() + sizeof(click_wifi);
+wifi/wepdecap.cc:119:  u_int8_t *payload = p->data() + sizeof(click_wifi) + WIFI_WEP_HEADERSIZE;
+wifi/wepdecap.cc:120:  int payload_len = p->length() - (sizeof(click_wifi) + WIFI_WEP_HEADERSIZE + WIFI_WEP_CRCLEN);
+wifi/wepdecap.cc:142:  memmove((void *)(p->data() + WIFI_WEP_HEADERSIZE), p->data(), sizeof(click_wifi));
+wifi/wepdecap.cc:143:  p->pull(WIFI_WEP_HEADERSIZE);
+wifi/wepdecap.cc:145:  p->take(WIFI_WEP_CRCLEN);
+wifi/wepdecap.cc:147:  w = (struct click_wifi *) p->data();
+wifi/wifiencap.cc:67:  if (p->length() < sizeof(struct click_ether)) {
+wifi/wifiencap.cc:70:		  p->length(),
+wifi/wifiencap.cc:73:    p->kill();
+wifi/wifiencap.cc:78:  click_ether *eh = (click_ether *) p->data();
+wifi/wifiencap.cc:81:  memcpy(&ethtype, p->data() + 12, 2);
+wifi/wifiencap.cc:83:  p_out = p->uniqueify();
+wifi/wifidefrag.cc:54:  click_wifi *w = (click_wifi *) p->data();
+wifi/wifidefrag.cc:95:    p->kill();
+wifi/wifidefrag.cc:120:    uint32_t len = nfo->p->length();
+wifi/wifidefrag.cc:122:    p->pull(sizeof(click_wifi));
+wifi/wifidefrag.cc:123:    if ((nfo->p = nfo->p->put(p->length())))
+wifi/wifidefrag.cc:124:	memcpy((void *) (nfo->p->data() + len), p->data(), p->length());
+wifi/wifidefrag.cc:125:    p->kill();
+wifi/wifidefrag.cc:141:  w = (click_wifi *) p->data();
+wifi/ap/beaconsource.cc:117:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/beaconsource.cc:137:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/beaconsource.cc:217:  p->take(max_len - actual_length);
+wifi/ap/beaconsource.cc:231:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/ap/beaconsource.cc:234:		  p->length(),
+wifi/ap/beaconsource.cc:237:    p->kill();
+wifi/ap/beaconsource.cc:241:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/beaconsource.cc:251:    p->kill();
+wifi/ap/beaconsource.cc:258:    p->kill();
+wifi/ap/beaconsource.cc:264:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/beaconsource.cc:266:  uint8_t *end  = (uint8_t *) p->data() + p->length();
+wifi/ap/beaconsource.cc:306:    p->kill();
+wifi/ap/beaconsource.cc:335:  p->kill();
+wifi/ap/openauthresponder.cc:69:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/ap/openauthresponder.cc:72:		  p->length(),
+wifi/ap/openauthresponder.cc:75:    p->kill();
+wifi/ap/openauthresponder.cc:79:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/openauthresponder.cc:89:    p->kill();
+wifi/ap/openauthresponder.cc:96:    p->kill();
+wifi/ap/openauthresponder.cc:102:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/openauthresponder.cc:122:    p->kill();
+wifi/ap/openauthresponder.cc:131:    p->kill();
+wifi/ap/openauthresponder.cc:144:  p->kill();
+wifi/ap/openauthresponder.cc:162:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/openauthresponder.cc:177:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/associationresponder.cc:72:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/ap/associationresponder.cc:75:		  p->length(),
+wifi/ap/associationresponder.cc:78:    p->kill();
+wifi/ap/associationresponder.cc:82:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/associationresponder.cc:91:    p->kill();
+wifi/ap/associationresponder.cc:98:    p->kill();
+wifi/ap/associationresponder.cc:104:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/associationresponder.cc:114:  uint8_t *end  = (uint8_t *) p->data() + p->length();
+wifi/ap/associationresponder.cc:175:    p->kill();
+wifi/ap/associationresponder.cc:235:  p->kill();
+wifi/ap/associationresponder.cc:264:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/associationresponder.cc:277:  uint8_t *ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/associationresponder.cc:327:  p->take(max_len - actual_length);
+wifi/ap/associationresponder.cc:347:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/associationresponder.cc:363:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/proberesponder.cc:80:  if (p->length() < sizeof(struct click_wifi)) {
+wifi/ap/proberesponder.cc:83:		  p->length(),
+wifi/ap/proberesponder.cc:86:    p->kill();
+wifi/ap/proberesponder.cc:90:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/proberesponder.cc:100:    p->kill();
+wifi/ap/proberesponder.cc:107:    p->kill();
+wifi/ap/proberesponder.cc:113:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/ap/proberesponder.cc:115:  uint8_t *end  = (uint8_t *) p->data() + p->length();
+wifi/ap/proberesponder.cc:155:    p->kill();
+wifi/ap/proberesponder.cc:184:  p->kill();
+wifi/ap/proberesponder.cc:207:  struct click_wifi *w = (struct click_wifi *) p->data();
+wifi/ap/proberesponder.cc:222:  ptr = (uint8_t *) p->data() + sizeof(struct click_wifi);
+wifi/wifiseq.cc:76:  if (p && p->length() > _offset + _bytes) {
+wifi/wifiseq.cc:79:    char *data = (char *)(p->data() + _offset);
+wifi/athdescdecap.cc:54:	WritablePacket *q = p->uniqueify();
+wifi/extradecap.cc:52:  click_wifi_extra *ceh = (click_wifi_extra *) p->data();
+wifi/extradecap.cc:55:      memcpy(WIFI_EXTRA_ANNO(p), p->data(), sizeof(click_wifi_extra));
+wifi/extradecap.cc:56:      p->pull(sizeof(click_wifi_extra));
+ns/fromsimdevice.cc:119:    if (!(p->data()[0] & 1))
+ns/fromsimdevice.cc:123:    if (memcmp(bcast_addr, p->data(), 6) == 0)
+ns/fromsimdevice.cc:124:      p->set_packet_type_anno(Packet::BROADCAST);
+ns/fromsimdevice.cc:126:      p->set_packet_type_anno(Packet::MULTICAST);
+ns/fromsimdevice.cc:140:  p->set_sim_packetinfo(pinfo);
+ns/tosimdevice.cc:112:  retval = myrouter->sim_write(_fd,_encap_type,p->data(),p->length(),
+ns/tosimdevice.cc:113:				 p->get_sim_packetinfo());
+ns/tosimdevice.cc:114:  p->kill();
+ns/tosimdevice.cc:120:  assert(p->length() >= 14);
+ip6/lookupip6route.cc:143:    p->kill();
+ip6/checkip6header.cc:91:    p->kill();
+ip6/checkip6header.cc:97:  const click_ip6 *ip = reinterpret_cast <const click_ip6 *>( p->data());
+ip6/checkip6header.cc:101:  if(p->length() < sizeof(click_ip6))
+ip6/checkip6header.cc:105:  if(ip->ip6_v != 6)
+ip6/checkip6header.cc:109:   if(ntohs(ip->ip6_plen) > (p->length()-40))
+ip6/checkip6header.cc:117:   src=ip->ip6_src;
+ip6/checkip6header.cc:130:  p->set_ip6_header(ip);
+ip6/checkip6header.cc:133:  if(ntohs(ip->ip6_plen) < (p->length()-40))
+ip6/checkip6header.cc:134:    p->take(p->length() - 40 - ip->ip6_plen);
+ip6/markip6header.cc:44:  const click_ip6 *ip6 = reinterpret_cast<const click_ip6 *>(p->data() + _offset);
+ip6/markip6header.cc:45:  p->set_ip6_header(ip6, 10 << 2);
+ip6/ip6encap.cc:84:    click_ip6 *ip6 = reinterpret_cast<click_ip6 *>(p->data());
+ip6/ip6encap.cc:92:    ip6->ip6_plen = htons(p->length() - sizeof(click_ip6));
+ip6/ip6encap.cc:93:    p->set_ip6_header(ip6, sizeof(click_ip6));
+ip6/protocoltranslator64.cc:77:  ip->ip_v = 4;
+ip6/protocoltranslator64.cc:78:  ip->ip_hl =5;
+ip6/protocoltranslator64.cc:79:  ip->ip_tos =0;
+ip6/protocoltranslator64.cc:80:  ip->ip_len = htons(sizeof(*ip) + ntohs(ip6->ip6_plen));
+ip6/protocoltranslator64.cc:82:  ip->ip_id = htons(0);
+ip6/protocoltranslator64.cc:84:  //ip->ip_id[0]=ip6->ip_flow[1];
+ip6/protocoltranslator64.cc:85:  //ip->ip_id[1]=ip6->ip_flow[2];
+ip6/protocoltranslator64.cc:89:  ip->ip_off = htons(IP_DF);
+ip6/protocoltranslator64.cc:93:  ip->ip_ttl = ip6->ip6_hlim;
+ip6/protocoltranslator64.cc:97:  ip->ip_src = src.in_addr();
+ip6/protocoltranslator64.cc:98:  ip->ip_dst = dst.in_addr();
+ip6/protocoltranslator64.cc:109:      ip->ip_p = ip6->ip6_nxt;
+ip6/protocoltranslator64.cc:112:      ip->ip_sum = 0;
+ip6/protocoltranslator64.cc:113:      tcp->th_sum = 0;
+ip6/protocoltranslator64.cc:117:      tcp->th_sum = click_in_cksum_pseudohdr(csum, ip, tlen);
+ip6/protocoltranslator64.cc:118:      ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+ip6/protocoltranslator64.cc:124:      ip->ip_p = ip6->ip6_nxt;
+ip6/protocoltranslator64.cc:127:      ip->ip_sum=0;
+ip6/protocoltranslator64.cc:128:      udp->uh_sum = 0;
+ip6/protocoltranslator64.cc:132:      udp->uh_sum = click_in_cksum_pseudohdr(csum, ip, tlen);
+ip6/protocoltranslator64.cc:133:      ip->ip_sum = click_in_cksum((unsigned char *)ip, sizeof(click_ip));
+ip6/protocoltranslator64.cc:139:      ip->ip_p = 1;
+ip6/protocoltranslator64.cc:178:	icmp->icmp_type = ICMP_ECHO;                 // icmp_type =8
+ip6/protocoltranslator64.cc:181:	icmp->icmp_type = ICMP_ECHOREPLY;              // icmp_type = 0
+ip6/protocoltranslator64.cc:184:      icmp->icmp_identifier = (icmp6->icmp6_identifier);
+ip6/protocoltranslator64.cc:185:      icmp->icmp_sequence = (icmp6->icmp6_sequence);
+ip6/protocoltranslator64.cc:187:      icmp->icmp_cksum = click_in_cksum((unsigned char *)icmp, icmp_length);
+ip6/protocoltranslator64.cc:201:      icmp->icmp_type = ICMP_UNREACH;             // icmp_type =3
+ip6/protocoltranslator64.cc:204:      case 0: icmp->icmp_code =0;  break;
+ip6/protocoltranslator64.cc:205:      case 1: icmp->icmp_code =10; break;
+ip6/protocoltranslator64.cc:206:      case 2: icmp->icmp_code =5;  break;
+ip6/protocoltranslator64.cc:207:      case 3: icmp->icmp_code =1;  break;
+ip6/protocoltranslator64.cc:208:      case 4: icmp->icmp_code =3;  break;
+ip6/protocoltranslator64.cc:212:      icmp->icmp_cksum = click_in_cksum((unsigned char *)icmp, icmp_length);
+ip6/protocoltranslator64.cc:225:      icmp->icmp_type = ICMP_UNREACH; //icmp_type = 3
+ip6/protocoltranslator64.cc:226:      icmp->icmp_code = 4;
+ip6/protocoltranslator64.cc:228:      icmp->icmp_cksum = click_in_cksum((unsigned char *)icmp, icmp_length);
+ip6/protocoltranslator64.cc:240:      icmp->icmp_type =ICMP_TIMXCEED;            //icmp_type = 11
+ip6/protocoltranslator64.cc:241:      icmp->icmp_code = icmp6_code;
+ip6/protocoltranslator64.cc:243:      icmp->icmp_cksum = click_in_cksum((unsigned char *)icmp, icmp_length);
+ip6/protocoltranslator64.cc:258:	  icmp->icmp_type = ICMP_PARAMPROB;         // icmp_type = 12
+ip6/protocoltranslator64.cc:259:	  icmp->icmp_code = 0;
+ip6/protocoltranslator64.cc:261:	    icmp->icmp_pointer = -1;
+ip6/protocoltranslator64.cc:266:	      case 0 : icmp->icmp_pointer = 0;  break;
+ip6/protocoltranslator64.cc:267:	      case 4 : icmp->icmp_pointer = 2;  break;
+ip6/protocoltranslator64.cc:268:	      case 7 : icmp->icmp_pointer = 8;  break;
+ip6/protocoltranslator64.cc:269:	      case 6 : icmp->icmp_pointer = 9;  break;
+ip6/protocoltranslator64.cc:270:	      case 8 : icmp->icmp_pointer = 12; break;
+ip6/protocoltranslator64.cc:271:	      case 24: icmp->icmp_pointer = -1; break;
+ip6/protocoltranslator64.cc:277:	  icmp->icmp_cksum = click_in_cksum((unsigned char *)icmp, icmp_length);
+ip6/protocoltranslator64.cc:288:	  icmp->icmp_type = ICMP_UNREACH; // icmp_type = 3
+ip6/protocoltranslator64.cc:289:	  icmp->icmp_code = 2;
+ip6/protocoltranslator64.cc:291:	  icmp->icmp_cksum = click_in_cksum((unsigned char *)icmp, icmp_length);
+ip6/protocoltranslator64.cc:315:  click_ip6 *ip6 = (click_ip6 *) p->data();
+ip6/protocoltranslator64.cc:342:	   ip->ip_len = htons(q3->length());
+ip6/protocoltranslator64.cc:343:	   ip->ip_sum=0;
+ip6/protocoltranslator64.cc:344:	   ip->ip_sum = click_in_cksum((unsigned char *)ip, q3->length());
+ip6/protocoltranslator64.cc:346:	   p->kill();
+ip6/protocoltranslator64.cc:353:	   p->kill();
+ip6/protocoltranslator64.cc:360:      p->kill();
+ip6/addresstranslator.cc:541:  click_ip6 *ip6 = (click_ip6 *)p->data();
+ip6/addresstranslator.cc:542:  unsigned char *start = (unsigned char *)p->data();
+ip6/addresstranslator.cc:550:  WritablePacket *q= Packet::make(p->length());
+ip6/addresstranslator.cc:561:  memcpy(start_new, start, p->length());
+ip6/addresstranslator.cc:597:	  p->kill();
+ip6/addresstranslator.cc:603:	  p->kill();
+ip6/addresstranslator.cc:621:	  p->kill();
+ip6/addresstranslator.cc:627:	  p->kill();
+ip6/addresstranslator.cc:644:	  p->kill();
+ip6/addresstranslator.cc:650:	  p->kill();
+ip6/addresstranslator.cc:657:      p->kill();
+ip6/addresstranslator.cc:665:click_ip6 *ip6 = (click_ip6 *)p->data();
+ip6/addresstranslator.cc:666:  unsigned char *start = (unsigned char *)p->data();
+ip6/addresstranslator.cc:675:  WritablePacket *q= Packet::make(p->length());
+ip6/addresstranslator.cc:686:  memcpy(start_new, start, p->length());
+ip6/addresstranslator.cc:723:	  p->kill();
+ip6/addresstranslator.cc:729:	  p->kill();
+ip6/addresstranslator.cc:748:	  p->kill();
+ip6/addresstranslator.cc:754:	  p->kill();
+ip6/addresstranslator.cc:772:	  p->kill();
+ip6/addresstranslator.cc:778:	  p->kill();
+ip6/addresstranslator.cc:785:      p->kill();
+ip6/setip6dscp.cc:54:  assert(p->has_network_header());
+ip6/setip6dscp.cc:55:  click_ip6 *ip6 = p->ip6_header();
+ip6/getip6address.cc:47:  IP6Address dst=IP6Address((unsigned char *)(p->data()+ _offset));
+ip6/icmp6error.cc:137:  const click_ip6 *ipp = p->ip6_header();
+ip6/icmp6error.cc:143:  if (!p->has_network_header())
+ip6/icmp6error.cc:150:  if(ipp->ip6_nxt == IP_PROTO_ICMP6) {
+ip6/icmp6error.cc:152:    if( is_error_type(icp->icmp6_type))
+ip6/icmp6error.cc:157:  if(unicast(IP6Address(ipp->ip6_dst)) == 0)
+ip6/icmp6error.cc:161:  if (p->packet_type_anno() == Packet::BROADCAST || p->packet_type_anno() == Packet::MULTICAST)
+ip6/icmp6error.cc:167:  xlen = p->length();
+ip6/icmp6error.cc:181:  nip->ip6_flow = 0;
+ip6/icmp6error.cc:182:  nip->ip6_v = 6;
+ip6/icmp6error.cc:183:  nip->ip6_plen = htons(q->length()-40);
+ip6/icmp6error.cc:184:  nip->ip6_nxt = IP_PROTO_ICMP6;  /* next header */
+ip6/icmp6error.cc:185:  nip->ip6_hlim = 0xff; //what hop limit shoud I set?
+ip6/icmp6error.cc:186:  nip->ip6_src = _src_ip;
+ip6/icmp6error.cc:187:  nip->ip6_dst = ipp->ip6_src;
+ip6/icmp6error.cc:191:  icp->icmp6_type = _type;
+ip6/icmp6error.cc:192:  icp->icmp6_code = _code;
+ip6/icmp6error.cc:210:    icpr->icmp6_dst = ipp->ip6_dst;
+ip6/icmp6error.cc:211:    memcpy((void *)(icpr + 1), p->data(), xlen);
+ip6/icmp6error.cc:213:    memcpy((void *)(icp + 1), p->data(), xlen);
+ip6/icmp6error.cc:215:  icp->icmp6_cksum = htons(in6_fast_cksum(&nip->ip6_src, &nip->ip6_dst, nip->ip6_plen, nip->ip6_nxt, 0, (unsigned char *)icp, nip->ip6_plen));
+ip6/icmp6error.cc:217:  SET_DST_IP6_ANNO(q, IP6Address(nip->ip6_dst));
+ip6/icmp6error.cc:222:  p->kill();
+ip6/protocoltranslator46.cc:61:  WritablePacket *q = Packet::make(sizeof(click_ip6)-sizeof(click_ip)+ntohs(ip->ip_len));
+ip6/protocoltranslator46.cc:76:  ip6->ip6_plen = htons(ntohs(ip->ip_len)-sizeof(click_ip));
+ip6/protocoltranslator46.cc:77:  ip6->ip6_hlim = ip->ip_ttl + 0x40-0xff;
+ip6/protocoltranslator46.cc:82:  if (ip->ip_p == 6) //TCP
+ip6/protocoltranslator46.cc:84:      ip6->ip6_nxt = ip->ip_p;
+ip6/protocoltranslator46.cc:85:      tcp->th_sum = htons(in6_fast_cksum(&ip6->ip6_src, &ip6->ip6_dst, ip6->ip6_plen, ip6->ip6_nxt, tcp->th_sum, a, ip6->ip6_plen));
+ip6/protocoltranslator46.cc:88:  else if (ip->ip_p == 17) //UDP
+ip6/protocoltranslator46.cc:90:      ip6->ip6_nxt = ip->ip_p;
+ip6/protocoltranslator46.cc:91:      udp->uh_sum = htons(in6_fast_cksum(&ip6->ip6_src, &ip6->ip6_dst, ip6->ip6_plen, ip6->ip6_nxt, udp->uh_sum, a, ip6->ip6_plen));
+ip6/protocoltranslator46.cc:94:  else if (ip->ip_p == 1)
+ip6/protocoltranslator46.cc:144:    icmp6->icmp6_identifier = icmp->icmp_identifier;
+ip6/protocoltranslator46.cc:145:    icmp6->icmp6_sequence = icmp->icmp_sequence;
+ip6/protocoltranslator46.cc:147:    icmp->icmp_cksum  = 0;
+ip6/protocoltranslator46.cc:169:	icmp->icmp_cksum  = 0;
+ip6/protocoltranslator46.cc:186:	icmp->icmp_cksum  = 0;
+ip6/protocoltranslator46.cc:228:	icmp->icmp_cksum  = 0;
+ip6/protocoltranslator46.cc:248:    icmp->icmp_cksum  = 0;
+ip6/protocoltranslator46.cc:273:    icmp->icmp_cksum  = 0;
+ip6/protocoltranslator46.cc:297:  click_ip *ip = (click_ip *)p->data();
+ip6/protocoltranslator46.cc:299:  IP6Address ip6a_src = IP6Address(IPAddress(ip->ip_src));
+ip6/protocoltranslator46.cc:300:  IP6Address ip6a_dst = IP6Address(IPAddress(ip->ip_dst));
+ip6/protocoltranslator46.cc:306:  if (ip->ip_p == 1)
+ip6/protocoltranslator46.cc:321:      p->kill();
+ip6/protocoltranslator46.cc:328:      p->kill();
+ip6/ip6mirror.cc:39:  click_ip6 *iph = p->ip6_header();
+ip6/ip6mirror.cc:45:  if ((iph->ip6_nxt == IP_PROTO_TCP || iph->ip6_nxt == IP_PROTO_UDP) &&  p->length() >= (uint32_t)(p->transport_header_offset() + 8)) {
+ip6/ip6mirror.cc:46:    click_udp *udph = reinterpret_cast<click_udp *>(p->transport_header());
+ip6/ip6print.cc:47:    const click_ip6 *iph = (click_ip6*) p->ip_header();
+ip6/ip6print.cc:58:    const unsigned char *data = p->data();
+ip6/ip6print.cc:67:	    for (unsigned i = 0; i < _bytes && i < p->length(); i++) {
+ip6/ip6fragmenter.cc:93:  if (p->length() <= _mtu)
+ip6/ip6fragmenter.cc:104:	p->kill();
+ip6/ip6fragmenter.cc:135:  // click_chatter("IP6Fragmenter::push, packet length is %x \n", p->length());
+ip6/ip6fragmenter.cc:136:  if (p->length() <= _mtu)
+ip6/decip6hlim.cc:40:    p->kill();
+ip6/decip6hlim.cc:54:     click_ip6 *ip = p->ip6_header();
+ip6/decip6hlim.cc:55:     ip->ip6_hlim--;
+test/neighborhoodtest.cc:39:    p->kill();
+test/queueyanktest.cc:71:	    if (p->data()[0] == *ss)
+test/heaptest.cc:41:	x->second = x - vp->begin();
+test/clptest.cc:169:    StringAccum *sa = (StringAccum *) clp->user_data;
+test/clptest.cc:184:    clp->user_data = &sa;
+test/clptest.cc:255:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 1);
+test/clptest.cc:256:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 2);
+test/clptest.cc:259:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 4);
+test/clptest.cc:260:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 5);
+test/clptest.cc:263:    CHECK(Clp_Next(clp) == 2 && clp->have_val);
+test/clptest.cc:264:    CHECK(1 && clp->have_val && clp->val.i == 1);
+test/clptest.cc:265:    CHECK(Clp_Next(clp) == 2 && !clp->have_val);
+test/clptest.cc:266:    CHECK(Clp_Next(clp) == Clp_NotOption && String(clp->vstr) == "2");
+test/clptest.cc:267:    CHECK(Clp_Next(clp) == 2 && clp->have_val && clp->val.i == 3);
+test/clptest.cc:268:    CHECK(Clp_Next(clp) == 2 && !clp->have_val);
+test/clptest.cc:269:    CHECK(Clp_Next(clp) == Clp_NotOption && String(clp->vstr) == "4");
+test/clptest.cc:272:    CHECK(Clp_Next(clp) == 3 && clp->negated);
+test/clptest.cc:282:    CHECK(Clp_Next(clp) == 1 && !clp->negated && clp->have_val && clp->val.i == 1);
+test/clptest.cc:283:    CHECK(Clp_Next(clp) == 1 && clp->negated && !clp->have_val);
+test/clptest.cc:286:    CHECK(Clp_Next(clp) == 1 && clp->negated && !clp->have_val);
+test/clptest.cc:287:    CHECK(Clp_Next(clp) == 1 && clp->negated && !clp->have_val);
+test/clptest.cc:288:    CHECK(Clp_Next(clp) == 2 && !clp->negated && clp->have_val && clp->val.i == 2);
+test/clptest.cc:299:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->vstr == String("--ar"));
+test/clptest.cc:300:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->vstr == String("ar"));
+test/clptest.cc:304:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->vstr == String("--ar"));
+test/clptest.cc:305:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->vstr == String("ar"));
+test/clptest.cc:317:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 1);
+test/clptest.cc:318:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 2);
+test/clptest.cc:319:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 3);
+test/clptest.cc:320:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 3);
+test/clptest.cc:323:    CHECK(Clp_Next(clp) == 1 && clp->have_val && clp->val.i == 4);
+test/queuethreadtest.cc:45:	WritablePacket *q = p->uniqueify();
+test/queuethreadtest.cc:108:	    CHECK(p->length() == 4);
+test/queuethreadtest.cc:109:	    CHECK(* reinterpret_cast<const uint32_t *>(p->data()) == _next);
+test/queuethreadtest.cc:110:	    p->kill();
+test/comparepackets.cc:72:    if (p->length() != q->length())
+test/comparepackets.cc:74:    if (memcmp(p->data(), q->data(), p->length()) != 0)
+test/comparepackets.cc:76:    if (p->timestamp_anno() != q->timestamp_anno() && _timestamp)
+test/comparepackets.cc:79:    if (p->has_network_header() && q->has_network_header()) {
+test/comparepackets.cc:80:	if (p->network_header_offset() != q->network_header_offset())
+test/comparepackets.cc:82:	if (p->network_header_length() != q->network_header_length())
+test/comparepackets.cc:84:    } else if (p->has_network_header() != q->has_network_header())
+test/comparepackets.cc:139:	return String(cp->_ndiff);
+test/comparepackets.cc:143:	      sa << cp->_diff_details[i] << '\t' << reason_texts[i] << '\n';
+test/comparepackets.cc:147:	return cp_unparse_bool(cp->_ndiff == 0);
+test/checkpacket.cc:85:	if (p->length() != _length)
+test/checkpacket.cc:86:	    errh->error("%s: bad length %d (wanted %d)", declaration().c_str(), p->length(), _length);
+test/checkpacket.cc:88:	if (p->length() <= _length)
+test/checkpacket.cc:89:	    errh->error("%s: bad length %d (wanted > %d)", declaration().c_str(), p->length(), _length);
+test/checkpacket.cc:91:	if (p->length() >= _length)
+test/checkpacket.cc:92:	    errh->error("%s: bad length %d (wanted < %d)", declaration().c_str(), p->length(), _length);
+test/checkpacket.cc:97:	if (p->length() < _data.length() + _data_offset)
+test/checkpacket.cc:98:	    errh->error("%s: data too short (%d bytes, wanted %d)", declaration().c_str(), p->length(), _data.length() + _data_offset);
+test/checkpacket.cc:99:	else if (_data_op == '=' && p->length() > _data.length() + _data_offset)
+test/checkpacket.cc:100:	    errh->error("%s: data too long (%d bytes, wanted %d)", declaration().c_str(), p->length(), _data.length() + _data_offset);
+test/checkpacket.cc:101:	else if (memcmp(p->data() + _data_offset, _data.data(), _data.length()) != 0)
+test/checkpacket.cc:107:	int alignment = reinterpret_cast<uintptr_t>(p->data()) & (_alignment_chunk - 1);
+test/packettest.cc:43:    CHECK(p->headroom() >= 10);
+test/packettest.cc:44:    CHECK(p->tailroom() >= 30);
+test/packettest.cc:45:    CHECK(p->length() == 20);
+test/packettest.cc:46:    CHECK(p->buffer_length() >= 60);
+test/packettest.cc:47:    CHECK_DATA(p->data(), lowers, 20);
+test/packettest.cc:48:    CHECK(!p->mac_header());
+test/packettest.cc:49:    CHECK(!p->network_header());
+test/packettest.cc:50:    CHECK(!p->transport_header());
+test/packettest.cc:51:    p->set_mac_header(p->data(), 10);
+test/packettest.cc:52:    CHECK(p->network_header() == p->data() + 10);
+test/packettest.cc:53:    p->set_dst_ip_anno(addr);
+test/packettest.cc:55:    WritablePacket *p1 = p->push(5);
+test/packettest.cc:62:    CHECK(p1->mac_header() == p->data() + 5);
+test/packettest.cc:63:    CHECK(p1->network_header() == p->data() + 15);
+test/packettest.cc:96:	p->clone()->kill();
+test/packettest.cc:97:    p->kill();
+test/packettest.cc:103:    CHECK(p->headroom() == 10 && p->tailroom() == 4);
+test/packettest.cc:104:    p = p->shift_data(-2);
+test/packettest.cc:105:    CHECK(p->headroom() == 8 && p->tailroom() == 6);
+test/packettest.cc:106:    CHECK(p->length() == 60);
+test/packettest.cc:107:    CHECK_DATA(p->data(), lowers, 60);
+test/packettest.cc:108:    CHECK_ALIGNED(p->data());
+test/packettest.cc:109:    p->kill();
+test/packettest.cc:112:    p = p->shift_data(3);
+test/packettest.cc:113:    CHECK(p->headroom() == 12 && p->tailroom() == 1 && p->length() == 60);
+test/packettest.cc:114:    CHECK_DATA(p->data(), lowers, 60);
+test/packettest.cc:115:    CHECK_ALIGNED(p->data());
+test/packettest.cc:116:    p->kill();
+test/packettest.cc:119:    p = p->shift_data(-5);
+test/packettest.cc:120:    CHECK(p->tailroom() >= 9 && p->length() == 60);
+test/packettest.cc:121:    CHECK_DATA(p->data(), lowers, 60);
+test/packettest.cc:122:    CHECK_ALIGNED(p->data());
+test/packettest.cc:123:    p->kill();
+test/packettest.cc:126:    p = p->shift_data(3);
+test/packettest.cc:127:    CHECK(p->headroom() >= 8 && p->length() == 60);
+test/packettest.cc:128:    CHECK_DATA(p->data(), lowers, 60);
+test/packettest.cc:129:    CHECK_ALIGNED(p->data());
+test/packettest.cc:130:    p->kill();
+test/packettest.cc:133:    p->set_mac_header(p->data(), 2);
+test/packettest.cc:134:    p->pull(2);
+test/packettest.cc:135:    p = p->shift_data(-3);
+test/packettest.cc:136:    CHECK(p->mac_header() == p->data() - 2);
+test/packettest.cc:137:    CHECK(p->headroom() >= 2 && p->length() == 58);
+test/packettest.cc:138:    CHECK_DATA(p->mac_header(), lowers, 2);
+test/packettest.cc:139:    CHECK_DATA(p->data(), lowers + 2, 58);
+test/packettest.cc:140:    CHECK_ALIGNED(p->data());
+test/packettest.cc:141:    p->kill();
