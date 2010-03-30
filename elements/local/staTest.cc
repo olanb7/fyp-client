@@ -205,14 +205,16 @@ StaTest::logOutput(station &sta, StringAccum log) {
 Packet *
 StaTest::make_packet(DIDS::Instance &packetData)
 {
-    
+   
+    //click_chatter("%s", packetData.c_str());
+ 
     std::string protoOutput = std::string();
     packetData.SerializeToString(&protoOutput);
 
-	//click_chatter("proto before: %d bytes\t proto after: %d bytes", sizeof(packetData), sizeof(protoOutput));
+    //click_chatter("proto before: %d bytes\t proto after: %d bytes", sizeof(packetData), sizeof(protoOutput));
 
     WritablePacket *q = Packet::make(sizeof(click_ip)+sizeof(click_tcp)+sizeof(click_ether)+sizeof(protoOutput),protoOutput.data(),protoOutput.length(),0);
-    
+
     return q;
 }
 
@@ -390,18 +392,19 @@ StaTest::push(int, Packet *p) {
 	
 	#if CLICK_USERLEVEL
 		logOutput(*sta, log);
-		log.clear();
 	#endif
 
+	log.clear();
+	
 	push:
-	google::protobuf::ShutdownProtobufLibrary();
+	//google::protobuf::ShutdownProtobufLibrary();
 
 	// need to create another element output
 	//output(0).push(p);
 
 	end:
-		google::protobuf::ShutdownProtobufLibrary();
-		return;		// do nothing
+	google::protobuf::ShutdownProtobufLibrary();
+	// do nothing
 }
 
 
