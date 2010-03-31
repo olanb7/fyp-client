@@ -79,7 +79,7 @@ DEPCFLAGS = -MD -MP
 
 DEFS = -DHAVE_CONFIG_H
 INCLUDES = -I$(top_builddir)/include -I$(top_srcdir)/include \
-	-I$(srcdir) -I$(top_srcdir)  
+	-I$(srcdir) -I$(top_srcdir) -I/home/olan/openwrt/build_dir/target-mips_uClibc-0.9.30.1/protobuf-2.3.0/src 
 LDFLAGS = 
 LIBS =  `$(top_builddir)/click-buildtool --otherlibs` $(ELEMENT_LIBS)
 
