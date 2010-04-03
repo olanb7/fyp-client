@@ -79,6 +79,7 @@ DEPCFLAGS = @DEPCFLAGS@
 
 DEFS = @DEFS@
 INCLUDES = -I$(top_builddir)/include -I$(top_srcdir)/include \
+	-I/home/olan/openwrt/build_dir/target-mips_uClibc-0.9.30.1/protobuf-2.3.0/src \
 	-I$(srcdir) -I$(top_srcdir) @PROPER_INCLUDES@ @PCAP_INCLUDES@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@ `$(top_builddir)/click-buildtool --otherlibs` $(ELEMENT_LIBS)
