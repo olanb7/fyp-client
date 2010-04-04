@@ -411,6 +411,6 @@ StaTest::push(int, Packet *p) {
 
 EXPORT_ELEMENT(StaTest)
 CLICK_ENDDECLS
-ELEMENT_LIBS(-L/usr/local/lib -lprotobuf)
+ELEMENT_LIBS((-L/usr/local/lib -lprotobuf))
 
 
